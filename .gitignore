@@ -7,3 +7,4 @@ build/
 .pytest_cache/
 *.pyc
 .venv/
+iMedicina_*.md
