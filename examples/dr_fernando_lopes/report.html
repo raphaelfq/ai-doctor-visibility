@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Visibility Report — Dr. Fernando Lopes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+
+        <!-- Header -->
+        <div class="bg-white rounded-2xl shadow-sm border p-8 mb-6">
+            <div class="flex items-start justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Dr. Fernando Lopes</h1>
+                    <p class="text-gray-600 mt-1">Dermatologia — Campinas - SP</p>
+                    <p class="text-gray-500 text-sm mt-1">CRM: 169135/SP</p>
+                    <div class="mt-2"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ CRM Verificado</span></div>
+                </div>
+                <div class="text-right text-sm text-gray-400">
+                    26/05/2026 08:21
+                </div>
+            </div>
+        </div>
+
+        <!-- Score Gauge -->
+        <div class="bg-white rounded-2xl shadow-sm border p-8 mb-6 text-center">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">AI Visibility Score</h2>
+            <div class="flex justify-center">
+                <svg class="w-48 h-48" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+                    <circle cx="50" cy="50" r="45" fill="none"
+                        stroke="#f59e0b" stroke-width="8" stroke-linecap="round"
+                        stroke-dasharray="283" stroke-dashoffset="154.0"
+                        transform="rotate(-90 50 50)"
+                        style="transition: stroke-dashoffset 1s ease-in-out"/>
+                    <text x="50" y="46" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">46</text>
+                    <text x="50" y="58" text-anchor="middle" font-size="8" fill="#6b7280">/100</text>
+                    <text x="50" y="70" text-anchor="middle" font-size="7" fill="#f59e0b">Moderada</text>
+                </svg>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">
+                Média da especialidade (Dermatologia): <strong>35/100</strong>
+            </p>
+
+            <!-- Dimension bars -->
+            <div class="grid grid-cols-2 gap-4 mt-6 max-w-lg mx-auto text-left">
+                <div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Presença</span><span>50</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: 50.0%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Qualidade</span><span>34</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: 34.0%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Posição</span><span>60</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: 60.0%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Competitivo</span><span>50</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: 50.0%"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verdicts Table -->
+        <div class="bg-white rounded-2xl shadow-sm border mb-6 overflow-hidden">
+            <div class="p-6 border-b">
+                <h2 class="text-lg font-semibold text-gray-700">Resultados por Prompt</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">#</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prompt</th>
+                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Citado?</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipo</th>
+                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Confiança</th>
+                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Posição</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Concorrentes</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        
+        <tr class="bg-red-50">
+            <td class="px-4 py-3 text-sm font-medium">p1</td>
+            <td class="px-4 py-3 text-sm max-w-md">Tô com umas manchas estranhas na pele que apareceram do nada, preciso de um dermato urgente em Campinas</td>
+            <td class="px-4 py-3 text-sm text-center">❌</td>
+            <td class="px-4 py-3 text-sm">competitor in place</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">—</td>
+            <td class="px-4 py-3 text-sm">Dra. Bruna Senna, Dra. Karina Zold</td>
+        </tr>
+        <tr class="bg-red-50">
+            <td class="px-4 py-3 text-sm font-medium">p2</td>
+            <td class="px-4 py-3 text-sm max-w-md">Já pesquisei bastante e sei que minha alergia na pele é eczema, queria um dermatologista em Campinas que tenha experiênc...</td>
+            <td class="px-4 py-3 text-sm text-center">❌</td>
+            <td class="px-4 py-3 text-sm">competitor in place</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">—</td>
+            <td class="px-4 py-3 text-sm">Dra. Karina Zold, Dr. Leonardo Faria Domingues</td>
+        </tr>
+        <tr class="bg-yellow-50">
+            <td class="px-4 py-3 text-sm font-medium">p3</td>
+            <td class="px-4 py-3 text-sm max-w-md">Oi, meu filho tem umas bolinhas vermelhas que não somem, será que devo levar no dermatologista pediátrico aí em Campinas...</td>
+            <td class="px-4 py-3 text-sm text-center">🔶</td>
+            <td class="px-4 py-3 text-sm">mentioned as specialty</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">—</td>
+            <td class="px-4 py-3 text-sm">—</td>
+        </tr>
+        <tr class="bg-green-50">
+            <td class="px-4 py-3 text-sm font-medium">p4</td>
+            <td class="px-4 py-3 text-sm max-w-md">Minha dermatologista mudou de cidade, tô procurando um novo especialista para acompanhar minha psoríase em Campinas. Alg...</td>
+            <td class="px-4 py-3 text-sm text-center">✅</td>
+            <td class="px-4 py-3 text-sm">mentioned by name</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">#4</td>
+            <td class="px-4 py-3 text-sm">Dra. Karina Zold, Dra. Ariany Denofre, Dr. Marcio Adad, Maura Simoes Bressan</td>
+        </tr>
+        <tr class="bg-red-50">
+            <td class="px-4 py-3 text-sm font-medium">p5</td>
+            <td class="px-4 py-3 text-sm max-w-md">Eu queria saber se em Campinas tem dermatologista que atende pelo convênio Amil e que também aceite particular, porque t...</td>
+            <td class="px-4 py-3 text-sm text-center">❌</td>
+            <td class="px-4 py-3 text-sm">competitor in place</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">—</td>
+            <td class="px-4 py-3 text-sm">Dra Maísa Mattieli, Dr. Fabio Toledo França Pupo Nogueira, Dra. Fabiana Gaião de Souza Paulo</td>
+        </tr>
+        <tr class="bg-red-50">
+            <td class="px-4 py-3 text-sm font-medium">p6</td>
+            <td class="px-4 py-3 text-sm max-w-md">Queria fazer um peeling ou algo pra melhorar a textura da minha pele, mas não sei se é seguro. Tem dermatologista em Cam...</td>
+            <td class="px-4 py-3 text-sm text-center">❌</td>
+            <td class="px-4 py-3 text-sm">competitor in place</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">—</td>
+            <td class="px-4 py-3 text-sm">Dra. Mônica Felici, Dr. Marcio Adad, Dra. Cláudia Issa, Dra. Stephanie Langen, Jéssica Starek, Dra. Isadora Gilli</td>
+        </tr>
+        <tr class="bg-red-50">
+            <td class="px-4 py-3 text-sm font-medium">p7</td>
+            <td class="px-4 py-3 text-sm max-w-md">Oi, tô pensando em consultar um dermato só pra fazer um check-up geral na pele, tem alguém bom pra prevenção em Campinas...</td>
+            <td class="px-4 py-3 text-sm text-center">❌</td>
+            <td class="px-4 py-3 text-sm">competitor in place</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">—</td>
+            <td class="px-4 py-3 text-sm">Dra. Karina Zold, Dra. Fernanda Blasques</td>
+        </tr>
+        <tr class="bg-yellow-50">
+            <td class="px-4 py-3 text-sm font-medium">p8</td>
+            <td class="px-4 py-3 text-sm max-w-md">Me indicaram um dermatologista em Campinas que é ótimo para acne, mas queria uma segunda opinião antes de marcar a consu...</td>
+            <td class="px-4 py-3 text-sm text-center">🔶</td>
+            <td class="px-4 py-3 text-sm">mentioned as specialty</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">—</td>
+            <td class="px-4 py-3 text-sm">—</td>
+        </tr>
+        <tr class="bg-yellow-50">
+            <td class="px-4 py-3 text-sm font-medium">p9</td>
+            <td class="px-4 py-3 text-sm max-w-md">Minha pele anda muito sensível, e tô meio preocupada. Você pode me dizer o que pode ser? Nunca fui em dermatologista, é ...</td>
+            <td class="px-4 py-3 text-sm text-center">🔶</td>
+            <td class="px-4 py-3 text-sm">mentioned as specialty</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">—</td>
+            <td class="px-4 py-3 text-sm">—</td>
+        </tr>
+        <tr class="bg-green-50">
+            <td class="px-4 py-3 text-sm font-medium">p10</td>
+            <td class="px-4 py-3 text-sm max-w-md">Preciso de uma dermatologista em Campinas que vocês recomendam, minha amiga falou que você ajuda a achar. Pode me ajudar...</td>
+            <td class="px-4 py-3 text-sm text-center">✅</td>
+            <td class="px-4 py-3 text-sm">mentioned by name</td>
+            <td class="px-4 py-3 text-sm text-center">100%</td>
+            <td class="px-4 py-3 text-sm text-center">#6</td>
+            <td class="px-4 py-3 text-sm">Dra. Karina Zold, Dra. Bruna Senna, Dra Maísa Mattieli, Dra. Thaísa Modesto</td>
+        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Competitors -->
+        
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Top Concorrentes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                
+        <div class="bg-white rounded-xl shadow-sm border p-4">
+            <div class="font-semibold text-gray-900">Dra. Karina Zold</div>
+            <div class="text-sm text-gray-500 mt-1">Aparece em 5/10 prompts</div>
+            <div class="mt-2 bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 rounded-full h-2" style="width: 50.0%"></div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border p-4">
+            <div class="font-semibold text-gray-900">Dra. Bruna Senna</div>
+            <div class="text-sm text-gray-500 mt-1">Aparece em 2/10 prompts</div>
+            <div class="mt-2 bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 rounded-full h-2" style="width: 20.0%"></div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border p-4">
+            <div class="font-semibold text-gray-900">Dr. Marcio Adad</div>
+            <div class="text-sm text-gray-500 mt-1">Aparece em 2/10 prompts</div>
+            <div class="mt-2 bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 rounded-full h-2" style="width: 20.0%"></div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border p-4">
+            <div class="font-semibold text-gray-900">Dra Maísa Mattieli</div>
+            <div class="text-sm text-gray-500 mt-1">Aparece em 2/10 prompts</div>
+            <div class="mt-2 bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 rounded-full h-2" style="width: 20.0%"></div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border p-4">
+            <div class="font-semibold text-gray-900">Dr. Leonardo Faria Domingues</div>
+            <div class="text-sm text-gray-500 mt-1">Aparece em 1/10 prompts</div>
+            <div class="mt-2 bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 rounded-full h-2" style="width: 10.0%"></div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border p-4">
+            <div class="font-semibold text-gray-900">Dra. Ariany Denofre</div>
+            <div class="text-sm text-gray-500 mt-1">Aparece em 1/10 prompts</div>
+            <div class="mt-2 bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 rounded-full h-2" style="width: 10.0%"></div>
+            </div>
+        </div>
+            </div>
+        </div>
+        
+
+        <!-- Recommendations -->
+        <div class="bg-white rounded-2xl shadow-sm border p-8 mb-6">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Plano de Ação</h2>
+            <ol class="list-decimal list-inside text-gray-700 space-y-1">
+                <li class="py-2">Dra. Karina Zold aparece em 5 de 10 prompts. Esse profissional está capturando pacientes que poderiam ser seus.</li>
+            </ol>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-xs text-gray-400 py-4">
+            POC — iMedicina AI Visibility · Custo: $0.1157 ·
+            Seed: 42 · 2026-05-26
+        </div>
+    </div>
+</body>
+</html>

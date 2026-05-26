@@ -1,0 +1,459 @@
+{
+  "doctor": {
+    "name": "Dr. Fernando Lopes",
+    "specialty": "Dermatologia",
+    "city": "Campinas",
+    "state": "SP",
+    "neighborhood": null,
+    "crm": "169135",
+    "crm_state": "SP"
+  },
+  "cfm_validation": {
+    "valid": true,
+    "registered_name": null,
+    "status": null,
+    "specialties": [],
+    "rqe_numbers": [],
+    "error": null
+  },
+  "prompts": [
+    {
+      "id": "p1",
+      "text": "Tô com umas manchas estranhas na pele que apareceram do nada, preciso de um dermato urgente em Campinas",
+      "persona": "urgência",
+      "intent_summary": "Busca por dermatologista para atendimento urgente devido a manchas na pele"
+    },
+    {
+      "id": "p2",
+      "text": "Já pesquisei bastante e sei que minha alergia na pele é eczema, queria um dermatologista em Campinas que tenha experiência comprovada com isso.",
+      "persona": "informado_específico",
+      "intent_summary": "Procura dermatologista especializado em eczema em Campinas"
+    },
+    {
+      "id": "p3",
+      "text": "Oi, meu filho tem umas bolinhas vermelhas que não somem, será que devo levar no dermatologista pediátrico aí em Campinas?",
+      "persona": "pediátrico",
+      "intent_summary": "Dúvida sobre necessidade de dermatologista pediátrico para filho com bolinhas vermelhas"
+    },
+    {
+      "id": "p4",
+      "text": "Minha dermatologista mudou de cidade, tô procurando um novo especialista para acompanhar minha psoríase em Campinas. Alguém recomenda?",
+      "persona": "crônico_acompanhamento",
+      "intent_summary": "Procura dermatologista para acompanhamento contínuo de psoríase"
+    },
+    {
+      "id": "p5",
+      "text": "Eu queria saber se em Campinas tem dermatologista que atende pelo convênio Amil e que também aceite particular, porque tô em dúvida no plano.",
+      "persona": "convênio_vs_particular",
+      "intent_summary": "Quer informações sobre dermatologistas que atendem convênio e particular em Campinas"
+    },
+    {
+      "id": "p6",
+      "text": "Queria fazer um peeling ou algo pra melhorar a textura da minha pele, mas não sei se é seguro. Tem dermatologista em Campinas que faz esses tratamentos estéticos?",
+      "persona": "estético_eletivo",
+      "intent_summary": "Busca dermatologista para tratamentos estéticos como peeling em Campinas"
+    },
+    {
+      "id": "p7",
+      "text": "Oi, tô pensando em consultar um dermato só pra fazer um check-up geral na pele, tem alguém bom pra prevenção em Campinas?",
+      "persona": "preventivo",
+      "intent_summary": "Procura dermatologista para exame preventivo em Campinas"
+    },
+    {
+      "id": "p8",
+      "text": "Me indicaram um dermatologista em Campinas que é ótimo para acne, mas queria uma segunda opinião antes de marcar a consulta. O que acha?",
+      "persona": "segunda_opinião",
+      "intent_summary": "Quer segunda opinião sobre indicação de dermatologista para acne em Campinas"
+    },
+    {
+      "id": "p9",
+      "text": "Minha pele anda muito sensível, e tô meio preocupada. Você pode me dizer o que pode ser? Nunca fui em dermatologista, é complicado?",
+      "persona": "leigo_ansioso",
+      "intent_summary": "Procura explicações simples e orientação para pele sensível, sem experiência prévia com dermatologista"
+    },
+    {
+      "id": "p10",
+      "text": "Preciso de uma dermatologista em Campinas que vocês recomendam, minha amiga falou que você ajuda a achar. Pode me ajudar?",
+      "persona": "pediu_indicação",
+      "intent_summary": "Pede indicação de dermatologista em Campinas"
+    }
+  ],
+  "responses": [
+    {
+      "prompt_id": "p1",
+      "raw_text": "Entendo que você está procurando um dermatologista em Campinas para avaliar manchas recentes na sua pele. Aqui estão algumas opções de profissionais na região:\n\n**[Dra. Bruna Senna - Dermatologista em Campinas - Clínica Babilon](http://brunasenna.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (253 avaliações)**  \n_R. Santo Antônio, 191 - Cambuí, Campinas - SP, 13024-440, Brazil_  \nMédica dermatologista formada pela UNICAMP, atua nas áreas clínica, cirúrgica e cosmiátrica, oferecendo tratamentos personalizados e avançados.\n\n**[Instituto Faria](https://institutofaria.com/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.5 (6 avaliações)**  \n_Av. Barão de Itapura, 2294 - conj. 31/32 - Jardim Guanabara, Campinas - SP, 13073-300, Brazil_  \nClínica de dermatologia que proporciona cuidados clínicos, cirúrgicos e estéticos, com profissionais experientes e atualizados.\n\n**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (13 avaliações)**  \n_Avenida Orosimbo Maia, 360 - 6o Andar Vila Itapura - Cambuí, Campinas - SP, 13010-211, Brazil_  \nDermatologista com especialização em doenças da pele, cabelos e unhas. Oferece atendimento presencial e online, com foco em diagnóstico preciso e tratamento individualizado.\n\nRecomendo entrar em contato com esses profissionais para verificar a disponibilidade de consultas urgentes. Além disso, é importante evitar a automedicação e buscar orientação médica o quanto antes para um diagnóstico adequado. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "http://brunasenna.com.br/?utm_source=openai",
+          "title": "Dra. Bruna Senna - Dermatologista em Campinas - Clínica Babilon"
+        },
+        {
+          "url": "https://institutofaria.com/?utm_source=openai",
+          "title": "Instituto Faria"
+        },
+        {
+          "url": "https://karinazold.com.br/?utm_source=openai",
+          "title": "Dra. Karina Zold - Dermatologista em Campinas"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 324,
+      "tokens_out": 406,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p2",
+      "raw_text": "Encontrei alguns dermatologistas em Campinas com experiência no tratamento de eczema:\n\n**[Instituto Faria](https://institutofaria.com/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.5 (6 avaliações)**  \n_Av. Barão de Itapura, 2294 - conj. 31/32 - Jardim Guanabara, Campinas - SP, 13073-300, Brazil_  \nClínica de dermatologia que oferece cuidados clínicos, cirúrgicos e estéticos, com equipe especializada.\n\n**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (13 avaliações)**  \n_Avenida Orosimbo Maia, 360 - 6o Andar Vila Itapura - Cambuí, Campinas - SP, 13010-211, Brazil_  \nDermatologista com especialização em doenças da pele, incluindo dermatites. Oferece atendimento presencial e online.\n\n**[Dr. Leonardo Faria Domingues, Dermatologista](https://drleonardofaria.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (28 avaliações)**  \n_Av. Barão de Itapura, 2294 - conj. 31 - Jardim Guanabara, Campinas - SP, 13073-300, Brazil_  \nDermatologista com experiência em dermatite atópica e procedimentos estéticos.\n\nRecomendo entrar em contato com esses profissionais para verificar a disponibilidade e agendar uma consulta. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "https://institutofaria.com/?utm_source=openai",
+          "title": "Instituto Faria"
+        },
+        {
+          "url": "https://karinazold.com.br/?utm_source=openai",
+          "title": "Dra. Karina Zold - Dermatologista em Campinas"
+        },
+        {
+          "url": "https://drleonardofaria.com.br/?utm_source=openai",
+          "title": "Dr. Leonardo Faria Domingues, Dermatologista"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 331,
+      "tokens_out": 354,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p3",
+      "raw_text": "Oi! Bolinhas vermelhas na pele das crianças podem ter várias causas, desde alergias, irritações, infecções até outras condições dermatológicas. Como as bolinhas não somem, é uma boa ideia levar seu filho para avaliar com um dermatologista pediátrico. Esse especialista poderá examinar as bolinhas, fazer um diagnóstico preciso e indicar o tratamento adequado.\n\nSe você precisar, posso ajudar a encontrar um dermatologista pediátrico em Campinas para você marcar uma consulta. Quer que eu faça isso?",
+      "doctors_named": [],
+      "citations": [],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 331,
+      "tokens_out": 106,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p4",
+      "raw_text": "Entendo que você está procurando um novo dermatologista em Campinas para acompanhar sua psoríase. Aqui estão algumas opções de profissionais especializados na região:\n\n**[Dra. Karina Zold](https://www.google.com/maps/search/Dra.+Karina+Zold%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nDermatologista com experiência em doenças autoimunes e inflamatórias da pele, incluindo psoríase. Oferece atendimento presencial e online.\n\n**[Dra. Ariany Denofre](https://www.google.com/maps/search/Dra.+Ariany+Denofre%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nEspecialista em doenças imunomediadas da pele, como psoríase, com formação na Unicamp e experiência internacional.\n\n**[Dr. Marcio Adad](https://www.google.com/maps/search/Dr.+Marcio+Adad%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nDermatologista com sólida formação e experiência, atuando no diagnóstico e tratamento de doenças da pele, incluindo psoríase.\n\n**[Dr. Fernando Lopes](https://www.google.com/maps/search/Dr.+Fernando+Lopes%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nEspecialista em dermatologia clínica e estética, com experiência em psoríase e outras condições da pele.\n\n**[Maura Simoes Bressan](https://www.google.com/maps/search/Maura+Simoes+Bressan%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nDermatologista com especialização em psoríase, acne, cirurgia dermatológica e procedimentos estéticos.\n\n**[Hospital PUC-Campinas](https://www.google.com/maps/search/Hospital+PUC-Campinas%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nOferece serviços de dermatologia clínica e preventiva, incluindo tratamento de psoríase, com equipe especializada.\n\nRecomendo entrar em contato com esses profissionais para verificar disponibilidade e agendar uma consulta. Lembre-se de que é importante escolher um dermatologista com o qual você se sinta confortável e confiante no tratamento da sua condição. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "https://www.google.com/maps/search/Dra.+Karina+Zold%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dra. Karina Zold"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dra.+Ariany+Denofre%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dra. Ariany Denofre"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dr.+Marcio+Adad%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dr. Marcio Adad"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dr.+Fernando+Lopes%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dr. Fernando Lopes"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Maura+Simoes+Bressan%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Maura Simoes Bressan"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Hospital+PUC-Campinas%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Hospital PUC-Campinas"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 328,
+      "tokens_out": 549,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p5",
+      "raw_text": "Em Campinas, há diversos dermatologistas que atendem pelo convênio Amil e também realizam atendimentos particulares. Aqui estão algumas opções:\n\n**[Dra Maísa Mattieli - Dermatologista](http://www.maisamattieli.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.5 (28 avaliações)**  \n_Rua Quirino do Amaral Campos, 144 - Sala 801 - Cambuí, Campinas - SP, 13023-570, Brazil_  \nAtende particular e planos de saúde, incluindo Amil. Consultório localizado na Rua Quirino do Amaral Campos, 144 - Sala 801, Cambuí. Telefone: (19) 99724-7212.\n\n**[Dr. Fabio Toledo França Pupo Nogueira, Dermatologista](https://www.doctoralia.com.br/fabio-toledo-franca-pupo-nogueira/dermatologista/campinas?utm_medium=gmb&utm_campaign=116851&utm_content=website&utm_source=openai)**  \n**Fechado · Dermatologist · 4.2 (10 avaliações)**  \n_R. Maria Monteiro, 1572 - Cambuí, Campinas - SP, 13025-152, Brazil_  \nAtende particular e planos de saúde, incluindo Amil. Consultório na Rua Maria Monteiro, 1572 - Cambuí. Telefone: (19) 3014-8364.\n\n**[Dra. Fabiana Gaião de Souza Paulo, Dermatologista](https://www.doctoralia.com.br/fabiana-gaiao-de-souza-paulo/dermatologista/campinas?utm_medium=gmb&utm_campaign=467129&utm_content=website&utm_source=openai)**  \n**Fechado · Dermatologist · 3.4 (15 avaliações)**  \n_Av. Barão de Itapura, 2294 - 6º andar sala 62 - Vila Itapura, Campinas - SP, 13073-300, Brazil_  \nAtende particular e planos de saúde, incluindo Amil. Consultório na Rua Sacramento, 900 - Vila Itapura. Telefone: (19) 3325-3211.\n\nRecomendo entrar em contato diretamente com esses profissionais para confirmar a disponibilidade de atendimento pelo convênio Amil e agendar uma consulta particular, caso deseje. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "http://www.maisamattieli.com.br/?utm_source=openai",
+          "title": "Dra Maísa Mattieli - Dermatologista"
+        },
+        {
+          "url": "https://www.doctoralia.com.br/fabio-toledo-franca-pupo-nogueira/dermatologista/campinas?utm_medium=gmb&utm_campaign=116851&utm_content=website&utm_source=openai",
+          "title": "Dr. Fabio Toledo França Pupo Nogueira, Dermatologista"
+        },
+        {
+          "url": "https://www.doctoralia.com.br/fabiana-gaiao-de-souza-paulo/dermatologista/campinas?utm_medium=gmb&utm_campaign=467129&utm_content=website&utm_source=openai",
+          "title": "Dra. Fabiana Gaião de Souza Paulo, Dermatologista"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 330,
+      "tokens_out": 511,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p6",
+      "raw_text": "Existem diversos dermatologistas em Campinas que oferecem tratamentos estéticos, como peelings, para melhorar a textura da pele. Aqui estão algumas opções:\n\n**[Face Doctor Harmonização Facial](https://www.google.com/maps/search/Face+Doctor+Harmoniza%C3%A7%C3%A3o+Facial%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nEspecializada em procedimentos estéticos, incluindo peelings e skinboosters, visando rejuvenescimento e melhoria da textura da pele.\n\n**[Dra. Mônica Felici](https://www.google.com/maps/search/Dra.+M%C3%B4nica+Felici%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nDermatologista com foco em dermatologia estética integrativa, oferecendo tratamentos personalizados para revitalização da pele.\n\n**[Dr. Marcio Adad](https://www.google.com/maps/search/Dr.+Marcio+Adad%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nMédico dermatologista com experiência em procedimentos estéticos, incluindo peelings, para rejuvenescimento e melhoria da textura da pele.\n\n**[Dra. Cláudia Issa](https://www.google.com/maps/search/Dra.+Cl%C3%A1udia+Issa%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nOferece tratamentos estéticos como peelings químicos, laser e luz intensa pulsada para realçar a beleza natural.\n\n**[Dra. Stephanie Langen](https://www.google.com/maps/search/Dra.+Stephanie+Langen%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nEspecialista em dermatologia clínica, cirúrgica e cosmiatria, realizando peelings químicos e outros procedimentos estéticos.\n\n**[Instituto Faria](https://www.google.com/maps/search/Instituto+Faria%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nClínica de dermatologia que oferece cuidados clínicos, cirúrgicos e estéticos, incluindo peelings.\n\n**[Jéssica Starek Dermatologia](https://www.google.com/maps/search/J%C3%A9ssica+Starek+Dermatologia%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nDermatologista com atuação em procedimentos estéticos como peelings, lasers e microagulhamento.\n\n**[Dra. Isadora Gilli](https://www.google.com/maps/search/Dra.+Isadora+Gilli%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nOferece tratamentos estéticos com foco em resultados naturais e segurança, incluindo peelings.\n\nÉ fundamental consultar um dermatologista qualificado para avaliar sua pele e determinar o tratamento mais adequado e seguro para você. Recomendo agendar uma consulta com um desses profissionais para discutir suas necessidades e expectativas. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "https://www.google.com/maps/search/Face+Doctor+Harmoniza%C3%A7%C3%A3o+Facial%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Face Doctor Harmonização Facial"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dra.+M%C3%B4nica+Felici%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dra. Mônica Felici"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dr.+Marcio+Adad%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dr. Marcio Adad"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dra.+Cl%C3%A1udia+Issa%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dra. Cláudia Issa"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dra.+Stephanie+Langen%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dra. Stephanie Langen"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Instituto+Faria%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Instituto Faria"
+        },
+        {
+          "url": "https://www.google.com/maps/search/J%C3%A9ssica+Starek+Dermatologia%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Jéssica Starek Dermatologia"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dra.+Isadora+Gilli%2C+Campinas%2C+SP?utm_source=openai",
+          "title": "Dra. Isadora Gilli"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 335,
+      "tokens_out": 682,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p7",
+      "raw_text": "Para realizar um check-up geral da pele em Campinas, você pode considerar as seguintes opções:\n\n**[VOI Medicina e Check-up](http://www.voi.med.br/?utm_source=openai)**  \n**Fechado · Diagnostic center · 4.8 (962 avaliações)**  \n_Rua: Pero Lopes, 820 - Jardim Bela Vista, Campinas - SP, 13076-418, Brazil_  \nCentro de medicina e saúde especializado em check-ups médicos, incluindo serviços de dermatologia focados na prevenção e diagnóstico precoce de doenças.\n\n**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (13 avaliações)**  \n_Avenida Orosimbo Maia, 360 - 6o Andar Vila Itapura - Cambuí, Campinas - SP, 13010-211, Brazil_  \nDermatologista com atendimento particular presencial e online, especializada em doenças da pele, cabelos e unhas, oferecendo consultas para prevenção do câncer de pele.\n\n**[Solumedi Campinas - Consultas e Exames com Preços Populares](https://solumedi.com.br/campinas-centro?utm_source=openai)**  \n**Fechado · Physician referral service · 4.7 (15 avaliações)**  \n_Rua Barão de Jaguara, 1184 - Centro, Campinas - SP, 13015-002, Brazil_  \nClínica que oferece consultas dermatológicas com preços acessíveis e agendamento rápido, visando facilitar o acesso a cuidados preventivos.\n\n**[Clínica Para Familia](http://clinicaparafamilia.com.br?utm_source=openai)**  \n**Fechado · Doctor's Office**  \n_Av. Francisco Glicério, 670, Campinas, SP, 13012-100_  \nClínica popular que oferece consultas médicas, incluindo dermatologia, com valores acessíveis e agendamento ágil, focada na saúde da família.\n\n**[Dermatologista em Campinas – Dra. Fernanda Blasques | Tricologista e Estética Médica](http://www.drafernandablasques.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (26 avaliações)**  \n_R. Oriente, 55 - Sala 1301 - Chácara da Barra, Campinas - SP, 13090-740, Brazil_  \nDermatologista que oferece atendimento em um ambiente moderno e acolhedor, com foco em cuidados preventivos e tratamentos personalizados.\n\n**[ClÍnica SALUS - Centro Médico em Campinas](https://clinicasalus.med.br/?utm_source=openai)**  \n**Fechado · Medical clinic · 4.7 (1179 avaliações)**  \n_R. José Rosolém, 145 - Jardim Londres, Campinas - SP, 13060-222, Brazil_  \nClínica médica que oferece consultas dermatológicas com foco em diagnóstico e tratamento de diversas condições da pele, cabelos e unhas.\n\nRecomendo entrar em contato com essas clínicas para verificar disponibilidade, agendar uma consulta e obter informações sobre os serviços oferecidos. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "http://www.voi.med.br/?utm_source=openai",
+          "title": "VOI Medicina e Check-up"
+        },
+        {
+          "url": "https://karinazold.com.br/?utm_source=openai",
+          "title": "Dra. Karina Zold - Dermatologista em Campinas"
+        },
+        {
+          "url": "https://solumedi.com.br/campinas-centro?utm_source=openai",
+          "title": "Solumedi Campinas - Consultas e Exames com Preços Populares"
+        },
+        {
+          "url": "http://clinicaparafamilia.com.br?utm_source=openai",
+          "title": "Clínica Para Familia"
+        },
+        {
+          "url": "http://www.drafernandablasques.com.br/?utm_source=openai",
+          "title": "Dermatologista em Campinas – Dra. Fernanda Blasques | Tricologista e Estética Médica"
+        },
+        {
+          "url": "https://clinicasalus.med.br/?utm_source=openai",
+          "title": "ClÍnica SALUS - Centro Médico em Campinas"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 328,
+      "tokens_out": 672,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p8",
+      "raw_text": "Claro! Posso ajudar a verificar a reputação do dermatologista em Campinas que te indicaram, seja por avaliações, experiência ou especialidade em acne. Você pode me passar o nome dele(a) para que eu faça uma pesquisa mais detalhada?",
+      "doctors_named": [],
+      "citations": [],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 330,
+      "tokens_out": 52,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p9",
+      "raw_text": "Pele sensível pode ter várias causas, como alergias, irritações por produtos, mudanças climáticas, estresse, ou até condições como dermatite e eczema. Também pode ser influenciada por fatores como exposição ao sol, poluição, e até alimentação.\n\nIr ao dermatologista é uma boa ideia, especialmente se a sensibilidade estiver causando desconforto ou agravando. Consultar um especialista ajuda a identificar a causa exata e receber o tratamento adequado. Dermatologistas são os médicos especializados em cuidados com a pele, e a consulta geralmente inclui uma avaliação da pele, perguntas sobre seu histórico de saúde, e, se necessário, exames específicos.\n\nA consulta em si não costuma ser complicada; é só ter em mãos informações sobre seus hábitos de cuidado com a pele, produtos que usa, e sintomas que percebe. Se quiser, posso ajudar com dicas de perguntas para levar ao dermatologista ou sugestões de cuidados básicos enquanto você não consegue consultar. Quer?",
+      "doctors_named": [],
+      "citations": [],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 332,
+      "tokens_out": 193,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p10",
+      "raw_text": "Claro, posso ajudá-la a encontrar dermatologistas em Campinas. Aqui estão algumas opções:\n\n**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (13 avaliações)**  \n_Avenida Orosimbo Maia, 360 - 6o Andar Vila Itapura - Cambuí, Campinas - SP, 13010-211, Brazil_  \nDermatologista com especialização em doenças da pele, cabelos e unhas. Oferece atendimento particular presencial e online, com foco em acne, melasma, queda de cabelo, dermatites e prevenção do câncer de pele.\n\n**[Dra. Bruna Senna - Dermatologista em Campinas - Clínica Babilon](http://brunasenna.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (253 avaliações)**  \n_R. Santo Antônio, 191 - Cambuí, Campinas - SP, 13024-440, Brazil_  \nMédica dermatologista formada pela UNICAMP, atua em dermatologia clínica, cirúrgica e cosmiátrica, oferecendo tratamentos individualizados com abordagem humana e profissional.\n\n**[Instituto Faria](https://institutofaria.com/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.5 (6 avaliações)**  \n_Av. Barão de Itapura, 2294 - conj. 31/32 - Jardim Guanabara, Campinas - SP, 13073-300, Brazil_  \nClínica de dermatologia que oferece cuidados clínicos, cirúrgicos e estéticos, com profissionais experientes e atualizados em procedimentos modernos e seguros.\n\n**[Dra Maísa Mattieli - Dermatologista](http://www.maisamattieli.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.5 (28 avaliações)**  \n_Rua Quirino do Amaral Campos, 144 - Sala 801 - Cambuí, Campinas - SP, 13023-570, Brazil_  \nDermatologista com especialização em dermatologia clínica e estética, focada em resultados naturais e atendimento personalizado.\n\n**[Dra. Thaísa Modesto](http://www.drathaisamodesto.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (18 avaliações)**  \n_Edifício Wall Street, R. Antônio Lapa, 178 - sala 208 - Cambuí, Campinas - SP, 13025-240, Brazil_  \nDermatologista especializada em dermatologia estética avançada, focada em realçar a beleza natural dos pacientes.\n\n**[Dr. Fernando Lopes | Dermatologista em Campinas](https://www.fernandolopesdermato.com/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (36 avaliações)**  \n_Rua Dr. Paulo C. P. Nogueira, 220 - Nova Campinas, Campinas - SP, 13092-104, Brazil_  \nDermatologista com especialização em cirurgia dermatológica, cirurgia micrográfica de Mohs, dermatologia clínica e estética.\n\nRecomendo entrar em contato com essas profissionais para verificar disponibilidade e agendar uma consulta. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "https://karinazold.com.br/?utm_source=openai",
+          "title": "Dra. Karina Zold - Dermatologista em Campinas"
+        },
+        {
+          "url": "http://brunasenna.com.br/?utm_source=openai",
+          "title": "Dra. Bruna Senna - Dermatologista em Campinas - Clínica Babilon"
+        },
+        {
+          "url": "https://institutofaria.com/?utm_source=openai",
+          "title": "Instituto Faria"
+        },
+        {
+          "url": "http://www.maisamattieli.com.br/?utm_source=openai",
+          "title": "Dra Maísa Mattieli - Dermatologista"
+        },
+        {
+          "url": "http://www.drathaisamodesto.com.br/?utm_source=openai",
+          "title": "Dra. Thaísa Modesto"
+        },
+        {
+          "url": "https://www.fernandolopesdermato.com/?utm_source=openai",
+          "title": "Dr. Fernando Lopes | Dermatologista em Campinas"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 327,
+      "tokens_out": 704,
+      "latency_ms": 0
+    }
+  ],
+  "verdicts": [
+    {
+      "prompt_id": "p1",
+      "citation_type": "competitor_in_place",
+      "confidence": 1.0,
+      "position": null,
+      "evidence_quote": "**[Dra. Bruna Senna - Dermatologista em Campinas - Clínica Babilon](http://brunasenna.com.br/?utm_source=openai)**",
+      "competitors_named": [
+        "Dra. Bruna Senna",
+        "Dra. Karina Zold"
+      ]
+    },
+    {
+      "prompt_id": "p2",
+      "citation_type": "competitor_in_place",
+      "confidence": 1.0,
+      "position": null,
+      "evidence_quote": "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (13 avaliações)**  \n_Avenida Orosimbo Maia, 360 - 6o Andar Vila Itapura - Cambuí, Campinas - SP, 13010-211, Brazil_  \nDermatologista com especialização em doenças da pele, incluindo dermatites.",
+      "competitors_named": [
+        "Dra. Karina Zold",
+        "Dr. Leonardo Faria Domingues"
+      ]
+    },
+    {
+      "prompt_id": "p3",
+      "citation_type": "mentioned_as_specialty",
+      "confidence": 1.0,
+      "position": null,
+      "evidence_quote": "é uma boa ideia levar seu filho para avaliar com um dermatologista pediátrico",
+      "competitors_named": []
+    },
+    {
+      "prompt_id": "p4",
+      "citation_type": "mentioned_by_name",
+      "confidence": 1.0,
+      "position": 4,
+      "evidence_quote": "**[Dr. Fernando Lopes](https://www.google.com/maps/search/Dr.+Fernando+Lopes%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nEspecialista em dermatologia clínica e estética, com experiência em psoríase e outras condições da pele.",
+      "competitors_named": [
+        "Dra. Karina Zold",
+        "Dra. Ariany Denofre",
+        "Dr. Marcio Adad",
+        "Maura Simoes Bressan"
+      ]
+    },
+    {
+      "prompt_id": "p5",
+      "citation_type": "competitor_in_place",
+      "confidence": 1.0,
+      "position": null,
+      "evidence_quote": "**[Dra Maísa Mattieli - Dermatologista](http://www.maisamattieli.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.5 (28 avaliações)**  \n_Rua Quirino do Amaral Campos, 144 - Sala 801 - Cambuí, Campinas - SP, 13023-570, Brazil_  \nAtende particular e planos de saúde, incluindo Amil.",
+      "competitors_named": [
+        "Dra Maísa Mattieli",
+        "Dr. Fabio Toledo França Pupo Nogueira",
+        "Dra. Fabiana Gaião de Souza Paulo"
+      ]
+    },
+    {
+      "prompt_id": "p6",
+      "citation_type": "competitor_in_place",
+      "confidence": 1.0,
+      "position": null,
+      "evidence_quote": "**[Dra. Mônica Felici](https://www.google.com/maps/search/Dra.+M%C3%B4nica+Felici%2C+Campinas%2C+SP?utm_source=openai)**\n_Campinas, SP_\nDermatologista com foco em dermatologia estética integrativa, oferecendo tratamentos personalizados para revitalização da pele.",
+      "competitors_named": [
+        "Dra. Mônica Felici",
+        "Dr. Marcio Adad",
+        "Dra. Cláudia Issa",
+        "Dra. Stephanie Langen",
+        "Jéssica Starek",
+        "Dra. Isadora Gilli"
+      ]
+    },
+    {
+      "prompt_id": "p7",
+      "citation_type": "competitor_in_place",
+      "confidence": 1.0,
+      "position": null,
+      "evidence_quote": "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**",
+      "competitors_named": [
+        "Dra. Karina Zold",
+        "Dra. Fernanda Blasques"
+      ]
+    },
+    {
+      "prompt_id": "p8",
+      "citation_type": "mentioned_as_specialty",
+      "confidence": 1.0,
+      "position": null,
+      "evidence_quote": "Posso ajudar a verificar a reputação do dermatologista em Campinas que te indicaram",
+      "competitors_named": []
+    },
+    {
+      "prompt_id": "p9",
+      "citation_type": "mentioned_as_specialty",
+      "confidence": 1.0,
+      "position": null,
+      "evidence_quote": "Ir ao dermatologista é uma boa ideia, especialmente se a sensibilidade estiver causando desconforto ou agravando. Consultar um especialista ajuda a identificar a causa exata e receber o tratamento adequado. Dermatologistas são os médicos especializados em cuidados com a pele, e a consulta geralmente inclui uma avaliação da pele, perguntas sobre seu histórico de saúde, e, se necessário, exames específicos.",
+      "competitors_named": []
+    },
+    {
+      "prompt_id": "p10",
+      "citation_type": "mentioned_by_name",
+      "confidence": 1.0,
+      "position": 6,
+      "evidence_quote": "**[Dr. Fernando Lopes | Dermatologista em Campinas](https://www.fernandolopesdermato.com/?utm_source=openai)**",
+      "competitors_named": [
+        "Dra. Karina Zold",
+        "Dra. Bruna Senna",
+        "Dra Maísa Mattieli",
+        "Dra. Thaísa Modesto"
+      ]
+    }
+  ],
+  "score": {
+    "presence": 50.0,
+    "quality": 34.0,
+    "position": 60.0,
+    "competitive": 50.0,
+    "overall": 45.6
+  },
+  "metadata": {
+    "generated_at": "2026-05-26T08:21:18.102943Z",
+    "model_generator": "gpt-4.1-mini-2025-04-14",
+    "model_simulator": "gpt-4.1-mini-2025-04-14",
+    "model_judge": "gpt-4.1-mini-2025-04-14",
+    "total_tokens_in": 15576,
+    "total_tokens_out": 5929,
+    "total_cost_usd": 0.1157,
+    "seed": 42
+  }
+}
