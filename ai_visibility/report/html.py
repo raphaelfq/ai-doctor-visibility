@@ -166,21 +166,33 @@ def render_html(report: Report, output_dir: Path) -> Path:
             </p>
 
             <!-- Dimension bars -->
-            <div class="grid grid-cols-2 gap-4 mt-6 max-w-lg mx-auto text-left">
+            <div class="grid grid-cols-2 gap-4 mt-6 max-w-xl mx-auto text-left">
                 <div>
-                    <div class="flex justify-between text-sm text-gray-600"><span>Presença</span><span>{s.presence:.0f}</span></div>
-                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.presence}%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-600"><span>Qualidade</span><span>{s.quality:.0f}</span></div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Qualidade (25%)</span><span>{s.quality:.0f}</span></div>
                     <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.quality}%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm text-gray-600"><span>Posição</span><span>{s.position:.0f}</span></div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Presença (20%)</span><span>{s.presence:.0f}</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.presence}%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Citation Strength (15%)</span><span>{s.citation_strength:.0f}</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-indigo-500 rounded-full h-2" style="width: {s.citation_strength}%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Share of Voice (15%)</span><span>{s.share_of_voice:.0f}</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-indigo-500 rounded-full h-2" style="width: {s.share_of_voice}%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Posição (10%)</span><span>{s.position:.0f}</span></div>
                     <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.position}%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm text-gray-600"><span>Competitivo</span><span>{s.competitive:.0f}</span></div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Sentiment (10%)</span><span>{s.sentiment:.0f}</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-indigo-500 rounded-full h-2" style="width: {s.sentiment}%"></div></div>
+                </div>
+                <div class="col-span-2">
+                    <div class="flex justify-between text-sm text-gray-600"><span>Competitivo (5%)</span><span>{s.competitive:.0f}</span></div>
                     <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.competitive}%"></div></div>
                 </div>
             </div>

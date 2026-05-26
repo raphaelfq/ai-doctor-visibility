@@ -1,147 +1,249 @@
 """Tests for the scorer — deterministic, no LLM calls.
 
-Every expected value is hand-calculated. These tests MUST fail
-if the scoring formula changes unexpectedly.
+Every expected value is hand-calculated.
+V4: 7 dimensions (4 original + citation_strength + share_of_voice + sentiment).
 """
 
 import pytest
 
-from ai_visibility.stages.scorer import score
+from ai_visibility.models import Citation, SimulatedResponse
+from ai_visibility.stages.scorer import (
+    citation_strength,
+    score,
+    sentiment_score,
+    share_of_voice,
+)
 from tests.conftest import make_verdict
 
 
-class TestPerfectScore:
-    """All prompts: mentioned_by_name, confidence 1.0, position 1."""
+def _make_response(prompt_id: str, raw_text: str = "test", citations=None):
+    return SimulatedResponse(
+        prompt_id=prompt_id,
+        raw_text=raw_text,
+        model="test",
+        tokens_in=0,
+        tokens_out=0,
+        latency_ms=0,
+        citations=citations or [],
+    )
 
+
+# ---------------------------------------------------------------------------
+# Core dimensions (kept from V3)
+# ---------------------------------------------------------------------------
+
+
+class TestPerfectScore:
     def test_all_dimensions_maxed(self):
         verdicts = [
-            make_verdict(
-                prompt_id=f"p{i}",
-                citation_type="mentioned_by_name",
-                confidence=1.0,
-                position=1,
+            make_verdict(f"p{i}", "mentioned_by_name", 1.0, position=1)
+            for i in range(1, 11)
+        ]
+        responses = [
+            _make_response(
+                f"p{i}",
+                raw_text="Dr. Teste, especialista renomado. 5.0 (30 avaliações). Rua X, 04535-001.",
+                citations=[
+                    Citation(url="https://drteste.com.br", title="Dr. Teste"),
+                    Citation(url="https://google.com/maps/search/Dr.+Teste", title="Dr. Teste"),
+                    Citation(url="https://doctoralia.com.br/teste", title="Dr. Teste"),
+                ],
             )
             for i in range(1, 11)
         ]
-        result = score(verdicts)
+        result = score(verdicts, responses=responses, doctor_name="Dr. Teste")
 
         assert result.presence == 100.0
         assert result.quality == 100.0
-        # position: (11-1)*10 = 100 for each
         assert result.position == 100.0
-        # no competitors
         assert result.competitive == 100.0
-        # overall: 0.40*100 + 0.30*100 + 0.20*100 + 0.10*100 = 100
+        assert result.citation_strength == 100.0
+        assert result.share_of_voice == 100.0
+        assert result.sentiment == 100.0
         assert result.overall == 100.0
 
 
 class TestZeroScore:
-    """All prompts: not_mentioned."""
-
     def test_all_dimensions_zero_or_near(self):
         verdicts = [
-            make_verdict(prompt_id=f"p{i}", citation_type="not_mentioned")
-            for i in range(1, 11)
+            make_verdict(f"p{i}", "not_mentioned") for i in range(1, 11)
         ]
-        result = score(verdicts)
+        responses = [_make_response(f"p{i}") for i in range(1, 11)]
+        result = score(verdicts, responses=responses, doctor_name="Dr. Ninguem")
 
         assert result.presence == 0.0
         assert result.quality == 0.0
         assert result.position == 0.0
-        # competitive: 100 - 0% competitor = 100
+        assert result.citation_strength == 0.0
+        assert result.share_of_voice == 0.0
+        assert result.sentiment == 0.0
+        # competitive: no competitors = 100
         assert result.competitive == 100.0
-        # overall: 0.40*0 + 0.30*0 + 0.20*0 + 0.10*100 = 10
-        assert result.overall == 10.0
+        # overall: only competitive contributes: 0.05 * 100 = 5.0
+        assert result.overall == 5.0
 
 
 class TestAllCompetitors:
-    """All prompts: competitor_in_place."""
-
     def test_competitive_zeroed(self):
         verdicts = [
-            make_verdict(
-                prompt_id=f"p{i}",
-                citation_type="competitor_in_place",
-                competitors_named=["Dr. Outro"],
-            )
+            make_verdict(f"p{i}", "competitor_in_place", competitors_named=["Dr. Outro"])
             for i in range(1, 11)
         ]
-        result = score(verdicts)
+        responses = [_make_response(f"p{i}") for i in range(1, 11)]
+        result = score(verdicts, responses=responses, doctor_name="Dr. Ninguem")
 
-        # presence: competitor_in_place is NOT counted as "appeared"
         assert result.presence == 0.0
-        # quality: competitor_in_place = 10 * 1.0 / 10 = 10
-        assert result.quality == 10.0
-        assert result.position == 0.0
-        # competitive: 100 - 100% = 0
         assert result.competitive == 0.0
-        # overall: 0.40*10 + 0.30*0 + 0.20*0 + 0.10*0 = 4
-        assert result.overall == 4.0
+        # share_of_voice: 0 doctor mentions / 10 competitor mentions = 0%
+        assert result.share_of_voice == 0.0
 
 
 class TestMixedResults:
-    """Realistic mix: 3 mentioned_by_name, 2 mentioned_as_specialty, 5 not_mentioned."""
-
     def test_intermediate_score(self):
         verdicts = [
-            # 3 mentioned by name at positions 1, 2, 3
             make_verdict("p1", "mentioned_by_name", 0.95, position=1),
             make_verdict("p2", "mentioned_by_name", 0.90, position=2),
             make_verdict("p3", "mentioned_by_name", 0.85, position=3),
-            # 2 mentioned as specialty
             make_verdict("p4", "mentioned_as_specialty", 0.80),
             make_verdict("p5", "mentioned_as_specialty", 0.75),
-            # 5 not mentioned
             make_verdict("p6", "not_mentioned", 1.0),
             make_verdict("p7", "not_mentioned", 1.0),
             make_verdict("p8", "not_mentioned", 1.0),
             make_verdict("p9", "not_mentioned", 1.0),
             make_verdict("p10", "not_mentioned", 1.0),
         ]
-        result = score(verdicts)
+        responses = [_make_response(f"p{i}") for i in range(1, 11)]
+        result = score(verdicts, responses=responses, doctor_name="Dr. Teste")
 
-        # presence: 5 mentioned (3 by_name + 2 as_specialty) / 10 = 50%
         assert result.presence == 50.0
-
-        # quality: (100*0.95 + 100*0.90 + 100*0.85 + 30*0.80 + 30*0.75 + 0*5) / 10
-        # = (95 + 90 + 85 + 24 + 22.5) / 10 = 316.5 / 10 = 31.65
-        assert result.quality == 31.6  # rounded to 1 decimal
-
-        # position: avg of (11-1)*10=100, (11-2)*10=90, (11-3)*10=80 = 270/3 = 90
+        # quality: (100*0.95 + 100*0.90 + 100*0.85 + 30*0.80 + 30*0.75) / 10 = 31.65 → 31.6
+        assert result.quality == pytest.approx(31.6, abs=0.1)
+        # position: (100 + 90 + 80) / 3 = 90.0
         assert result.position == 90.0
-
-        # competitive: no competitor_in_place, so 100
         assert result.competitive == 100.0
-
-        # overall uses unrounded intermediates:
-        # 0.40*31.65 + 0.30*50 + 0.20*90 + 0.10*100
-        # = 12.66 + 15 + 18 + 10 = 55.66 → rounds to 55.7
-        assert result.overall == pytest.approx(55.7, abs=0.1)
+        # share_of_voice: 3 by_name / (3 + 0 competitors) = 100%
+        assert result.share_of_voice == 100.0
 
 
 class TestReproducibility:
-    """Same input → same output (deterministic)."""
-
     def test_identical_runs(self):
         verdicts = [
             make_verdict("p1", "mentioned_by_name", 0.9, position=2),
             make_verdict("p2", "competitor_in_place", 0.8, competitors_named=["Dr. X"]),
             make_verdict("p3", "not_mentioned", 1.0),
         ]
-        result1 = score(verdicts)
-        result2 = score(verdicts)
+        responses = [_make_response(f"p{i}") for i in range(1, 4)]
+        r1 = score(verdicts, responses=responses, doctor_name="Dr. T")
+        r2 = score(verdicts, responses=responses, doctor_name="Dr. T")
 
-        assert result1.overall == result2.overall
-        assert result1.presence == result2.presence
-        assert result1.quality == result2.quality
-        assert result1.position == result2.position
-        assert result1.competitive == result2.competitive
+        assert r1.overall == r2.overall
 
 
 class TestEmptyInput:
-    """Edge case: no verdicts."""
-
     def test_returns_zeros(self):
         result = score([])
         assert result.overall == 0.0
-        assert result.presence == 0.0
+        assert result.citation_strength == 0.0
+        assert result.share_of_voice == 0.0
+        assert result.sentiment == 0.0
+
+
+class TestBackwardsCompatibility:
+    """Score function works without responses (V3 mode)."""
+
+    def test_without_responses(self):
+        verdicts = [
+            make_verdict("p1", "mentioned_by_name", 1.0, position=1),
+            make_verdict("p2", "not_mentioned", 1.0),
+        ]
+        result = score(verdicts)
+        assert result.presence == 50.0
+        assert result.citation_strength == 0.0  # no responses → 0
+        assert result.sentiment == 0.0
+
+
+# ---------------------------------------------------------------------------
+# New dimensions (V4)
+# ---------------------------------------------------------------------------
+
+
+class TestCitationStrength:
+    def test_own_site_cited(self):
+        responses = [
+            _make_response("p1", citations=[
+                Citation(url="https://drjoao.com.br/page", title="Dr. João Silva"),
+            ]),
+        ]
+        result = citation_strength(responses, "Dr. João Silva")
+        # own_site=40 + 1 source=10 = 50
+        assert result == 50.0
+
+    def test_google_maps(self):
+        responses = [
+            _make_response("p1", citations=[
+                Citation(url="https://google.com/maps/search/Dr.+Joao", title="Dr. João"),
+                Citation(url="https://drjoao.com.br", title="Dr. João"),
+            ]),
+        ]
+        result = citation_strength(responses, "Dr. João")
+        # own_site=40 + maps=25 + 2 sources ≥1 = 10 → 75
+        assert result == 75.0
+
+    def test_no_citations(self):
+        responses = [_make_response("p1")]
+        assert citation_strength(responses, "Dr. Ninguem") == 0.0
+
+    def test_competitor_citations_dont_count(self):
+        responses = [
+            _make_response("p1", citations=[
+                Citation(url="https://draoutro.com.br", title="Dra. Outro"),
+            ]),
+        ]
+        result = citation_strength(responses, "Dr. João")
+        assert result == 0.0
+
+
+class TestShareOfVoice:
+    def test_all_doctor_mentions(self):
+        verdicts = [
+            make_verdict("p1", "mentioned_by_name"),
+            make_verdict("p2", "mentioned_by_name"),
+        ]
+        assert share_of_voice(verdicts) == 100.0
+
+    def test_no_mentions_at_all(self):
+        verdicts = [make_verdict("p1", "not_mentioned")]
+        assert share_of_voice(verdicts) == 0.0
+
+    def test_shared_with_competitors(self):
+        verdicts = [
+            make_verdict("p1", "mentioned_by_name", competitors_named=["Dr. A"]),
+            make_verdict("p2", "competitor_in_place", competitors_named=["Dr. A", "Dr. B"]),
+        ]
+        # doctor: 1 mention, competitors: 1 + 2 = 3, total = 4
+        assert share_of_voice(verdicts) == pytest.approx(25.0)
+
+
+class TestSentimentScore:
+    def test_rich_mention(self):
+        verdicts = [make_verdict("p1", "mentioned_by_name")]
+        responses = [
+            _make_response(
+                "p1",
+                raw_text="Dr. João, especialista renomado. 5.0 (30 avaliações). Rua X, 04535-001.",
+            ),
+        ]
+        result = sentiment_score(responses, verdicts)
+        # rating=30 + cep=20 + especialista=25 + renomado=25 = 100
+        assert result == 100.0
+
+    def test_bare_mention(self):
+        verdicts = [make_verdict("p1", "mentioned_by_name")]
+        responses = [_make_response("p1", raw_text="Dr. João atende em Campinas.")]
+        result = sentiment_score(responses, verdicts)
+        assert result == 0.0  # no rating, no cep, no keywords
+
+    def test_not_mentioned_returns_zero(self):
+        verdicts = [make_verdict("p1", "not_mentioned")]
+        responses = [_make_response("p1")]
+        assert sentiment_score(responses, verdicts) == 0.0

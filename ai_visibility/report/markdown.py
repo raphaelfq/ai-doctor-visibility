@@ -46,20 +46,15 @@ def render_markdown(report: Report, output_dir: Path) -> Path:
     lines.append(f"## Score Geral: {s.overall:.0f} / 100\n")
     lines.append(f"Média da especialidade ({doc.specialty}): {benchmark:.0f}/100\n")
 
-    lines.append("| Dimensão | Score | O que mede |")
-    lines.append("|----------|-------|------------|")
-    lines.append(
-        f"| Presença | {s.presence:.1f} | Em quantos prompts o médico apareceu |"
-    )
-    lines.append(
-        f"| Qualidade | {s.quality:.1f} | Tipo de menção ponderado pela confiança |"
-    )
-    lines.append(
-        f"| Posição | {s.position:.1f} | Posição média quando citado por nome |"
-    )
-    lines.append(
-        f"| Competitivo | {s.competitive:.1f} | Inverso de 'concorrente tomou a vaga' |"
-    )
+    lines.append("| Dimensão | Score | Peso | O que mede |")
+    lines.append("|----------|-------|------|------------|")
+    lines.append(f"| Qualidade | {s.quality:.1f} | 25% | Tipo de menção ponderado pela confiança |")
+    lines.append(f"| Presença | {s.presence:.1f} | 20% | Em quantos prompts o médico apareceu |")
+    lines.append(f"| Citation Strength | {s.citation_strength:.1f} | 15% | Fontes próprias citadas (site, GBP, plataformas) |")
+    lines.append(f"| Share of Voice | {s.share_of_voice:.1f} | 15% | Proporção de menções vs competidores |")
+    lines.append(f"| Posição | {s.position:.1f} | 10% | Posição média quando citado por nome |")
+    lines.append(f"| Sentiment | {s.sentiment:.1f} | 10% | Riqueza da menção (ratings, endereço, detalhes) |")
+    lines.append(f"| Competitivo | {s.competitive:.1f} | 5% | Inverso de deslocamento por concorrente |")
     lines.append("")
 
     # One-line diagnosis

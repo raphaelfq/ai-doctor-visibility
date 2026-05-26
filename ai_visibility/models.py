@@ -120,6 +120,9 @@ class ScoreBreakdown(BaseModel):
     quality: float = Field(ge=0, le=100)
     position: float = Field(ge=0, le=100)
     competitive: float = Field(ge=0, le=100)
+    citation_strength: float = Field(ge=0, le=100)
+    share_of_voice: float = Field(ge=0, le=100)
+    sentiment: float = Field(ge=0, le=100)
     overall: float = Field(ge=0, le=100)
 
 

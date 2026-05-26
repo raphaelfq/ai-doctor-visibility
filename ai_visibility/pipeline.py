@@ -76,7 +76,7 @@ async def run_pipeline(
 
     # --- Stage 4: Scorer ---
     _progress("Calculando AI Visibility Score...")
-    score_result = score(verdicts)
+    score_result = score(verdicts, responses=responses, doctor_name=doctor.name)
     recommendations = generate_recommendations(
         verdicts, score_result, doctor.name, doctor.specialty
     )
