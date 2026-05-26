@@ -133,20 +133,54 @@ pytest -v   # 51 testes
 
 Cobertura: models, scorer (6 cenários determinísticos), recommendations, cache, CFM parser, cost estimation, reporters (JSON roundtrip, markdown, HTML).
 
-## Limitações
+## Score: o que implementamos vs. o que o PRD define
 
-- **Médico fictício pontua baixo**: esperado — LLMs não conhecem médicos inventados. Esse é o ponto do produto.
+O PRD define o AI Visibility Score com **6 dimensões**: Encontrabilidade, Entidade, Conteúdo, Reputação, Citação em IA e Conversão. Este POC implementa **1 dessas 6 dimensões — Citação em IA** — subdividida em 4 sub-métricas:
+
+| Sub-métrica POC | Peso | O que mede | Dimensão PRD |
+|---|---|---|---|
+| Quality | 40% | Tipo de menção × confiança do judge | Citação em IA |
+| Presence | 30% | % de prompts onde o médico apareceu | Citação em IA |
+| Position | 20% | Posição quando citado por nome | Citação em IA |
+| Competitive | 10% | Inverso de deslocamento por concorrente | Citação em IA |
+
+As outras 5 dimensões dependem de infraestrutura que não existe no POC:
+
+| Dimensão PRD | Requer |
+|---|---|
+| Encontrabilidade | Audit de SEO, Google Business Profile |
+| Entidade | Entity Builder completo (CRM, RQE, schema JSON-LD) |
+| Conteúdo | Engine de conteúdo educativo + pipeline de compliance |
+| Reputação | Google Reviews, Doctoralia, score médio |
+| Conversão | Pixel de atribuição + funil booking→consulta confirmada |
+
+**Pesos são assumidos, não calibrados.** O próprio PRD reconhece isso como open question: "Pesos iniciais das 6 dimensões — calibrar com julgamento dos 3 médicos consultores ou com correlação ex-post a pacientes atribuíveis?" Em produção, os pesos seriam calibrados com sample de 50 médicos beta (Epic 4, 8 dias estimados no roadmap).
+
+## Limitações conhecidas
+
+### Score
+- **1 de 6 dimensões implementada**: o score deste POC mede exclusivamente citação em IA. O score de produção agregaria SEO, entidade, conteúdo, reputação e conversão.
+- **Pesos arbitrários (40/30/20/10)**: sem dados reais para calibrar. Em produção seriam ajustados com correlação a pacientes atribuíveis.
+- **Benchmarks por especialidade são estimativas**: hardcoded (Dermatologia=35, Cardiologia=28, etc.). Em produção seriam calculados a partir de dados reais agregados.
+- **Variância entre runs ~±5 pontos**: o `web_search_preview` retorna resultados diferentes a cada chamada (a web é não-determinística). O scorer é determinístico (±0), mas o input dele varia. O PRD pede ±2 assumindo simulação estável — com busca web real, ±5 é mais realista.
+
+### Judge
+- **Accuracy ~80%**: audit manual identificou que o judge confunde conselho genérico ("vá ao dermatologista") com recomendação concreta de especialidade. Mitigado no prompt v2 com exemplos explícitos.
+- **Confidence pouco granular**: varia entre 0.9-1.0. O ideal seria 0.3-1.0 com mais granularidade. Requer few-shot calibration com exemplos scored manualmente.
+
+### Pipeline
+- **Médico fictício pontua baixo**: esperado — LLMs não conhecem médicos inventados. É o ponto do produto.
 - **10 prompts por diagnóstico**: em produção seriam 50+ (PRD P0.7).
 - **1 fonte (OpenAI)**: em produção incluiria Perplexity e Google AI Overviews. Interface plugável (`BaseJudge`, `BaseSimulator`) preparada para isso.
-- **Benchmarks por especialidade são estimativas**: em produção seriam calculados a partir de dados reais agregados.
 - **Validação CFM é best-effort**: site do CFM pode bloquear scraping — fallback para validação de formato.
 
 ## What I'd do with more time
 
+- **Implementar as 5 dimensões restantes** do score (Encontrabilidade, Entidade, Conteúdo, Reputação, Conversão) à medida que a infraestrutura correspondente for construída
+- **Calibração de pesos** com sample de 50 médicos beta + correlação com pacientes atribuíveis
 - Scraping real de Perplexity e Google AI Overviews (PRD P0.7 pede 3 fontes)
-- Múltiplos providers de judge (Claude, Gemini) com voting
-- Calibração dos benchmarks com dados reais de centenas de médicos
+- Múltiplos providers de judge (Claude, Gemini) com majority voting para reduzir variância
+- **Pipeline de avaliação humana** (Cohen's Kappa entre judges humanos vs LLM) para validar accuracy do judge
 - Sample maior (50 prompts/médico) com custo otimizado via cache agressivo
-- Pipeline de avaliação humana (Cohen's Kappa entre judges humanos vs LLM)
-- Dashboard web (Streamlit) para rodar diagnósticos sem CLI
-- Validação CFM via API oficial (se disponível) em vez de scraping
+- Dashboard web para rodar diagnósticos sem CLI
+- Versionamento de prompts (prompt registry) para rastrear impacto de mudanças no judge/generator
