@@ -2,122 +2,116 @@
 
 **Especialidade:** Dermatologia  
 **Cidade:** São Paulo (Moema) - SP  
-**Gerado em:** 2026-05-26 13:10
+**Gerado em:** 2026-05-26 13:57
 
-## Score Geral: 2 / 100
+## Score Geral: 32 / 100
 
 Média da especialidade (Dermatologia): 35/100
 
 | Dimensão | Score | Peso | O que mede |
 |----------|-------|------|------------|
-| Qualidade | 9.5 | 25% | Tipo de menção ponderado pela confiança |
-| Presença | 0.0 | 20% | Em quantos prompts o médico apareceu |
-| Citation Strength | 0.0 | 15% | Fontes próprias citadas (site, GBP, plataformas) |
-| Share of Voice | 0.0 | 15% | Proporção de menções vs competidores |
-| Posição | 0.0 | 10% | Posição média quando citado por nome |
-| Sentiment | 0.0 | 10% | Riqueza da menção (ratings, endereço, detalhes) |
-| Competitivo | 0.0 | 5% | Inverso de deslocamento por concorrente |
+| Qualidade | 19.7 | 40% | Tipo de menção ponderado pela confiança |
+| Presença | 20.0 | 30% | Em quantos prompts o médico apareceu |
+| Posição | 80.0 | 20% | Posição média quando citado por nome |
+| Competitivo | 20.0 | 10% | Inverso de deslocamento por concorrente |
 
 ## Diagnóstico em uma frase
 
-O médico não aparece por nome nas recomendações de IA. Em 10 de 10 prompts, outros profissionais foram citados.
+O médico aparece em 1 de 10 prompts, mas ainda perde espaço para concorrentes em 8 prompts.
 
 ## Detalhe por prompt
 
 ### p1 — leigo_ansioso
-> "Tô com muita coceira e umas bolinhas vermelhas que não somem, tô preocupado, preciso de um dermatologista em Moema pra me ajudar rápido."
+> "Tô com umas manchas estranhas na pele que apareceram do nada, preciso de um dermato urgente em Moema, SP. Alguém sabe onde posso ir rápido?"
 
 **Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Recomendo que você procure atendimento dermatológico o quanto antes para uma avaliação adequada."
+**Evidência:** "Recomendo entrar em contato com essas clínicas para verificar a disponibilidade de atendimento urgente e agendar sua consulta o quanto antes."
 **Concorrentes citados:** Dra. Aline Baptista
 
 ### p2 — informado_específico
-> "Estou procurando um dermatologista em Moema que tenha experiência em tratamentos para melasma, já li vários artigos e quero um profissional que faça acompanhamento com laser e cremes específicos."
+> "Estou pesquisando dermatologistas em Moema que tenham experiência em tratamento de rosácea com laser vascular. Alguém conhece alguma clínica ou profissional especializado?"
 
 **Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Encontrei algumas dermatologistas em Moema que possuem experiência no tratamento de melasma, utilizando laser e cremes específicos"
-**Concorrentes citados:** Dra Paula Casteleti, Dra Helena Reich Camasmie, Dra. Patrícia Ishiy
+**Evidência:** "Encontrei algumas clínicas e dermatologistas em Moema que oferecem tratamentos para rosácea, incluindo opções com laser vascular"
+**Concorrentes citados:** Dra Helena Reich Camasmie, Dra. Eduarda Braga Esteves, Dra. Alice Guimarães, Dra. Flavia Ravelli, Clínica Leilane Catricala
 
 ### p3 — urgência
-> "Minha filha acordou com uma erupção cutânea que parece alergia, não sei se é sério, alguém sabe se dermatologista em Moema atende emergências?"
+> "Minha alergia na pele piorou muito hoje, com coceira e vermelhidão intensa. Preciso de um dermatologista em Moema que atenda com urgência, o que vocês recomendam?"
 
-**Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Recomendo entrar em contato com uma dessas clínicas para verificar a disponibilidade de atendimento emergencial ou agendar uma consulta"
-**Concorrentes citados:** Dra. Alice Guimarães, Dra. Aline Baptista, Clínica Leilane Catricala, Clinica Derma Line
+**Veredicto:** ✅ mentioned_by_name (confiança 1.00)
+**Posição:** 3º
+**Evidência:** "**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  Fechado · Dermatologist · 5.0 (15 avaliações)"
+**Concorrentes citados:** Dra. Aline Baptista, Clínica Leilane Catricala
 
 ### p4 — segunda_opinião
-> "Já fui diagnosticado com psoríase, mas não tô satisfeito com meu tratamento atual. Queria uma segunda opinião de um dermatologista bom que atenda em Moema, SP."
+> "Já consultei dois dermatologistas em Moema sobre minhas espinhas que não melhoram, quero uma segunda opinião antes de começar um novo tratamento. Alguma dica?"
 
-**Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** ""Aqui estão algumas opções de profissionais que podem auxiliá-lo: Dra. Alice Guimarães, Dra Helena Reich Camasmie, Dr. João Bueno""
-**Concorrentes citados:** Dra. Alice Guimarães, Dra Helena Reich Camasmie, Dr. João Bueno
+**Veredicto:** 🔶 mentioned_as_specialty (confiança 0.70)
+**Evidência:** "Tente encontrar um especialista em acne ou um dermatologista com experiência específica nessa área."
 
 ### p5 — pediátrico
-> "Meu filho de 5 anos tem umas pintinhas estranhas e queria saber se preciso levar ele a um dermatologista em Moema, vocês recomendam algum especialista para crianças?"
+> "Meu filho de 6 anos está com uma irritação estranha no rosto e umas bolinhas vermelhas. É melhor levar ele em um dermatologista pediátrico em Moema? Onde encontro?"
 
 **Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Em Moema, há diversas clínicas especializadas em dermatologia pediátrica que podem atender seu filho."
-**Concorrentes citados:** Clínica Laub, Clínica Leilane Catricala, Dra. Alice Guimarães, Clinica Derma Line, Dra. Flavia Ravelli
+**Evidência:** "É recomendável que você leve seu filho a um dermatologista pediátrico para avaliar a irritação e as bolinhas vermelhas no rosto."
+**Concorrentes citados:** Dra. Aline Baptista
 
 ### p6 — convênio_vs_particular
-> "Tenho convênio Amil, alguém sabe se tem dermatologista em Moema que atenda pelo plano? Ou se vale a pena procurar particular?"
+> "Tenho convênio Amil e quero saber quais dermatologistas em Moema atendem pelo plano e que tenham boas avaliações. Também queria saber preço para particular, caso valha a pena."
 
 **Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Sim, há dermatologistas em Moema que atendem pelo plano de saúde Amil. Aqui estão algumas opções:"
-**Concorrentes citados:** Dra. Marina Bucker, Newform Medicina e Saúde, Dra. Luciana Malzoni Langhi, Dra. Ana Regina Alencar Santos, Dra. Paula Casteleti
+**Evidência:** "Encontrei algumas opções de dermatologistas em Moema que atendem pelo plano Amil e possuem boas avaliações"
+**Concorrentes citados:** Dra. Luciana Malzoni Langhi, Dra. Aline Baptista, Clinica Derma Line, Softskin Clínica Dermatológica Unidade Moema
 
 ### p7 — estético_eletivo
-> "Quero fazer um peeling químico pra melhorar as manchas no rosto, tô buscando um dermatologista em Moema que faça esse procedimento estético com segurança."
+> "Tô pensando em fazer um peeling químico para melhorar a textura da pele, alguém sabe de bons dermatologistas estéticos em Moema que façam esse procedimento?"
 
 **Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Recomendo entrar em contato com essas clínicas para agendar uma consulta e discutir o tratamento mais adequado para o seu caso."
-**Concorrentes citados:** Dra. Aline Baptista, Dra. Thais Akemi Yoshimoto
+**Evidência:** ""Especialista em dermatologia, realiza peeling químico para clarear manchas e melhorar a textura da pele.""
+**Concorrentes citados:** RV Beauté, Clínica Leilane Catricala, Dra. Aline Baptista, Dra. Thais Akemi Yoshimoto
 
 ### p8 — crônico_acompanhamento
-> "Tenho dermatite atópica crônica e preciso de um acompanhamento regular com um especialista em Moema, alguém indica profissional que seja atento e faça um bom acompanhamento?"
+> "Tenho psoríase há anos e preciso de um acompanhamento dermatológico regular aqui em Moema. Alguém conhece especialistas que tratem doenças crônicas de pele?"
 
 **Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Para o acompanhamento regular da dermatite atópica crônica em Moema, São Paulo, você pode considerar os seguintes dermatologistas:"
-**Concorrentes citados:** Dra. Priscila Costa, Dra. Ana Fasanella, Dra. Flávia Martelli, Dra. Alice Guimarães, Dra. Marina Barletta, Dra. Eduarda Braga Esteves, Dra. Patrícia Ishiy, Dra. Aline Baptista
+**Evidência:** "Para um acompanhamento dermatológico regular em Moema, especialmente no tratamento de doenças crônicas de pele como a psoríase, você pode considerar as seguintes clínicas e profissionais:"
+**Concorrentes citados:** Instituto Protta, Clinica Derma Line, Thais Pepe Dermatology
 
 ### p9 — preventivo
-> "Quero começar a cuidar melhor da minha pele para evitar problemas futuros, alguém recomenda um dermatologista em Moema que faça avaliação preventiva?"
+> "Quero fazer um check-up completo da pele, tipo exame preventivo para câncer de pele ou manchas suspeitas. Tem dermatologista em Moema que faça esse tipo de avaliação?"
 
 **Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Claro, posso recomendar alguns dermatologistas em Moema que oferecem avaliações preventivas para cuidados com a pele:"
-**Concorrentes citados:** Dra. Aline Baptista, Dra. Eduarda Braga Esteves
+**Evidência:** "Recomendo entrar em contato com essas clínicas para agendar uma consulta e realizar o check-up da pele conforme sua necessidade."
+**Concorrentes citados:** Dra. Aline Baptista, Dra. Alice Guimarães
 
 ### p10 — pediu_indicação
-> "Uma amiga me falou de um dermatologista ótimo em Moema, mas não lembro o nome, alguém pode me indicar um bom profissional por lá?"
+> "Meus amigos falaram que tem dermatologista muito bom em Moema. Alguém pode indicar profissional que seja bom no tratamento de acne e manchas?"
 
 **Veredicto:** ❌ competitor_in_place (confiança 0.95)
-**Evidência:** "Claro, posso indicar alguns dermatologistas renomados na região de Moema, São Paulo:"
-**Concorrentes citados:** Dra. Ritha Capelato, Dra. Vivian Simões, Dra. Alice Guimarães, Dra. Aline Baptista, Dra. Leilane Catricala, Dra. Eduarda Braga Esteves
+**Evidência:** "Claro, posso indicar algumas dermatologistas em Moema, São Paulo, que são especializadas no tratamento de acne e manchas:"
+**Concorrentes citados:** Dra Mirelle Furlan, Dra. Aline Baptista, Dra. Eduarda Braga Esteves
 
 ## Top Concorrentes
 
 | Nome | Aparições | % |
 |------|-----------|---|
-| Dra. Aline Baptista | 6/10 | 60% |
-| Dra. Alice Guimarães | 5/10 | 50% |
-| Dra. Eduarda Braga Esteves | 3/10 | 30% |
-| Dra Helena Reich Camasmie | 2/10 | 20% |
-| Dra. Patrícia Ishiy | 2/10 | 20% |
-| Clínica Leilane Catricala | 2/10 | 20% |
+| Dra. Aline Baptista | 7/10 | 70% |
+| Clínica Leilane Catricala | 3/10 | 30% |
+| Dra. Eduarda Braga Esteves | 2/10 | 20% |
+| Dra. Alice Guimarães | 2/10 | 20% |
 | Clinica Derma Line | 2/10 | 20% |
-| Dra Paula Casteleti | 1/10 | 10% |
-| Dr. João Bueno | 1/10 | 10% |
-| Clínica Laub | 1/10 | 10% |
+| Dra Helena Reich Camasmie | 1/10 | 10% |
+| Dra. Flavia Ravelli | 1/10 | 10% |
+| Dra. Luciana Malzoni Langhi | 1/10 | 10% |
+| Softskin Clínica Dermatológica Unidade Moema | 1/10 | 10% |
+| RV Beauté | 1/10 | 10% |
 
 ## Plano de ação
 
-1. Você é praticamente invisível para IAs de busca. Em 10 de 10 prompts simulados, seu nome não apareceu em nenhuma forma.
-2. Dra. Aline Baptista aparece em 6 de 10 prompts. Esse profissional está capturando pacientes que poderiam ser seus.
-3. Sua presença digital é fraca: seu site não aparece como fonte citada pelas IAs. Ter um site próprio com schema correto e Google Business Profile atualizado aumenta significativamente a chance de ser citado.
-4. Seu share of voice é muito baixo (0%). Concorrentes dominam as menções na sua região.
-5. Seu score (2) está abaixo da média da especialidade Dermatologia (35). Construir uma presença digital estruturada pode mudar isso.
-6. Construa uma entidade verificada (CRM/RQE) com schema correto — você praticamente não existe na camada de IA.
+1. Dra. Aline Baptista aparece em 7 de 10 prompts. Esse profissional está capturando pacientes que poderiam ser seus.
+2. Seu score (32) está abaixo da média da especialidade Dermatologia (35). Construir uma presença digital estruturada pode mudar isso.
+3. Construa uma entidade verificada (CRM/RQE) com schema correto — você praticamente não existe na camada de IA.
 
 ---
 
-*Custo: $0.1175 · Tokens: 15283→7125 · Seed: 42*
+*Custo: $0.1161 · Tokens: 14653→6421 · Seed: 42*

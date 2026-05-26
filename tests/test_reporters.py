@@ -58,8 +58,7 @@ def _make_report() -> Report:
             ),
         ],
         score=ScoreBreakdown(
-            presence=0.0, quality=9.0, position=0.0, competitive=0.0,
-            citation_strength=0.0, share_of_voice=0.0, sentiment=0.0, overall=3.6,
+            presence=0.0, quality=9.0, position=0.0, competitive=0.0, overall=3.6,
         ),
         metadata=ReportMetadata(
             generated_at=datetime(2026, 5, 26, 12, 0, tzinfo=timezone.utc),

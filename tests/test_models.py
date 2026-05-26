@@ -83,8 +83,7 @@ class TestVerdict:
 class TestScoreBreakdown:
     def test_valid_scores(self):
         s = ScoreBreakdown(
-            presence=50.0, quality=30.0, position=0.0, competitive=80.0,
-            citation_strength=40.0, share_of_voice=25.0, sentiment=60.0, overall=42.0,
+            presence=50.0, quality=30.0, position=0.0, competitive=80.0, overall=42.0,
         )
         assert s.overall == 42.0
 

@@ -13,8 +13,7 @@ class TestInvisibleDoctor:
             make_verdict(f"p{i}", "not_mentioned") for i in range(1, 11)
         ]
         score = ScoreBreakdown(
-            presence=0.0, quality=0.0, position=0.0, competitive=100.0,
-            citation_strength=0.0, share_of_voice=0.0, sentiment=0.0, overall=10.0,
+            presence=0.0, quality=0.0, position=0.0, competitive=100.0, overall=10.0,
         )
         recs = generate_recommendations(verdicts, score, "Dr. Teste", "Dermatologia")
 
@@ -38,8 +37,7 @@ class TestCompetitorDominance:
             make_verdict("p10", "not_mentioned"),
         ]
         score = ScoreBreakdown(
-            presence=0.0, quality=8.0, position=0.0, competitive=20.0,
-            citation_strength=0.0, share_of_voice=0.0, sentiment=0.0, overall=5.2,
+            presence=0.0, quality=8.0, position=0.0, competitive=20.0, overall=5.2,
         )
         recs = generate_recommendations(verdicts, score, "Dr. Teste", "Dermatologia")
 
@@ -55,8 +53,7 @@ class TestAboveBenchmark:
             for i in range(1, 11)
         ]
         score = ScoreBreakdown(
-            presence=100.0, quality=100.0, position=100.0, competitive=100.0,
-            citation_strength=100.0, share_of_voice=100.0, sentiment=100.0, overall=100.0,
+            presence=100.0, quality=100.0, position=100.0, competitive=100.0, overall=100.0,
         )
         recs = generate_recommendations(verdicts, score, "Dr. Teste", "Dermatologia")
 
@@ -72,8 +69,7 @@ class TestBelowBenchmark:
             *[make_verdict(f"p{i}", "not_mentioned") for i in range(2, 11)],
         ]
         score = ScoreBreakdown(
-            presence=10.0, quality=10.0, position=80.0, competitive=100.0,
-            citation_strength=0.0, share_of_voice=0.0, sentiment=0.0, overall=24.0,
+            presence=10.0, quality=10.0, position=80.0, competitive=100.0, overall=24.0,
         )
         recs = generate_recommendations(verdicts, score, "Dr. Teste", "Dermatologia")
 
@@ -85,8 +81,7 @@ class TestAlwaysReturnsAtLeastOne:
     def test_never_empty(self):
         verdicts = [make_verdict("p1", "not_mentioned")]
         score = ScoreBreakdown(
-            presence=0.0, quality=0.0, position=0.0, competitive=100.0,
-            citation_strength=0.0, share_of_voice=0.0, sentiment=0.0, overall=10.0,
+            presence=0.0, quality=0.0, position=0.0, competitive=100.0, overall=10.0,
         )
         recs = generate_recommendations(verdicts, score, "Dr. Teste", "Cardiologia")
         assert len(recs) >= 1
