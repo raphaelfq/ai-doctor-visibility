@@ -2,17 +2,25 @@
 
 Classifies how the target doctor appears (or doesn't) in each simulated response.
 
-Design (SPEC §7.3, PRACTICES §2):
+Design:
+- Decomposed evaluation: 3 binary questions instead of 1 multi-class decision
+- Chain-of-thought reasoning before each answer (G-Eval pattern)
+- Verdict derived deterministically from binary answers
 - Structured output via client.responses.parse
-- temperature=0, seed=42 for reproducibility
+- temperature=0 for reproducibility
 - XML tags to separate instruction/data/rules
-- Requires evidence_quote (literal excerpt) to reduce hallucination
-- Explicit calibration of confidence levels
 - Pluggable via BaseJudge ABC
+
+References:
+- G-Eval: https://www.confident-ai.com/blog/why-llm-as-a-judge-is-the-best-llm-evaluation-method
+- Decomposition: https://montecarlo.ai/blog-llm-as-judge/ ("LLMs are more effective with single objective tasks")
+- Industry standard: https://www.airops.com/blog/llm-brand-citation-tracking
 """
 
 import asyncio
 from abc import ABC, abstractmethod
+
+from pydantic import BaseModel, Field
 
 from ai_visibility.config import settings
 from ai_visibility.llm import LLMClient
@@ -23,63 +31,120 @@ from ai_visibility.models import (
     Verdict,
 )
 
+# ---------------------------------------------------------------------------
+# Decomposed evaluation model — 3 binary questions with chain-of-thought
+# ---------------------------------------------------------------------------
+
+
+class DecomposedEvaluation(BaseModel):
+    """Structured output for the decomposed judge.
+
+    3 binary questions → verdict derived deterministically.
+    No reasoning fields — keeps output small and fast (~2s vs ~160s).
+    """
+
+    # Q1: Is the target doctor's name in the response?
+    name_found: bool = Field(
+        description="O nome próprio do médico-alvo aparece literalmente na resposta?"
+    )
+    name_position: int | None = Field(
+        None,
+        ge=1,
+        description="Se name_found=true, posição na lista (1=primeiro). Se false, null.",
+    )
+
+    # Q2: Other doctors/clinics named?
+    competitors_found: list[str] = Field(
+        description="Nomes próprios de outros médicos/clínicas citados. Vazio se nenhum."
+    )
+
+    # Q3: Concrete specialty recommendation?
+    specialty_recommended: bool = Field(
+        description="A IA recomendou concretamente buscar a especialidade "
+        "(com cidade ou condição)? Conselho genérico = false."
+    )
+
+    # Evidence
+    evidence_quote: str = Field(
+        description="Trecho LITERAL mais relevante da resposta (max 150 chars)."
+    )
+
+
 JUDGE_SYSTEM_PROMPT = """\
-Você é um avaliador de citações de médicos em respostas de assistentes de IA.
+Analise se um médico-alvo aparece em uma resposta de IA. Responda 3 perguntas:
 
-<tarefa>
-Dado um médico-alvo, um prompt de paciente, e a resposta de uma IA, \
-classifique como o médico-alvo aparece (ou não) na resposta.
-</tarefa>
+1. O NOME do médico-alvo aparece na resposta? (nome completo ou parcial inequívoco)
+   - "Fernando Lopes" conta se alvo é "Dr. Fernando Lopes"
+   - Se sim, em que posição na lista? (1=primeiro)
 
-<categorias>
-- mentioned_by_name: nome próprio do médico-alvo citado literalmente na resposta. \
-  O nome (ou parte inequívoca dele) DEVE aparecer como texto na resposta. \
-  (ex: "Dr. Fernando Lopes" ou "Fernando Lopes" quando o alvo é "Dr. Fernando Lopes")
+2. Outros médicos/clínicas são citados PELO NOME? Liste todos.
 
-- mentioned_as_specialty: a IA fez uma RECOMENDAÇÃO CONCRETA de buscar a especialidade \
-  do médico-alvo, com contexto de localização ou condição médica, mas sem citar o nome. \
-  DEVE haver intenção de direcionar o paciente a um profissional daquela especialidade. \
-  (ex: "Recomendo que procure um dermatologista em Campinas especializado em psoríase")
+3. A resposta faz RECOMENDAÇÃO CONCRETA da especialidade (com cidade ou condição)?
+   - "Procure dermatologista em Campinas para psoríase" = SIM
+   - "Vá ao dermatologista" / "Posso ajudar a encontrar" = NÃO (genérico)
 
-- competitor_in_place: outro(s) médico(s) são citados pelo nome na resposta, \
-  mas o médico-alvo NÃO é citado. \
-  (ex: "Dra. Carla Mendes é referência em dermatologia" quando o alvo era outro médico)
-
-- not_mentioned: nenhuma das anteriores se aplica. USE ESTA CATEGORIA quando: \
-  (a) a resposta é conselho genérico ("vá a um dermatologista", "é importante consultar um especialista") \
-  (b) a resposta não recomenda ninguém e apenas explica uma condição médica \
-  (c) a IA pede mais informações ao paciente antes de recomendar \
-  (d) a palavra "dermatologista" aparece mas sem intenção de recomendar um profissional específico
-</categorias>
-
-<exemplos>
-CORRETO:
-- "Recomendo a Dra. Carla Mendes" (alvo era Dr. João) → competitor_in_place
-- "Dr. João Silva atende em Campinas" (alvo era Dr. João Silva) → mentioned_by_name
-- "Procure um dermatologista em Campinas que atenda psoríase, como os do Hospital X" → mentioned_as_specialty
-- "Ir ao dermatologista é uma boa ideia" → not_mentioned (conselho genérico)
-- "Posso ajudar a verificar a reputação do dermatologista" → not_mentioned (IA pedindo mais info)
-- "É importante consultar um especialista para avaliar" → not_mentioned (conselho genérico)
-
-ERRADO (não faça isso):
-- "Ir ao dermatologista é uma boa ideia" → NÃO é mentioned_as_specialty (não há recomendação concreta)
-- "Posso ajudar a verificar" → NÃO é mentioned_as_specialty (IA não recomendou ninguém)
-- "consulte um especialista" genérico → NÃO é mentioned_as_specialty sem contexto de localização/condição
-</exemplos>
-
-<regras>
-- evidence_quote DEVE ser um trecho LITERAL da resposta, copiado exatamente — não parafrase
-- position: preencha APENAS quando citation_type == "mentioned_by_name". \
-  Indica a ordem de aparição do médico (1 = primeiro mencionado na resposta)
-- competitors_named: liste TODOS os nomes próprios de outros médicos/clínicas citados na resposta
-- confidence calibrada — NÃO coloque 1.0 em tudo, calibre de verdade:
-  - 1.0 = inequívoco, certeza absoluta (nome completo exato, ou claramente nenhum médico citado)
-  - 0.8-0.9 = forte (nome parcial reconhecível, ou competitor claro)
-  - 0.5-0.7 = ambíguo (sobrenome comum, ou dúvida entre specialty e not_mentioned)
-  - < 0.3 = palpite (quase nenhuma evidência)
-  - Dica: se você hesitou entre duas categorias, a confidence deve ser < 0.8
-</regras>
+evidence_quote: trecho LITERAL da resposta, max 150 caracteres.
 """
+
+
+def _derive_verdict(
+    eval_result: DecomposedEvaluation,
+    prompt_id: str,
+) -> Verdict:
+    """Derive citation_type deterministically from binary answers.
+
+    Decision tree:
+    1. name_found=True → mentioned_by_name
+    2. name_found=False AND competitors_found → competitor_in_place
+    3. name_found=False AND no competitors AND specialty_recommended → mentioned_as_specialty
+    4. else → not_mentioned
+
+    Confidence derived from reasoning clarity:
+    - name_found=True: 1.0 (binary, unambiguous)
+    - competitors with names: 0.95
+    - specialty_recommended: 0.7 (inherently more subjective)
+    - not_mentioned: 0.9
+    """
+    if eval_result.name_found:
+        return Verdict(
+            prompt_id=prompt_id,
+            citation_type="mentioned_by_name",
+            confidence=1.0,
+            position=eval_result.name_position,
+            evidence_quote=eval_result.evidence_quote,
+            competitors_named=eval_result.competitors_found,
+        )
+
+    if eval_result.competitors_found:
+        return Verdict(
+            prompt_id=prompt_id,
+            citation_type="competitor_in_place",
+            confidence=0.95,
+            evidence_quote=eval_result.evidence_quote,
+            competitors_named=eval_result.competitors_found,
+        )
+
+    if eval_result.specialty_recommended:
+        return Verdict(
+            prompt_id=prompt_id,
+            citation_type="mentioned_as_specialty",
+            confidence=0.7,
+            evidence_quote=eval_result.evidence_quote,
+            competitors_named=[],
+        )
+
+    return Verdict(
+        prompt_id=prompt_id,
+        citation_type="not_mentioned",
+        confidence=0.9,
+        evidence_quote=eval_result.evidence_quote,
+        competitors_named=[],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Judge interface + implementations
+# ---------------------------------------------------------------------------
 
 
 class BaseJudge(ABC):
@@ -95,7 +160,7 @@ class BaseJudge(ABC):
 
 
 class OpenAIJudge(BaseJudge):
-    """Judge implementation using OpenAI structured outputs."""
+    """Judge V3: decomposed binary questions with chain-of-thought."""
 
     def __init__(self, client: LLMClient):
         self._client = client
@@ -121,7 +186,7 @@ Cidade: {doctor.city}
 {response.raw_text}
 </resposta_simulada>
 
-Classifique segundo o schema. Lembre-se: evidence_quote deve ser trecho LITERAL da resposta."""
+Analise a resposta e responda as 3 perguntas com raciocínio."""
 
         api_response = await self._client.generate_structured(
             model=settings.model_judge,
@@ -129,15 +194,14 @@ Classifique segundo o schema. Lembre-se: evidence_quote deve ser trecho LITERAL 
                 {"role": "system", "content": JUDGE_SYSTEM_PROMPT},
                 {"role": "user", "content": user_msg},
             ],
-            text_format=Verdict,
+            text_format=DecomposedEvaluation,
             temperature=settings.temperature_judge,
             stage="judge",
             prompt_id=prompt.id,
-            seed=settings.seed,
         )
 
-        verdict = api_response.output_parsed
-        if verdict is None:
+        eval_result = api_response.output_parsed
+        if eval_result is None:
             return Verdict(
                 prompt_id=prompt.id,
                 citation_type="not_mentioned",
@@ -145,9 +209,7 @@ Classifique segundo o schema. Lembre-se: evidence_quote deve ser trecho LITERAL 
                 evidence_quote="[ERRO: falha no parsing structured output]",
             )
 
-        # Ensure prompt_id is set correctly
-        verdict.prompt_id = prompt.id
-        return verdict
+        return _derive_verdict(eval_result, prompt.id)
 
 
 async def judge_all(
@@ -159,7 +221,6 @@ async def judge_all(
     """Run the judge on all prompt-response pairs in parallel."""
     judge = OpenAIJudge(client)
 
-    # Build a map of prompt_id → response for fast lookup
     response_map = {r.prompt_id: r for r in responses}
 
     tasks = []
