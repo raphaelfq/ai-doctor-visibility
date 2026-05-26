@@ -1,0 +1,10 @@
+{"timestamp":"2026-05-26T11:04:45.871987Z","stage":"judge","prompt_id":"p3","model":"gpt-4.1-mini-2025-04-14","tokens_in":847,"tokens_out":50,"latency_ms":1637,"cost_usd":0.000419,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:46.104412Z","stage":"judge","prompt_id":"p5","model":"gpt-4.1-mini-2025-04-14","tokens_in":1000,"tokens_out":76,"latency_ms":1866,"cost_usd":0.000522,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:46.135321Z","stage":"judge","prompt_id":"p4","model":"gpt-4.1-mini-2025-04-14","tokens_in":1213,"tokens_out":93,"latency_ms":1898,"cost_usd":0.000634,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:46.572756Z","stage":"judge","prompt_id":"p1","model":"gpt-4.1-mini-2025-04-14","tokens_in":1114,"tokens_out":71,"latency_ms":2352,"cost_usd":0.000559,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:47.195615Z","stage":"judge","prompt_id":"p2","model":"gpt-4.1-mini-2025-04-14","tokens_in":953,"tokens_out":72,"latency_ms":2962,"cost_usd":0.000496,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:48.125795Z","stage":"judge","prompt_id":"p9","model":"gpt-4.1-mini-2025-04-14","tokens_in":810,"tokens_out":46,"latency_ms":1552,"cost_usd":0.000398,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:48.525397Z","stage":"judge","prompt_id":"p7","model":"gpt-4.1-mini-2025-04-14","tokens_in":1109,"tokens_out":99,"latency_ms":2420,"cost_usd":0.000602,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:48.637260Z","stage":"judge","prompt_id":"p8","model":"gpt-4.1-mini-2025-04-14","tokens_in":1305,"tokens_out":115,"latency_ms":2501,"cost_usd":0.000706,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:48.794250Z","stage":"judge","prompt_id":"p6","model":"gpt-4.1-mini-2025-04-14","tokens_in":864,"tokens_out":68,"latency_ms":2921,"cost_usd":0.000454,"status":"success","error":null}
+{"timestamp":"2026-05-26T11:04:49.445008Z","stage":"judge","prompt_id":"p10","model":"gpt-4.1-mini-2025-04-14","tokens_in":1127,"tokens_out":97,"latency_ms":2248,"cost_usd":0.000606,"status":"success","error":null}
