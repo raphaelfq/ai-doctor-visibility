@@ -73,8 +73,8 @@ Três exemplos pré-gerados em `examples/`:
 | Médico | Tipo | Score | Presença | Insight |
 |---|---|---|---|---|
 | Dra. Mariana Costa | Fictícia | **4/100** | 0/10 | Invisível — nenhuma IA a cita |
-| Dr. Fernando Lopes | Real (Campinas) | **46/100** | 5/10 | Aparece, mas perde espaço para concorrentes |
-| Dra. Karina Zold | Real (Campinas) | **78/100** | 8/10 | Domina as recomendações de IA na região |
+| Dr. Fernando Lopes | Real (Campinas) | **18/100** | 2/10 | Aparece raramente, perde espaço para concorrentes |
+| Dra. Karina Zold | Real (Campinas) | **92/100** | 9/10 | Domina as recomendações de IA na região |
 
 Para ver o relatório visual: `open examples/dra_karina_zold/report.html`
 

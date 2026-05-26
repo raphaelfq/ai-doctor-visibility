@@ -32,33 +32,52 @@ classifique como o médico-alvo aparece (ou não) na resposta.
 </tarefa>
 
 <categorias>
-- mentioned_by_name: nome próprio do médico-alvo citado literalmente na resposta \
-  (ex: "Dr. Fernando Lopes" quando o alvo é "Dr. Fernando Lopes")
-- mentioned_as_specialty: a especialidade dele é citada mas o nome próprio NÃO aparece \
-  (ex: "consulte um dermatologista em Campinas" sem citar o nome do médico-alvo)
-- competitor_in_place: outro(s) médico(s) são citados pelo nome, mas o médico-alvo NÃO \
-  (ex: "Dra. Carla Mendes é referência" quando o alvo era outro médico)
-- not_mentioned: nenhuma das anteriores se aplica
+- mentioned_by_name: nome próprio do médico-alvo citado literalmente na resposta. \
+  O nome (ou parte inequívoca dele) DEVE aparecer como texto na resposta. \
+  (ex: "Dr. Fernando Lopes" ou "Fernando Lopes" quando o alvo é "Dr. Fernando Lopes")
+
+- mentioned_as_specialty: a IA fez uma RECOMENDAÇÃO CONCRETA de buscar a especialidade \
+  do médico-alvo, com contexto de localização ou condição médica, mas sem citar o nome. \
+  DEVE haver intenção de direcionar o paciente a um profissional daquela especialidade. \
+  (ex: "Recomendo que procure um dermatologista em Campinas especializado em psoríase")
+
+- competitor_in_place: outro(s) médico(s) são citados pelo nome na resposta, \
+  mas o médico-alvo NÃO é citado. \
+  (ex: "Dra. Carla Mendes é referência em dermatologia" quando o alvo era outro médico)
+
+- not_mentioned: nenhuma das anteriores se aplica. USE ESTA CATEGORIA quando: \
+  (a) a resposta é conselho genérico ("vá a um dermatologista", "é importante consultar um especialista") \
+  (b) a resposta não recomenda ninguém e apenas explica uma condição médica \
+  (c) a IA pede mais informações ao paciente antes de recomendar \
+  (d) a palavra "dermatologista" aparece mas sem intenção de recomendar um profissional específico
 </categorias>
 
-<exemplos_negativos>
-- "consulte um dermatologista em São Paulo" → NÃO é mentioned_by_name (não tem nome próprio)
-- "Dra. Carla Mendes é ótima" (alvo era Dr. João) → competitor_in_place, NÃO mentioned_by_name
-- Uma resposta que fala de ortopedia quando o alvo é dermatologista → not_mentioned
-- Menção parcial ambígua como "Dr. Costa" quando o alvo é "Dra. Mariana Costa" → \
-  mentioned_by_name com confidence < 0.7
-</exemplos_negativos>
+<exemplos>
+CORRETO:
+- "Recomendo a Dra. Carla Mendes" (alvo era Dr. João) → competitor_in_place
+- "Dr. João Silva atende em Campinas" (alvo era Dr. João Silva) → mentioned_by_name
+- "Procure um dermatologista em Campinas que atenda psoríase, como os do Hospital X" → mentioned_as_specialty
+- "Ir ao dermatologista é uma boa ideia" → not_mentioned (conselho genérico)
+- "Posso ajudar a verificar a reputação do dermatologista" → not_mentioned (IA pedindo mais info)
+- "É importante consultar um especialista para avaliar" → not_mentioned (conselho genérico)
+
+ERRADO (não faça isso):
+- "Ir ao dermatologista é uma boa ideia" → NÃO é mentioned_as_specialty (não há recomendação concreta)
+- "Posso ajudar a verificar" → NÃO é mentioned_as_specialty (IA não recomendou ninguém)
+- "consulte um especialista" genérico → NÃO é mentioned_as_specialty sem contexto de localização/condição
+</exemplos>
 
 <regras>
 - evidence_quote DEVE ser um trecho LITERAL da resposta, copiado exatamente — não parafrase
 - position: preencha APENAS quando citation_type == "mentioned_by_name". \
   Indica a ordem de aparição do médico (1 = primeiro mencionado na resposta)
 - competitors_named: liste TODOS os nomes próprios de outros médicos/clínicas citados na resposta
-- confidence calibrada:
-  - 1.0 = inequívoco, certeza absoluta
-  - 0.7-0.9 = forte mas com pequena ambiguidade
-  - 0.5-0.7 = ambíguo (nome parcial, sobrenome comum)
-  - < 0.3 = palpite, muito incerto
+- confidence calibrada — NÃO coloque 1.0 em tudo, calibre de verdade:
+  - 1.0 = inequívoco, certeza absoluta (nome completo exato, ou claramente nenhum médico citado)
+  - 0.8-0.9 = forte (nome parcial reconhecível, ou competitor claro)
+  - 0.5-0.7 = ambíguo (sobrenome comum, ou dúvida entre specialty e not_mentioned)
+  - < 0.3 = palpite (quase nenhuma evidência)
+  - Dica: se você hesitou entre duas categorias, a confidence deve ser < 0.8
 </regras>
 """
 

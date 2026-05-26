@@ -3,125 +3,131 @@
 **Especialidade:** Dermatologia  
 **Cidade:** Campinas - SP  
 **CRM:** 112954/SP  
-**Gerado em:** 2026-05-26 08:24
+**Gerado em:** 2026-05-26 09:31
 
 ✅ **CRM verificado** — Nome registrado
 
-## Score Geral: 78 / 100
+## Score Geral: 92 / 100
 
 Média da especialidade (Dermatologia): 35/100
 
 | Dimensão | Score | O que mede |
 |----------|-------|------------|
-| Presença | 80.0 | Em quantos prompts o médico apareceu |
-| Qualidade | 67.0 | Tipo de menção ponderado pela confiança |
-| Posição | 90.0 | Posição média quando citado por nome |
-| Competitivo | 90.0 | Inverso de 'concorrente tomou a vaga' |
+| Presença | 100.0 | Em quantos prompts o médico apareceu |
+| Qualidade | 82.4 | Tipo de menção ponderado pela confiança |
+| Posição | 96.2 | Posição média quando citado por nome |
+| Competitivo | 100.0 | Inverso de 'concorrente tomou a vaga' |
 
 ## Diagnóstico em uma frase
 
-O médico tem boa visibilidade: aparece em 6 de 10 prompts.
+O médico tem boa visibilidade: aparece em 8 de 10 prompts.
 
 ## Detalhe por prompt
 
-### p1 — urgência
-> "Tô com umas manchas estranhas na pele que apareceram do nada, preciso de um dermato urgente em Campinas"
+### p1 — leigo_ansioso
+> "Tô vendo umas pintinhas vermelhas que coçam e não sei se é grave, tô meio preocupado. Tem dermatologista bom em Campinas que atenda rápido?"
 
-**Veredicto:** ✅ mentioned_by_name (confiança 1.00)
-**Posição:** 1º
-**Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**"
-**Concorrentes citados:** Dra. Bruna Senna, Dra. Christiane Faria Domingues
+**Veredicto:** ✅ mentioned_by_name (confiança 0.95)
+**Posição:** 2º
+**Evidência:** "**[Dra. Karina Zold](https://www.google.com/maps/search/Dra.+Karina+Zold%2C+Campinas%2C+SP?utm_source=openai)**
+_Campinas, SP_
+Especialista em dermatologia com atendimento presencial e online, focada em doenças de pele, cabelos e unhas."
+**Concorrentes citados:** Dra. Bruna Senna, Dra. Larissa Mercadante, Dra. Fernanda Blasques, Dra. Cláudia Issa
 
 ### p2 — informado_específico
-> "Já pesquisei bastante e sei que minha alergia na pele é eczema, queria um dermatologista em Campinas que tenha experiência comprovada com isso."
+> "Tenho psoríase e já uso tratamento tópico e fototerapia há anos. Quero saber se em Campinas tem dermatologista que trabalhe com terapias biológicas para casos resistentes."
 
-**Veredicto:** ❌ competitor_in_place (confiança 1.00)
-**Evidência:** "**[Dra. Aline Talarico - Dermatologista](http://alinetalarico.com.br/?utm_source=openai)**"
-**Concorrentes citados:** Dra. Aline Talarico, Dr. Leonardo Faria Domingues
-
-### p3 — pediátrico
-> "Oi, meu filho tem umas bolinhas vermelhas que não somem, será que devo levar no dermatologista pediátrico aí em Campinas?"
-
-**Veredicto:** 🔶 mentioned_as_specialty (confiança 1.00)
-**Evidência:** "é uma boa ideia levá-lo a um dermatologista pediátrico para uma avaliação adequada"
-
-### p4 — crônico_acompanhamento
-> "Minha dermatologista mudou de cidade, tô procurando um novo especialista para acompanhar minha psoríase em Campinas. Alguém recomenda?"
-
-**Veredicto:** ✅ mentioned_by_name (confiança 1.00)
-**Posição:** 1º
-**Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**"
-**Concorrentes citados:** Dra. Christiane Faria Domingues, Dra. Fernanda Blasques, Dr. Fernando Lopes
-
-### p5 — convênio_vs_particular
-> "Eu queria saber se em Campinas tem dermatologista que atende pelo convênio Amil e que também aceite particular, porque tô em dúvida no plano."
-
-**Veredicto:** ✅ mentioned_by_name (confiança 1.00)
+**Veredicto:** ✅ mentioned_by_name (confiança 0.95)
 **Posição:** 2º
-**Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**"
-**Concorrentes citados:** Dra Maísa Mattieli, Dr. Petrus Renó
-
-### p6 — estético_eletivo
-> "Queria fazer um peeling ou algo pra melhorar a textura da minha pele, mas não sei se é seguro. Tem dermatologista em Campinas que faz esses tratamentos estéticos?"
-
-**Veredicto:** ✅ mentioned_by_name (confiança 1.00)
-**Posição:** 5º
 **Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**  
 **Fechado · Dermatologist · 5.0 (13 avaliações)**  
 _Avenida Orosimbo Maia, 360 - 6o Andar Vila Itapura - Cambuí, Campinas - SP, 13010-211, Brazil_  
-Dermatologista que oferece tratamentos para doenças da pele, cabelos e unhas, além de procedimentos estéticos."
-**Concorrentes citados:** Dra. Mônica Felici, Dra Jéssica Starek, Dra. Stephanie Langen
+Especialista em dermatologia, oferece atendimento particular presencial e online, com foco em doenças da pele, cabelos e unhas, incluindo psoríase."
+**Concorrentes citados:** Instituto Faria, JG Fototerapia
 
-### p7 — preventivo
-> "Oi, tô pensando em consultar um dermato só pra fazer um check-up geral na pele, tem alguém bom pra prevenção em Campinas?"
+### p3 — urgência
+> "Minha filha de 3 anos acordou com uma erupção avermelhada no rosto e está reclamando muito de coceira. Isso é emergência? Devo levar ela já para o dermatologista em Campinas?"
+
+**Veredicto:** 🔶 mentioned_as_specialty (confiança 0.90)
+**Evidência:** "porém, como a coceira está incomodando muito e a criança é pequena, é recomendável consultar um dermatologista para um diagnóstico adequado e tratamento específico."
+
+### p4 — segunda_opinião
+> "Fui diagnosticado com dermatite atópica, mas o tratamento que recebi não melhorou nada. Quero uma segunda opinião de algum especialista confiável em Campinas."
+
+**Veredicto:** ✅ mentioned_by_name (confiança 0.95)
+**Posição:** 2º
+**Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**  
+**Fechado · Dermatologist · 5.0 (13 avaliações)**  
+_Avenida Orosimbo Maia, 360 - 6o Andar Vila Itapura - Cambuí, Campinas - SP, 13010-211, Brazil_  
+Dermatologista com especialização em dermatologia clínica, oncológica e estética, membro da Sociedade Brasileira de Dermatologia desde 2010."
+**Concorrentes citados:** Dra. Christiane Faria Domingues, Dra. Bruna Senna, Dra Jéssica Starek
+
+### p5 — pediátrico
+> "Meu filho está com umas bolinhas estranhas na pele, parece alergia ou algo contagioso. Qual dermatologista pediátrico em Campinas vocês recomendam?"
 
 **Veredicto:** ✅ mentioned_by_name (confiança 1.00)
 **Posição:** 1º
 **Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**"
-**Concorrentes citados:** Instituto Faria, Deali - Clínica Dermatológica, Dra Maísa Mattieli
+**Concorrentes citados:** Dra. Christiane Faria Domingues, Dra Maísa Mattieli, Dra. Isabella Motta, Dr. Leonardo Faria Domingues
 
-### p8 — segunda_opinião
-> "Me indicaram um dermatologista em Campinas que é ótimo para acne, mas queria uma segunda opinião antes de marcar a consulta. O que acha?"
+### p6 — convênio_vs_particular
+> "Tenho plano de saúde Amil e preciso saber quais dermatologistas em Campinas atendem pelo convênio, ou se vale mais a pena ir particular?"
 
-**Veredicto:** ⬜ not_mentioned (confiança 1.00)
-**Evidência:** "Claro! Me diga o nome do dermatologista ou qualquer detalhe que você tenha sobre ele para que eu possa ajudar a verificar a reputação ou informações adicionais. Assim posso dar uma opinião mais segura para você."
+**Veredicto:** 🔶 mentioned_as_specialty (confiança 0.90)
+**Evidência:** "Para encontrar dermatologistas em Campinas que atendem pelo plano de saúde Amil, você pode consultar o catálogo de médicos credenciados da Amil ou entrar em contato diretamente com a operadora para obter uma lista atualizada de profissionais na sua região."
+**Concorrentes citados:** Clínica para Família, Principal Saúde
 
-### p9 — leigo_ansioso
-> "Minha pele anda muito sensível, e tô meio preocupada. Você pode me dizer o que pode ser? Nunca fui em dermatologista, é complicado?"
+### p7 — estético_eletivo
+> "Quero fazer um peeling para manchas e melasma que estão me incomodando muito. Alguém sabe se tem dermatologista estético bom em Campinas?"
 
-**Veredicto:** 🔶 mentioned_as_specialty (confiança 1.00)
-**Evidência:** "Ir ao dermatologista não é complicado e pode ser muito útil para entender a causa da sensibilidade da sua pele."
+**Veredicto:** ✅ mentioned_by_name (confiança 0.95)
+**Posição:** 1º
+**Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**"
+**Concorrentes citados:** Dra Maísa Mattieli, Dra Jéssica Starek, Dra. Stephanie Langen, Dra. Marcela Engracia
+
+### p8 — crônico_acompanhamento
+> "Tenho acne severa desde a adolescência, já tentei vários tratamentos e preciso de acompanhamento contínuo com dermatologista em Campinas. Alguma indicação?"
+
+**Veredicto:** ✅ mentioned_by_name (confiança 1.00)
+**Posição:** 1º
+**Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**"
+**Concorrentes citados:** Dra. Bruna Senna, Dra. Fabiana Chamma Audi, Dr. Fernando Lopes
+
+### p9 — preventivo
+> "Quais exames dermatológicos preventivos vocês recomendam para alguém da minha idade aqui em Campinas? Quero cuidar da saúde da minha pele."
+
+**Veredicto:** ✅ mentioned_by_name (confiança 0.95)
+**Posição:** 1º
+**Evidência:** "**[Dra. Karina Zold - Dermatologia e Saúde da Pele](https://www.google.com/maps/search/Dra.+Karina+Zold+-+Dermatologia+e+Sa%C3%BAde+da+Pele%2C+Campinas%2C+SP?utm_source=openai)**"
+**Concorrentes citados:** Dra. Stephanie Langen, Dra. Eliane Moreno
 
 ### p10 — pediu_indicação
-> "Preciso de uma dermatologista em Campinas que vocês recomendam, minha amiga falou que você ajuda a achar. Pode me ajudar?"
+> "Me indicaram um dermatologista em Campinas que é muito bom para tratar manchas e cicatrizes, mas não lembro o nome. Alguém sabe algum especialista confiável?"
 
-**Veredicto:** ✅ mentioned_by_name (confiança 1.00)
-**Posição:** 2º
-**Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**  
-**Fechado · Dermatologist · 5.0 (13 avaliações)**  
-_Avenida Orosimbo Maia, 360 - 6o Andar Vila Itapura - Cambuí, Campinas - SP, 13010-211, Brazil_  
-Dermatologista com especialização em doenças da pele, cabelos e unhas. Oferece atendimento particular presencial e online, com foco em diagnóstico preciso e tratamento baseado em evidências."
-**Concorrentes citados:** Dra. Christiane Faria Domingues, Dra. Aline Caixeta Guimarães Véspoli, Dra. Thaísa Modesto, Dra. Cintia Volpini, Dra Jéssica Starek
+**Veredicto:** ✅ mentioned_by_name (confiança 0.95)
+**Posição:** 1º
+**Evidência:** "**[Dra. Karina Zold - Dermatologista em Campinas](https://karinazold.com.br/?utm_source=openai)**"
+**Concorrentes citados:** Dra. Karina Zold, Instituto Faria, Dra. Mônica Felici, Dra. Stephanie Langen, Dra Oriete Gerin Leite
 
 ## Top Concorrentes
 
 | Nome | Aparições | % |
 |------|-----------|---|
-| Dra. Christiane Faria Domingues | 3/10 | 30% |
-| Dra Maísa Mattieli | 2/10 | 20% |
+| Dra. Bruna Senna | 3/10 | 30% |
+| Dra. Stephanie Langen | 3/10 | 30% |
+| Instituto Faria | 2/10 | 20% |
+| Dra. Christiane Faria Domingues | 2/10 | 20% |
 | Dra Jéssica Starek | 2/10 | 20% |
-| Dra. Bruna Senna | 1/10 | 10% |
-| Dra. Aline Talarico | 1/10 | 10% |
-| Dr. Leonardo Faria Domingues | 1/10 | 10% |
+| Dra Maísa Mattieli | 2/10 | 20% |
+| Dra. Larissa Mercadante | 1/10 | 10% |
 | Dra. Fernanda Blasques | 1/10 | 10% |
-| Dr. Fernando Lopes | 1/10 | 10% |
-| Dr. Petrus Renó | 1/10 | 10% |
-| Dra. Mônica Felici | 1/10 | 10% |
+| Dra. Cláudia Issa | 1/10 | 10% |
+| JG Fototerapia | 1/10 | 10% |
 
 ## Plano de ação
 
-1. Dra. Christiane Faria Domingues aparece em 3 de 10 prompts. Esse profissional está capturando pacientes que poderiam ser seus.
+1. Dra. Bruna Senna aparece em 3 de 10 prompts. Esse profissional está capturando pacientes que poderiam ser seus.
 
 ---
 
-*Custo: $0.1139 · Tokens: 14758→5020 · Seed: 42*
+*Custo: $0.1183 · Tokens: 19496→6571 · Seed: 42*
