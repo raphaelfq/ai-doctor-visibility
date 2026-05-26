@@ -1,0 +1,66 @@
+"""FastAPI application factory."""
+
+import re
+from contextlib import asynccontextmanager
+from pathlib import Path
+
+from markupsafe import Markup
+
+from fastapi import FastAPI
+from fastapi.templating import Jinja2Templates
+
+from ai_visibility.config import settings
+from ai_visibility.report.html import _score_color, _score_label
+from ai_visibility.stages.scorer import get_benchmark
+from ai_visibility.web.db import close_pool, init_pool
+
+
+TEMPLATES_DIR = Path(__file__).parent / "templates"
+
+
+def _render_md(text: str) -> Markup:
+    """Convert basic markdown (bold, links) to HTML. Returns safe markup."""
+    import html as html_mod
+
+    text = html_mod.escape(text)
+    # Bold+link: **[text](url)**
+    text = re.sub(
+        r"\*\*\[([^\]]+)\]\(([^)]+)\)\*\*",
+        r'<a href="\2" target="_blank" class="font-semibold text-blue-600 hover:underline">\1</a>',
+        text,
+    )
+    # Plain links: [text](url)
+    text = re.sub(
+        r"\[([^\]]+)\]\(([^)]+)\)",
+        r'<a href="\2" target="_blank" class="text-blue-600 hover:underline">\1</a>',
+        text,
+    )
+    # Bold: **text**
+    text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
+    # Italic: _text_
+    text = re.sub(r"(?<!\w)_([^_]+)_(?!\w)", r"<em>\1</em>", text)
+    return Markup(text)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_pool(settings.database_url)
+    yield
+    close_pool()
+
+
+def create_app() -> FastAPI:
+    app = FastAPI(title="AI Visibility", lifespan=lifespan)
+
+    templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
+    templates.env.filters["score_color"] = _score_color
+    templates.env.filters["score_label"] = _score_label
+    templates.env.filters["get_benchmark"] = get_benchmark
+    templates.env.filters["render_md"] = _render_md
+    app.state.templates = templates
+
+    from ai_visibility.web.routes import router
+
+    app.include_router(router)
+
+    return app

@@ -27,5 +27,7 @@ class Settings(BaseSettings):
     cache_dir: str = "./.cache"
     cache_ttl_seconds: int = 86400  # 24h
 
+    database_url: str = "postgresql://app:dev@localhost:5432/ai_visibility"
+
 
 settings = Settings()

@@ -1,0 +1,228 @@
+{# Report embed with ChatGPT-style chat emulation #}
+{% set s = report.score %}
+{% set doc = report.doctor %}
+{% set benchmark = doc.specialty | get_benchmark %}
+{% set color = s.overall | score_color %}
+{% set label = s.overall | score_label %}
+
+<!-- ==================== SECTION 1: Score Overview ==================== -->
+<div class="bg-white rounded-2xl shadow-sm border p-8 mb-6">
+    <div class="flex items-start justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">{{ doc.name }}</h1>
+            <p class="text-gray-600 mt-1">{{ doc.specialty }} — {{ doc.city }}{% if doc.neighborhood %} ({{ doc.neighborhood }}){% endif %}{% if doc.state %} - {{ doc.state }}{% endif %}</p>
+            {% if doc.crm %}
+            <p class="text-gray-500 text-sm mt-1">CRM: {{ doc.crm }}/{{ doc.crm_state }}</p>
+            {% endif %}
+            {% if report.cfm_validation %}
+                {% if report.cfm_validation.valid == true %}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mt-2">CRM Verificado</span>
+                {% elif report.cfm_validation.valid == false %}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 mt-2">CRM Inválido</span>
+                {% else %}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mt-2">Verificação Pendente</span>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="text-right text-sm text-gray-400">
+            {{ report.metadata.generated_at.strftime('%d/%m/%Y %H:%M') if report.metadata.generated_at.strftime is defined else report.metadata.generated_at }}
+        </div>
+    </div>
+</div>
+
+<!-- Score Gauge -->
+<div class="bg-white rounded-2xl shadow-sm border p-8 mb-6 text-center">
+    <h2 class="text-lg font-semibold text-gray-700 mb-4">AI Visibility Score</h2>
+    <div class="flex justify-center">
+        {% set offset = 283 * (1 - s.overall / 100) %}
+        <svg class="w-48 h-48" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+            <circle cx="50" cy="50" r="45" fill="none"
+                stroke="{{ color }}" stroke-width="8" stroke-linecap="round"
+                stroke-dasharray="283" stroke-dashoffset="{{ '%.1f' | format(offset) }}"
+                transform="rotate(-90 50 50)"
+                style="transition: stroke-dashoffset 1s ease-in-out"/>
+            <text x="50" y="46" text-anchor="middle" font-size="22" font-weight="700" fill="#111827">{{ '%.0f' | format(s.overall) }}</text>
+            <text x="50" y="58" text-anchor="middle" font-size="8" fill="#6b7280">/100</text>
+            <text x="50" y="70" text-anchor="middle" font-size="7" fill="{{ color }}">{{ label }}</text>
+        </svg>
+    </div>
+    <p class="text-sm text-gray-500 mt-2">
+        Média da especialidade ({{ doc.specialty }}): <strong>{{ '%.0f' | format(benchmark) }}/100</strong>
+    </p>
+
+    <!-- Dimension bars -->
+    <div class="grid grid-cols-2 gap-4 mt-6 max-w-lg mx-auto text-left">
+        {% for dim_name, dim_val, dim_weight in [('Presença', s.presence, '30%'), ('Qualidade', s.quality, '40%'), ('Posição', s.position, '20%'), ('Competitivo', s.competitive, '10%')] %}
+        <div>
+            <div class="flex justify-between text-sm text-gray-600">
+                <span>{{ dim_name }} <span class="text-gray-400 text-xs">({{ dim_weight }})</span></span>
+                <span>{{ '%.0f' | format(dim_val) }}</span>
+            </div>
+            <div class="bg-gray-200 rounded-full h-2 mt-1">
+                <div class="bg-blue-500 rounded-full h-2 transition-all" style="width: {{ dim_val }}%"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ==================== SECTION 2: Chat Simulations ==================== -->
+<div class="mb-6">
+    <h2 class="text-lg font-semibold text-gray-700 mb-4">Simulações de Chat ({{ report.verdicts | length }} prompts)</h2>
+
+    <div class="space-y-4">
+        {% for verdict in report.verdicts %}
+        {% set prompt = report.prompts | selectattr('id', 'equalto', verdict.prompt_id) | first %}
+        {% set response = report.responses | selectattr('prompt_id', 'equalto', verdict.prompt_id) | first %}
+        {% if prompt and response %}
+
+        {% set bg_map = {'mentioned_by_name': 'border-green-200 bg-green-50/30', 'mentioned_as_specialty': 'border-yellow-200 bg-yellow-50/30', 'competitor_in_place': 'border-red-200 bg-red-50/30', 'not_mentioned': 'border-gray-200'} %}
+        {% set icon_map = {'mentioned_by_name': '&#10003;', 'mentioned_as_specialty': '&#9670;', 'competitor_in_place': '&#10007;', 'not_mentioned': '&#9633;'} %}
+        {% set icon_color_map = {'mentioned_by_name': 'text-green-600', 'mentioned_as_specialty': 'text-yellow-600', 'competitor_in_place': 'text-red-600', 'not_mentioned': 'text-gray-400'} %}
+
+        <div class="bg-white rounded-2xl shadow-sm border {{ bg_map.get(verdict.citation_type, 'border-gray-200') }} overflow-hidden">
+            <!-- Chat header -->
+            <div class="bg-gray-800 px-4 py-2 flex items-center gap-2">
+                <div class="flex gap-1.5">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <span class="text-gray-300 text-xs ml-2">ChatGPT — Prompt {{ verdict.prompt_id }}</span>
+            </div>
+
+            <div class="p-5 space-y-4">
+                <!-- Patient message (left bubble) -->
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="bg-blue-50 rounded-2xl rounded-tl-sm px-4 py-3 max-w-xl">
+                            <p class="text-sm text-gray-800">{{ prompt.text }}</p>
+                        </div>
+                        <span class="text-xs text-gray-400 mt-1 inline-block">{{ prompt.persona | replace('_', ' ') }}</span>
+                    </div>
+                </div>
+
+                <!-- AI response (right bubble) -->
+                <div class="flex items-start gap-3 justify-end">
+                    <div class="max-w-2xl">
+                        <div class="bg-gray-50 rounded-2xl rounded-tr-sm px-4 py-3 border">
+                            {% set rendered_text = response.raw_text | truncate(2000) | render_md %}
+                            {% set rendered_text = rendered_text | replace(doc.name, '<mark class="bg-green-200 px-0.5 rounded font-semibold">' ~ doc.name ~ '</mark>') %}
+                            {% for comp in verdict.competitors_named %}
+                                {% set rendered_text = rendered_text | replace(comp, '<mark class="bg-red-100 px-0.5 rounded">' ~ comp ~ '</mark>') %}
+                            {% endfor %}
+                            <div class="text-sm text-gray-700 whitespace-pre-line break-words max-h-64 overflow-y-auto">{{ rendered_text }}</div>
+
+                            {% if response.citations %}
+                            <div class="mt-3 pt-3 border-t border-gray-200">
+                                <div class="text-xs text-gray-500 font-medium mb-1">Fontes:</div>
+                                {% for citation in response.citations[:5] %}
+                                <a href="{{ citation.url }}" target="_blank" rel="noopener" class="text-xs text-blue-500 hover:underline block truncate">
+                                    {{ citation.title or citation.url }}
+                                </a>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Verdict bar -->
+                {% set verdict_bg = {'mentioned_by_name': 'bg-green-50 border-green-200', 'mentioned_as_specialty': 'bg-yellow-50 border-yellow-200', 'competitor_in_place': 'bg-red-50 border-red-200', 'not_mentioned': 'bg-gray-50 border-gray-200'} %}
+                <div class="rounded-xl border {{ verdict_bg.get(verdict.citation_type, 'bg-gray-50 border-gray-200') }} px-4 py-2.5 flex items-center justify-between flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="{{ icon_color_map.get(verdict.citation_type, 'text-gray-400') }} text-lg">{{ icon_map.get(verdict.citation_type, '?') | safe }}</span>
+                        <span class="text-sm font-medium text-gray-700">{{ verdict.citation_type | replace('_', ' ') }}</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs text-gray-500">
+                        <span>Confiança: <strong>{{ '%.0f' | format(verdict.confidence * 100) }}%</strong></span>
+                        {% if verdict.position %}
+                        <span>Posição: <strong>#{{ verdict.position }}</strong></span>
+                        {% endif %}
+                        {% if verdict.competitors_named %}
+                        <span>Concorrentes: <strong>{{ verdict.competitors_named | join(', ') }}</strong></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ==================== SECTION 3: Insights ==================== -->
+
+<!-- Top Competitors -->
+{% set all_competitors = [] %}
+{% for v in report.verdicts %}
+    {% for comp in v.competitors_named %}
+        {% if all_competitors.append(comp) %}{% endif %}
+    {% endfor %}
+{% endfor %}
+{% if all_competitors %}
+<div class="mb-6">
+    <h2 class="text-lg font-semibold text-gray-700 mb-4">Top Concorrentes</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% set seen = [] %}
+        {% set total = report.verdicts | length %}
+        {% for comp in all_competitors %}
+            {% if comp not in seen and seen.append(comp) is none %}
+            {% set count = all_competitors | select('equalto', comp) | list | length %}
+            {% set pct = (100 * count / total) | int %}
+            <div class="bg-white rounded-xl shadow-sm border p-4">
+                <div class="font-semibold text-gray-900">{{ comp }}</div>
+                <div class="text-sm text-gray-500 mt-1">Aparece em {{ count }}/{{ total }} prompts</div>
+                <div class="mt-2 bg-gray-200 rounded-full h-2">
+                    <div class="bg-blue-600 rounded-full h-2" style="width: {{ pct }}%"></div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Recommendations -->
+{% set recommendations = [] %}
+{% set recs = report.verdicts %}
+{% if s.overall < 30 %}
+    {% if recommendations.append('Visibilidade crítica: o médico não aparece na maioria das buscas por IA. Recomenda-se investir em presença digital com conteúdo otimizado para AEO.') %}{% endif %}
+{% endif %}
+{% if s.presence < 50 %}
+    {% if recommendations.append('Presença baixa: aparece em menos da metade dos prompts. Criar perfis em plataformas de saúde e produzir conteúdo sobre a especialidade pode aumentar citações.') %}{% endif %}
+{% endif %}
+{% if s.competitive < 50 %}
+    {% if recommendations.append('Concorrentes dominam as respostas. Analisar o que eles fazem diferente (conteúdo, avaliações, presença digital) para se posicionar melhor.') %}{% endif %}
+{% endif %}
+
+{% if recommendations %}
+<div class="bg-white rounded-2xl shadow-sm border p-8 mb-6">
+    <h2 class="text-lg font-semibold text-gray-700 mb-4">Plano de Ação</h2>
+    <ol class="list-decimal list-inside text-gray-700 space-y-2">
+        {% for rec in recommendations %}
+        <li class="py-1">{{ rec }}</li>
+        {% endfor %}
+    </ol>
+</div>
+{% endif %}
+
+<!-- Metadata footer -->
+<div class="text-center text-xs text-gray-400 py-4">
+    Custo: ${{ '%.4f' | format(report.metadata.total_cost_usd) }} |
+    Tokens: {{ report.metadata.total_tokens_in }}+{{ report.metadata.total_tokens_out }} |
+    Seed: {{ report.metadata.seed }} |
+    {{ report.metadata.generated_at.strftime('%Y-%m-%d') if report.metadata.generated_at.strftime is defined else report.metadata.generated_at }}
+</div>

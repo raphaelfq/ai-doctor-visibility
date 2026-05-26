@@ -161,3 +161,18 @@ def trace(
 
     console.print(table)
     console.print(f"\n[bold]Total cost:[/bold] ${total_cost:.4f}")
+
+
+@app.command()
+def serve(
+    host: str = typer.Option("127.0.0.1", help="Host to bind"),
+    port: int = typer.Option(8000, help="Port to bind"),
+) -> None:
+    """Inicia o servidor web com dashboard de visibilidade."""
+    import uvicorn
+
+    from ai_visibility.web import create_app
+
+    web_app = create_app()
+    console.print(f"[green]Servidor iniciado em[/green] http://{host}:{port}")
+    uvicorn.run(web_app, host=host, port=port)

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Análise — {{ run.doctor_name }} — AI Visibility{% endblock %}
+{% block content %}
+
+<div class="mb-4">
+    <a href="/doctors/{{ run.doctor_id }}" class="text-sm text-blue-600 hover:text-blue-800">&larr; Voltar para {{ run.doctor_name }}</a>
+</div>
+
+<div id="run-content">
+    {% include "_partials/run_status.html" %}
+</div>
+
+{% endblock %}

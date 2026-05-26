@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Médicos — AI Visibility{% endblock %}
+{% block content %}
+
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">Médicos cadastrados</h1>
+    <a href="/doctors/new" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
+        + Novo Médico
+    </a>
+</div>
+
+{% if doctors %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {% for doc in doctors %}
+    <a href="/doctors/{{ doc.id }}" class="bg-white rounded-2xl shadow-sm border p-5 hover:shadow-md transition block">
+        <div class="font-semibold text-gray-900">{{ doc.name }}</div>
+        <div class="text-sm text-gray-500 mt-1">{{ doc.specialty }} — {{ doc.city }}{% if doc.state %}/{{ doc.state }}{% endif %}</div>
+        {% if doc.crm %}
+        <div class="text-xs text-gray-400 mt-2">CRM {{ doc.crm }}/{{ doc.crm_state }}</div>
+        {% endif %}
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="bg-white rounded-2xl shadow-sm border p-12 text-center">
+    <div class="text-gray-400 text-lg mb-3">Nenhum médico cadastrado</div>
+    <a href="/doctors/new" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition inline-block">
+        Cadastrar primeiro médico
+    </a>
+</div>
+{% endif %}
+
+{% endblock %}

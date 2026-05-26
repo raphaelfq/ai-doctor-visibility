@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — AI Visibility{% endblock %}
+{% block content %}
+
+<!-- Stats cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <div class="bg-white rounded-2xl shadow-sm border p-6">
+        <div class="text-sm text-gray-500">Médicos cadastrados</div>
+        <div class="text-3xl font-bold text-gray-900 mt-1">{{ doctors | length }}</div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border p-6">
+        <div class="text-sm text-gray-500">Análises realizadas</div>
+        <div class="text-3xl font-bold text-gray-900 mt-1">{{ runs | length }}</div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border p-6">
+        <div class="text-sm text-gray-500">Score médio</div>
+        <div class="text-3xl font-bold text-gray-900 mt-1">
+            {% set completed_runs = runs | selectattr('score') | list %}
+            {% if completed_runs %}
+                {{ "%.0f" | format(completed_runs | map(attribute='score') | sum / completed_runs | length) }}
+            {% else %}
+                —
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Doctors list -->
+<div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-bold text-gray-900">Médicos</h2>
+    <a href="/doctors/new" class="text-sm text-blue-600 hover:text-blue-800 font-medium">Ver todos &rarr;</a>
+</div>
+
+{% if doctors %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+    {% for doc in doctors[:6] %}
+    <a href="/doctors/{{ doc.id }}" class="bg-white rounded-2xl shadow-sm border p-5 hover:shadow-md transition block">
+        <div class="font-semibold text-gray-900">{{ doc.name }}</div>
+        <div class="text-sm text-gray-500 mt-1">{{ doc.specialty }} — {{ doc.city }}{% if doc.state %}/{{ doc.state }}{% endif %}</div>
+        {% if doc.crm %}
+        <div class="text-xs text-gray-400 mt-1">CRM {{ doc.crm }}/{{ doc.crm_state }}</div>
+        {% endif %}
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="bg-white rounded-2xl shadow-sm border p-12 text-center mb-10">
+    <div class="text-gray-400 text-lg mb-3">Nenhum médico cadastrado ainda</div>
+    <a href="/doctors/new" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition inline-block">
+        Cadastrar primeiro médico
+    </a>
+</div>
+{% endif %}
+
+<!-- Recent runs -->
+<div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-bold text-gray-900">Análises recentes</h2>
+</div>
+
+{% if runs %}
+<div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
+    <table class="w-full">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Médico</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Especialidade</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Cidade</th>
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Score</th>
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Status</th>
+                <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Data</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for run in runs %}
+            <tr class="hover:bg-gray-50 cursor-pointer" onclick="window.location='/runs/{{ run.id }}'">
+                <td class="px-4 py-4 font-medium text-gray-900">{{ run.doctor_name }}</td>
+                <td class="px-4 py-4 text-gray-600">{{ run.specialty }}</td>
+                <td class="px-4 py-4 text-gray-600">{{ run.city }}</td>
+                <td class="px-4 py-4 text-center">
+                    {% if run.score is not none %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-semibold
+                        {% if run.score <= 30 %}bg-red-100 text-red-800
+                        {% elif run.score <= 60 %}bg-amber-100 text-amber-800
+                        {% else %}bg-green-100 text-green-800{% endif %}">
+                        {{ "%.0f" | format(run.score) }}
+                    </span>
+                    {% else %}—{% endif %}
+                </td>
+                <td class="px-4 py-4 text-center">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                        {% if run.status == 'completed' %}bg-green-100 text-green-700
+                        {% elif run.status == 'running' %}bg-blue-100 text-blue-700
+                        {% elif run.status == 'failed' %}bg-red-100 text-red-700
+                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                        {{ run.status }}
+                    </span>
+                </td>
+                <td class="px-4 py-4 text-right text-sm text-gray-500">
+                    {{ run.created_at.strftime('%d/%m/%Y %H:%M') if run.created_at.strftime is defined else run.created_at }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="bg-white rounded-2xl shadow-sm border p-8 text-center text-gray-400">
+    Nenhuma análise realizada ainda.
+</div>
+{% endif %}
+
+{% endblock %}
