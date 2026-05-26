@@ -12,69 +12,69 @@
   "prompts": [
     {
       "id": "p1",
-      "text": "Tô com umas manchas vermelhas que coçam muito, tô bem preocupado. Tem algum dermatologista em Moema que possa me atender rápido?",
+      "text": "Tô com muita coceira e umas bolinhas vermelhas que não somem, tô preocupado, preciso de um dermatologista em Moema pra me ajudar rápido.",
       "persona": "leigo_ansioso",
-      "intent_summary": "Procura atendimento rápido para manchas vermelhas que coçam."
+      "intent_summary": "Paciente relata sintomas preocupantes e quer atendimento rápido."
     },
     {
       "id": "p2",
-      "text": "Estou pesquisando opções de dermatologistas em Moema especializados em dermatite atópica. Quais clínicas ou profissionais possuem experiência comprovada nessa área?",
+      "text": "Estou procurando um dermatologista em Moema que tenha experiência em tratamentos para melasma, já li vários artigos e quero um profissional que faça acompanhamento com laser e cremes específicos.",
       "persona": "informado_específico",
-      "intent_summary": "Busca dermatologistas especializados em dermatite atópica em Moema."
+      "intent_summary": "Busca especialista com experiência em melasma e tratamentos avançados."
     },
     {
       "id": "p3",
-      "text": "Minha filha tem uma reação alérgica na pele que apareceu do nada e está piorando, é urgente. Onde encontro um dermatologista em Moema que atenda emergências?",
+      "text": "Minha filha acordou com uma erupção cutânea que parece alergia, não sei se é sério, alguém sabe se dermatologista em Moema atende emergências?",
       "persona": "urgência",
-      "intent_summary": "Precisa de dermatologista para emergência por reação alérgica na pele."
+      "intent_summary": "Procura atendimento dermatológico urgente para criança com erupção."
     },
     {
       "id": "p4",
-      "text": "Fui diagnosticado com psoríase, mas não estou satisfeito com o tratamento que recebi até agora. Gostaria de uma segunda opinião de um dermatologista em Moema.",
+      "text": "Já fui diagnosticado com psoríase, mas não tô satisfeito com meu tratamento atual. Queria uma segunda opinião de um dermatologista bom que atenda em Moema, SP.",
       "persona": "segunda_opinião",
-      "intent_summary": "Quer segunda opinião dermatológica para psoríase em Moema."
+      "intent_summary": "Quer segunda opinião dermatológica para psoríase."
     },
     {
       "id": "p5",
-      "text": "Meu filho de 5 anos está com umas bolhas estranhas na pele. Alguém conhece um dermatologista pediátrico confiável em Moema?",
+      "text": "Meu filho de 5 anos tem umas pintinhas estranhas e queria saber se preciso levar ele a um dermatologista em Moema, vocês recomendam algum especialista para crianças?",
       "persona": "pediátrico",
-      "intent_summary": "Procura dermatologista pediátrico em Moema para bolhas na pele da criança."
+      "intent_summary": "Busca dermatologista pediátrico para pintinhas na pele do filho."
     },
     {
       "id": "p6",
-      "text": "Tenho plano de saúde Amil e preciso saber quais dermatologistas em Moema atendem pelo convênio ou se vale mais a pena pagar particular.",
+      "text": "Tenho convênio Amil, alguém sabe se tem dermatologista em Moema que atenda pelo plano? Ou se vale a pena procurar particular?",
       "persona": "convênio_vs_particular",
-      "intent_summary": "Consulta sobre dermatologistas em Moema que atendem Amil ou atendimento particular."
+      "intent_summary": "Dúvida sobre dermatologista que atende convênio ou particular."
     },
     {
       "id": "p7",
-      "text": "Quero fazer um tratamento para manchas e cicatrizes no rosto, mas é só estética. Tem algum dermatologista em Moema que faça esses procedimentos eletivos?",
+      "text": "Quero fazer um peeling químico pra melhorar as manchas no rosto, tô buscando um dermatologista em Moema que faça esse procedimento estético com segurança.",
       "persona": "estético_eletivo",
-      "intent_summary": "Busca dermatologista para tratamento estético de manchas e cicatrizes em Moema."
+      "intent_summary": "Procura dermatologista para procedimento estético de peeling químico."
     },
     {
       "id": "p8",
-      "text": "Tenho acne crônica e já uso remédios há anos. Preciso de um dermatologista em Moema para acompanhamento contínuo e atualização do tratamento.",
+      "text": "Tenho dermatite atópica crônica e preciso de um acompanhamento regular com um especialista em Moema, alguém indica profissional que seja atento e faça um bom acompanhamento?",
       "persona": "crônico_acompanhamento",
-      "intent_summary": "Procura dermatologista para acompanhamento de acne crônica em Moema."
+      "intent_summary": "Busca dermatologista para acompanhamento de dermatite atópica crônica."
     },
     {
       "id": "p9",
-      "text": "Quero saber como prevenir problemas de pele comuns com a idade. Tem algum dermatologista em Moema que faça consultas preventivas?",
+      "text": "Quero começar a cuidar melhor da minha pele para evitar problemas futuros, alguém recomenda um dermatologista em Moema que faça avaliação preventiva?",
       "persona": "preventivo",
-      "intent_summary": "Busca dermatologista para consulta preventiva em Moema."
+      "intent_summary": "Interesse em avaliação dermatológica preventiva."
     },
     {
       "id": "p10",
-      "text": "Alguém pode me indicar um dermatologista bom em Moema? Quero marcar consulta, mas não conheço ninguém por aqui.",
+      "text": "Uma amiga me falou de um dermatologista ótimo em Moema, mas não lembro o nome, alguém pode me indicar um bom profissional por lá?",
       "persona": "pediu_indicação",
-      "intent_summary": "Pede indicação de dermatologista confiável em Moema."
+      "intent_summary": "Pediu indicação de dermatologista confiável em Moema."
     }
   ],
   "responses": [
     {
       "prompt_id": "p1",
-      "raw_text": "Entendo sua preocupação com as manchas vermelhas e a coceira intensa. É fundamental consultar um dermatologista para avaliação e tratamento adequado. Aqui estão algumas clínicas em Moema que podem atendê-lo:\n\n**[RV Beauté](http://www.rvbeaute.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (23 avaliações)**  \n_Av. Indianópolis, 974 - Moema, São Paulo - SP, 04062-001, Brazil_  \nCentro de referência em dermatologia e estética avançada, oferecendo tratamentos personalizados em um ambiente sofisticado.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nCom mais de 15 anos de experiência, oferece atendimento humanizado e tratamentos com tecnologia de ponta.\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nConsultório moderno com atendimento humanizado e uso de tecnologias de ponta.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.4 (336 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nEspecializada em dermatologia, oferece uma ampla gama de serviços com atendimento personalizado.\n\nRecomendo entrar em contato com essas clínicas para verificar a disponibilidade de atendimentos rápidos. Lembre-se de que, em casos de urgência, é importante buscar atendimento médico o quanto antes. ",
+      "raw_text": "Sinto muito por saber que você está enfrentando coceira e bolinhas vermelhas persistentes. Recomendo que você procure atendimento dermatológico o quanto antes para uma avaliação adequada. Aqui estão algumas clínicas de dermatologia em Moema que podem oferecer atendimento rápido:\n\n**[RV Beauté](http://www.rvbeaute.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (23 avaliações)**  \n_Av. Indianópolis, 974 - Moema, São Paulo - SP, 04062-001, Brazil_  \nCentro de referência em dermatologia e estética avançada, oferecendo tratamentos personalizados em um ambiente sofisticado.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nClínica com mais de 15 anos de experiência, reconhecida por tratamentos de alta tecnologia, incluindo Laser Fotona 4D.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 4.4 (337 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nClínica especializada em dermatologia com atendimento personalizado e tecnologia de última geração.\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nConsultório moderno com atendimento humanizado, utilizando tecnologias de ponta para tratamentos dermatológicos.\n\nRecomendo entrar em contato com essas clínicas para verificar a disponibilidade de consultas rápidas. Além disso, é importante evitar coçar as áreas afetadas para prevenir possíveis infecções. Se os sintomas persistirem ou piorarem, procure atendimento médico imediatamente. ",
       "doctors_named": [],
       "citations": [
         {
@@ -86,50 +86,54 @@
           "title": "Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova"
         },
         {
-          "url": "https://www.dralinebaptista.com.br/?utm_source=openai",
-          "title": "Dra. Aline Baptista, Dermatologista"
-        },
-        {
           "url": "https://dermaline.com.br/?utm_source=openai",
           "title": "Clinica Derma Line"
+        },
+        {
+          "url": "https://www.dralinebaptista.com.br/?utm_source=openai",
+          "title": "Dra. Aline Baptista, Dermatologista"
         }
       ],
       "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 331,
-      "tokens_out": 474,
+      "tokens_in": 336,
+      "tokens_out": 512,
       "latency_ms": 0
     },
     {
       "prompt_id": "p2",
-      "raw_text": "Encontrei algumas clínicas e dermatologistas em Moema, São Paulo, que possuem experiência no tratamento de dermatite atópica:\n\n**[Dra. Priscila Costa - Dermatologista](https://drapriscilacosta.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (13 avaliações)**  \n_Edifício Moema Work Center - Alameda dos Maracatins, 426 - CJ. 711 e 712 - Moema, São Paulo - SP, 04089-000, Brazil_  \nEspecialista em dermatite atópica, psoríase e hidradenite supurativa, oferecendo tratamentos inovadores com imunobiológicos e cuidados dermatológicos e estéticos.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em dermatologia, oferece tratamentos para diversas condições, incluindo dermatite atópica, em um espaço privilegiado e confortável.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.4 (336 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nOferece tratamentos dermatológicos completos para toda a família, incluindo doenças da pele como acne, rosácea, psoríase e eczemas.\n\nRecomendo entrar em contato com essas clínicas para verificar a disponibilidade de atendimento e agendar uma consulta. ",
+      "raw_text": "Encontrei algumas dermatologistas em Moema que possuem experiência no tratamento de melasma, utilizando laser e cremes específicos:\n\n**[Dra Paula Casteleti - Dermatologista em Moema](https://paulacasteleti.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 5.0 (143 avaliações)**  \n_Av. Ibirapuera, 2907 - Moema, São Paulo - SP, 04029-200, Brazil_  \nEspecializada no tratamento de melasma, oferece acompanhamento personalizado com estratégias dermatológicas para controle das manchas.\n\n**[Dra Helena Reich Camasmie - Dermatologista Moema](https://drahelenacamasmie.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 5.0 (9 avaliações)**  \n_R. Min. Gabriel de Rezende Passos, 500 - Moema, São Paulo - SP, 04521-020, Brazil_  \nMédica dermatologista com título de especialista, pós-graduada em Laser e Cosmiatria, oferece tratamentos avançados para melasma.\n\n**[Dra. Patrícia Ishiy - Dermatologista](https://www.drapatriciaishiy.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 5.0 (63 avaliações)**  \n_R. Funchal, 263 - Cj. 131 - Vila Olímpia, São Paulo - SP, 04551-060, Brazil_  \nEspecializada em cosmiatria e laser, doutoranda em dermatologia com foco em melasma, oferece tratamentos personalizados.\n\nRecomendo entrar em contato com essas profissionais para agendar uma consulta e discutir o melhor plano de tratamento para o seu caso. ",
       "doctors_named": [],
       "citations": [
         {
-          "url": "https://drapriscilacosta.com.br/?utm_source=openai",
-          "title": "Dra. Priscila Costa - Dermatologista"
+          "url": "https://paulacasteleti.com.br/?utm_source=openai",
+          "title": "Dra Paula Casteleti - Dermatologista em Moema"
         },
         {
-          "url": "https://draeduardabraga.com.br/?utm_source=openai",
-          "title": "Dra. Eduarda Braga Esteves, Dermatologista"
+          "url": "https://drahelenacamasmie.com.br/?utm_source=openai",
+          "title": "Dra Helena Reich Camasmie - Dermatologista Moema"
         },
         {
-          "url": "https://dermaline.com.br/?utm_source=openai",
-          "title": "Clinica Derma Line"
+          "url": "https://www.drapatriciaishiy.com.br/?utm_source=openai",
+          "title": "Dra. Patrícia Ishiy - Dermatologista"
         }
       ],
       "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 332,
-      "tokens_out": 406,
+      "tokens_in": 336,
+      "tokens_out": 389,
       "latency_ms": 0
     },
     {
       "prompt_id": "p3",
-      "raw_text": "Entendo a urgência da situação e a preocupação com a saúde da sua filha. Em Moema, São Paulo, há diversas clínicas dermatológicas que podem atender emergências. Aqui estão algumas opções:\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.4 (336 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nOferece tratamentos dermatológicos completos para toda a família. Localizada na Avenida Rouxinol, 55 – 6º andar. Agendamentos podem ser feitos pelo telefone (11) 5561-0293.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nCom mais de 15 anos de experiência, oferece atendimento humanizado e tecnologia de ponta. Localizada na Rua Dr. Alceu de Campos Rodrigues, 509, Vila Nova Conceição.\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nDermatologista com consultório moderno e atendimento humanizado. Localizada na Rua Ministro Gabriel de Rezende Passos, 500, sala 912, Moema.\n\nRecomendo entrar em contato com essas clínicas o mais rápido possível para verificar a disponibilidade de atendimento emergencial. Além disso, caso a situação seja grave, considere procurar o pronto-socorro de um hospital próximo ou ligar para o serviço de emergência médica. ",
+      "raw_text": "Sinto muito em saber que sua filha acordou com uma erupção cutânea. É importante que um dermatologista avalie a condição para determinar a gravidade e o tratamento adequado.\n\nEm Moema, há várias clínicas de dermatologia que podem oferecer atendimento emergencial ou agendamento rápido. Aqui estão algumas opções:\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 3.7 (452 avaliações)**  \n_Rua Conde de Itu, 550 - Jardim Santo Amaro, São Paulo - SP, 04741-000, Brazil_  \nOferece tratamentos dermatológicos completos para toda a família, com agendamento online e por telefone. Localizada na Avenida Rouxinol, 55 – 6º andar.\n\n**[Dra. Alice Guimarães](http://aliceguimaraes.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_Rua Pintassilgo, 429 - cj 102 - Moema, São Paulo - SP, 04514-032, Brazil_  \nEspecialista em dermatologia, localizada na Rua Pintassilgo, 429, conjunto 102, Moema.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nCom foco em dermatologia, oferece atendimento humanizado e tecnologia de ponta. Localizada na Rua Dr. Alceu de Campos Rodrigues, 509, Vila Nova Conceição.\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nDermatologista com atendimento humanizado, localizada na Rua Ministro Gabriel de Rezende Passos, 500, sala 912, Moema.\n\nRecomendo entrar em contato com uma dessas clínicas para verificar a disponibilidade de atendimento emergencial ou agendar uma consulta o mais breve possível. Além disso, se a erupção cutânea de sua filha estiver causando desconforto significativo ou se houver sinais de gravidade, como dificuldade para respirar, febre alta ou inchaço intenso, procure atendimento médico imediato. ",
       "doctors_named": [],
       "citations": [
         {
           "url": "https://dermaline.com.br/?utm_source=openai",
           "title": "Clinica Derma Line"
+        },
+        {
+          "url": "http://aliceguimaraes.com.br/?utm_source=openai",
+          "title": "Dra. Alice Guimarães"
         },
         {
           "url": "https://clinicaleilanecatricala.com.br/?utm_source=openai",
@@ -141,71 +145,67 @@
         }
       ],
       "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 337,
-      "tokens_out": 470,
+      "tokens_in": 335,
+      "tokens_out": 588,
       "latency_ms": 0
     },
     {
       "prompt_id": "p4",
-      "raw_text": "Entendo que você está buscando uma segunda opinião sobre o tratamento da psoríase com dermatologistas em Moema. Aqui estão algumas opções de profissionais na região que podem auxiliá-lo:\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nGraduada e com residência médica em Dermatologia pela UNIFESP, a Dra. Aline Baptista oferece atendimento humanizado e utiliza tecnologias de ponta. Seu consultório está localizado na Rua Ministro Gabriel de Rezende Passos, 500, Sala 912.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em Dermatologia pela Sociedade Brasileira de Dermatologia, a Dra. Eduarda Braga Esteves possui pós-graduação em Oncologia Cutânea pelo Hospital Sírio Libanês. Atende na Clínica Evive, localizada na Rua dos Três Irmãos, 100.\n\n**[Dra Helena Reich Camasmie - Dermatologista Moema](https://drahelenacamasmie.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (9 avaliações)**  \n_R. Min. Gabriel de Rezende Passos, 500 - Moema, São Paulo - SP, 04521-020, Brazil_  \nMestre pela Universidade Federal do Rio de Janeiro e pós-graduada em Laser, Cosmiatria e Procedimentos pelo Hospital Israelita Albert Einstein, a Dra. Helena Reich Camasmie oferece atendimento em Dermatologia Avançada. Seu consultório está situado na Rua dos Três Irmãos, 100.\n\n**[Dra. Alice Guimarães](http://aliceguimaraes.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_Rua Pintassilgo, 429 - cj 102 - Moema, São Paulo - SP, 04514-032, Brazil_  \nCom residência médica em Dermatologia pelo Hospital Ipiranga São Paulo e título de especialista pela Associação Médica Brasileira e Sociedade Brasileira de Dermatologia, a Dra. Alice Guimarães atende na Rua Pintassilgo, 429, conjunto 102.\n\nRecomendo entrar em contato com esses profissionais para verificar disponibilidade e agendar uma consulta. Uma segunda opinião pode ser fundamental para ajustar o tratamento da psoríase de acordo com suas necessidades específicas. ",
+      "raw_text": "Entendo que você está buscando uma segunda opinião sobre o tratamento da psoríase com um dermatologista qualificado na região de Moema, São Paulo. Aqui estão algumas opções de profissionais que podem auxiliá-lo:\n\n**[Dra. Alice Guimarães](http://aliceguimaraes.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_Rua Pintassilgo, 429 - cj 102 - Moema, São Paulo - SP, 04514-032, Brazil_  \nEspecialista em Dermatologia com residência médica pelo Hospital Ipiranga São Paulo, Dra. Alice Guimarães atende na Rua Pintassilgo, 429, Conjunto 102, em Moema.\n\n**[Dra Helena Reich Camasmie - Dermatologista Moema](https://drahelenacamasmie.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 5.0 (9 avaliações)**  \n_R. Min. Gabriel de Rezende Passos, 500 - Moema, São Paulo - SP, 04521-020, Brazil_  \nCom título de especialista pela Sociedade Brasileira de Dermatologia, Dra. Helena Reich Camasmie oferece tratamentos avançados para psoríase. Atende na Rua Ministro Gabriel de Rezende Passos, 500, Sala 912, Moema.\n\n**[Dr. João Bueno - Nutrologia/Medicina Esportiva - São Paulo](https://drjoaovbueno.com.br/agendamento?utm_source=openai)**  \n**Aberto agora · Sports medicine physician · 5.0 (96 avaliações)**  \n_Ladeira Velha, 35 - Freguesia do Ó, São Paulo - SP, 02925-110, Brazil_  \nEspecialista em Dermatologia Clínica e Estética, Dr. João Bueno possui experiência no tratamento de psoríase. Seu consultório está localizado na Rua Ministro Gabriel de Rezende Passos, 521, 2º andar, Moema.\n\nRecomendo entrar em contato com esses profissionais para verificar disponibilidade e agendar uma consulta. Lembre-se de levar todos os exames e informações sobre seu tratamento atual para uma avaliação completa. ",
       "doctors_named": [],
       "citations": [
         {
-          "url": "https://www.dralinebaptista.com.br/?utm_source=openai",
-          "title": "Dra. Aline Baptista, Dermatologista"
-        },
-        {
-          "url": "https://draeduardabraga.com.br/?utm_source=openai",
-          "title": "Dra. Eduarda Braga Esteves, Dermatologista"
+          "url": "http://aliceguimaraes.com.br/?utm_source=openai",
+          "title": "Dra. Alice Guimarães"
         },
         {
           "url": "https://drahelenacamasmie.com.br/?utm_source=openai",
           "title": "Dra Helena Reich Camasmie - Dermatologista Moema"
         },
         {
-          "url": "http://aliceguimaraes.com.br/?utm_source=openai",
-          "title": "Dra. Alice Guimarães"
+          "url": "https://drjoaovbueno.com.br/agendamento?utm_source=openai",
+          "title": "Dr. João Bueno - Nutrologia/Medicina Esportiva - São Paulo"
         }
       ],
       "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 339,
-      "tokens_out": 624,
+      "tokens_in": 340,
+      "tokens_out": 481,
       "latency_ms": 0
     },
     {
       "prompt_id": "p5",
-      "raw_text": "Sinto muito em saber que seu filho está com bolhas estranhas na pele. É fundamental que ele seja avaliado por um dermatologista pediátrico para um diagnóstico preciso e tratamento adequado.\n\nEm Moema, São Paulo, há diversas clínicas e profissionais especializados em dermatologia pediátrica que podem atender seu filho. Aqui estão algumas opções:\n\n**[Dra. Flavia Ravelli](http://flaviaravelli.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (34 avaliações)**  \n_Alameda dos Maracatins, 1217 - conj. 307 - Moema, São Paulo - SP, 04089-014, Brazil_  \nMédica dermatologista com especialização em dermatologia pediátrica, atuando na Alameda dos Maracatins, 1217, Conj. 307, Moema.\n\n**[Dra. Patrícia Ishiy - Dermatologista](https://www.drapatriciaishiy.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (63 avaliações)**  \n_R. Funchal, 263 - Cj. 131 - Vila Olímpia, São Paulo - SP, 04551-060, Brazil_  \nEspecialista em dermatologia pediátrica, com consultório na Avenida Ibirapuera, 2907, Cj. 813, Moema.\n\n**[Dra. Alice Guimarães](http://aliceguimaraes.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_Rua Pintassilgo, 429 - cj 102 - Moema, São Paulo - SP, 04514-032, Brazil_  \nDermatologista com experiência em dermatologia pediátrica, atendendo na Rua Pintassilgo, 429, cj 102, Moema.\n\n**[Clínica Laub](http://www.clinicalaub.com/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (2 avaliações)**  \n_Alameda dos Maracatins, 780 - 2301 - Moema, São Paulo - SP, 04089-001, Brazil_  \nOferece serviços de dermatologia clínica e estética, além de endocrinologia infantil, localizada na Alameda dos Maracatins, 780, Indianópolis, São Paulo.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.4 (336 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nEspecializada em dermatologia, com unidade em Moema, localizada na Avenida Rouxinol, 55 – 6º andar.\n\nRecomendo entrar em contato com essas clínicas para verificar a disponibilidade de consultas e escolher a que melhor atenda às necessidades do seu filho. ",
+      "raw_text": "É importante que você leve seu filho ao dermatologista para avaliar as pintinhas estranhas que ele apresenta. Em Moema, há diversas clínicas especializadas em dermatologia pediátrica que podem atender seu filho. Aqui estão algumas opções:\n\n**[Clínica Laub](http://www.clinicalaub.com/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (2 avaliações)**  \n_Alameda dos Maracatins, 780 - 2301 - Moema, São Paulo - SP, 04089-001, Brazil_  \nEspecializada em dermatologia clínica e estética, além de endocrinologia infantil, atendendo crianças e adolescentes.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nCom mais de 15 anos de experiência, oferece dermatologia com foco em tratamentos personalizados para cada paciente.\n\n**[Dra. Alice Guimarães](http://aliceguimaraes.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_Rua Pintassilgo, 429 - cj 102 - Moema, São Paulo - SP, 04514-032, Brazil_  \nDermatologista com especialização em oncologia cutânea e cosmiatria, oferecendo tratamentos clínicos e estéticos.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 4.4 (337 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nOferece tratamentos dermatológicos completos para toda a família, incluindo doenças da pele, dermatologia estética e cirurgia dermatológica.\n\n**[Dra. Flavia Ravelli](http://flaviaravelli.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (34 avaliações)**  \n_Alameda dos Maracatins, 1217 - conj. 307 - Moema, São Paulo - SP, 04089-014, Brazil_  \nMédica dermatologista com experiência em dermatologia pediátrica, membro da Sociedade Brasileira de Dermatologia.\n\nRecomendo entrar em contato com essas clínicas para verificar a disponibilidade de consultas e escolher a que melhor atenda às necessidades do seu filho. ",
       "doctors_named": [],
       "citations": [
-        {
-          "url": "http://flaviaravelli.com.br/?utm_source=openai",
-          "title": "Dra. Flavia Ravelli"
-        },
-        {
-          "url": "https://www.drapatriciaishiy.com.br/?utm_source=openai",
-          "title": "Dra. Patrícia Ishiy - Dermatologista"
-        },
-        {
-          "url": "http://aliceguimaraes.com.br/?utm_source=openai",
-          "title": "Dra. Alice Guimarães"
-        },
         {
           "url": "http://www.clinicalaub.com/?utm_source=openai",
           "title": "Clínica Laub"
         },
         {
+          "url": "https://clinicaleilanecatricala.com.br/?utm_source=openai",
+          "title": "Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova"
+        },
+        {
+          "url": "http://aliceguimaraes.com.br/?utm_source=openai",
+          "title": "Dra. Alice Guimarães"
+        },
+        {
           "url": "https://dermaline.com.br/?utm_source=openai",
           "title": "Clinica Derma Line"
+        },
+        {
+          "url": "http://flaviaravelli.com.br/?utm_source=openai",
+          "title": "Dra. Flavia Ravelli"
         }
       ],
       "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 333,
-      "tokens_out": 650,
+      "tokens_in": 336,
+      "tokens_out": 589,
       "latency_ms": 0
     },
     {
       "prompt_id": "p6",
-      "raw_text": "Encontrei algumas dermatologistas em Moema que atendem pelo plano de saúde Amil:\n\n**[Dra. Marina Bucker](https://www.google.com/maps/search/Dra.+Marina+Bucker%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecialista em dermatologia e medicina estética, localizada na Avenida Ibirapuera 2907, Conjunto 212/213, Moema. Atende planos de saúde somente por reembolso.\n\n**[Newform Medicina e Saúde](https://www.google.com/maps/search/Newform+Medicina+e+Sa%C3%BAde%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nClínica que oferece serviços de dermatologia, localizada na Av. Juriti 144, Moema. Aceita o plano Amil.\n\n**[Dra. Luciana Malzoni Langhi](https://www.google.com/maps/search/Dra.+Luciana+Malzoni+Langhi%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista que atende na Newform Medicina e Saúde, Av. Juriti 144, Moema. Aceita o plano Amil.\n\n**[Dra. Aline Baptista](https://www.google.com/maps/search/Dra.+Aline+Baptista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista com consultório na Rua Ministro Gabriel de Rezende Passos, 500, Sala 912, Moema. Aceita o plano Amil.\n\n**[Dra. Flávia Martelli](https://www.google.com/maps/search/Dra.+Fl%C3%A1via+Martelli%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista localizada na Alameda dos Maracatins, 1435, Conjunto 1201, Moema. Aceita o plano Amil.\n\n**[Dra. Leilane Catricala](https://www.google.com/maps/search/Dra.+Leilane+Catricala%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista com consultório na Alameda dos Maracatins, 1217, 5º andar, Conjunto 503, Moema. Aceita o plano Amil.\n\nPara determinar se é mais vantajoso utilizar seu plano de saúde ou pagar a consulta particular, é importante verificar se o seu plano cobre consultas dermatológicas e quais são as condições de reembolso. Alguns planos podem exigir pagamento antecipado e posterior reembolso, enquanto outros podem ter restrições de cobertura. Recomendo entrar em contato com a Amil para obter informações detalhadas sobre a cobertura e os procedimentos para reembolso.\n\nAlém disso, ao considerar o pagamento particular, é válido comparar os preços das consultas. Por exemplo, a Clínica Leilane Catricala oferece consulta dermatológica por R$ 700,00 ([dermatomoema.com.br](https://www.dermatomoema.com.br/service-page/consulta-m%C3%A9dica-dermatol%C3%B3gica?utm_source=openai)). Já a Dra. Karen Vargas Lutfi Rebechi, localizada na Avenida Moema 265, oferece consultas com preços variados, dependendo do procedimento ([drakarenlutfidermato.com](https://www.drakarenlutfidermato.com/?utm_source=openai)).\n\nPortanto, avalie as coberturas do seu plano de saúde, os custos das consultas particulares e as condições de reembolso para tomar a melhor decisão. ",
+      "raw_text": "Sim, há dermatologistas em Moema que atendem pelo plano de saúde Amil. Aqui estão algumas opções:\n\n**[Dra. Marina Bucker](https://www.google.com/maps/search/Dra.+Marina+Bucker%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecialista em doenças de pele, cabelo e unhas, além de tratamentos estéticos faciais e corporais. Atende na Avenida Ibirapuera 2907, Conjunto 212/213, Moema.\n\n**[Newform Medicina e Saúde](https://www.google.com/maps/search/Newform+Medicina+e+Sa%C3%BAde%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nClínica que oferece serviços de dermatologia, incluindo tratamentos estéticos e patologias da pele. Localizada na Av. Juriti 144, Moema.\n\n**[Dra. Luciana Malzoni Langhi](https://www.google.com/maps/search/Dra.+Luciana+Malzoni+Langhi%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista que atende na Newform Medicina e Saúde, Av. Juriti 144, Moema.\n\n**[Dra. Ana Regina Alencar Santos](https://www.google.com/maps/search/Dra.+Ana+Regina+Alencar+Santos%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecialista em cirurgia dermatológica, alergias cutâneas e dermatologia estética. Atende na Av. Ibirapuera, 2907, 2º andar, Conjunto 223, Moema.\n\n**[Dra. Paula Casteleti](https://www.google.com/maps/search/Dra.+Paula+Casteleti%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista com foco em doenças de pele e tratamentos estéticos. Consultório na Avenida Ibirapuera 2907, São Paulo.\n\nPara agendar uma consulta, é recomendável entrar em contato diretamente com o consultório ou clínica de sua preferência, verificando a disponibilidade e os procedimentos para atendimento pelo plano Amil.\n\nQuanto à opção de atendimento particular, os preços podem variar. Por exemplo, a Dra. Paula Casteleti cobra a partir de R$ 650 por consulta. ([doctoralia.com.br](https://www.doctoralia.com.br/dermatologista/moema2/moema?utm_source=openai)) É importante considerar que, ao optar pelo atendimento particular, você terá maior flexibilidade na escolha do profissional e nos horários de consulta.\n\nRecomendo entrar em contato com as clínicas e profissionais mencionados para obter informações atualizadas sobre disponibilidade, preços e se o atendimento pelo plano Amil é aceito. ",
       "doctors_named": [],
       "citations": [
         {
@@ -221,121 +221,105 @@
           "title": "Dra. Luciana Malzoni Langhi"
         },
         {
-          "url": "https://www.google.com/maps/search/Dra.+Aline+Baptista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "Dra. Aline Baptista"
+          "url": "https://www.google.com/maps/search/Dra.+Ana+Regina+Alencar+Santos%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Ana Regina Alencar Santos"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dra.+Paula+Casteleti%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Paula Casteleti"
+        },
+        {
+          "url": "https://www.doctoralia.com.br/dermatologista/moema2/moema?utm_source=openai",
+          "title": "Dermatologista Moema, Moema - Doctoralia"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 330,
+      "tokens_out": 672,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p7",
+      "raw_text": "Para realizar um peeling químico com segurança e melhorar as manchas no rosto, é fundamental escolher um dermatologista qualificado. Em Moema, São Paulo, há diversas opções de profissionais especializados nesse procedimento. Aqui estão algumas clínicas e dermatologistas na região:\n\n**[RV Beauté](http://www.rvbeaute.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (23 avaliações)**  \n_Av. Indianópolis, 974 - Moema, São Paulo - SP, 04062-001, Brazil_  \nCentro de referência em dermatologia e estética avançada, oferecendo tratamentos personalizados, incluindo peelings químicos, na Av. Indianópolis, 974, Moema.\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nDermatologista que realiza peelings faciais para clarear manchas e cicatrizes de acne, localizada na Rua Ministro Gabriel de Rezende Passos, 500, Sala 912, Moema.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 4.4 (337 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nClínica dermatológica que oferece tratamentos completos, incluindo peelings, localizada na Av. Rouxinol, 55, 6º andar, Moema.\n\n**[Dra. Thais Akemi Yoshimoto, Dermatologista](http://www.drathaisakemi.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 5.0 (30 avaliações)**  \n_Av. Ibirapuera, 2064 - Moema, São Paulo - SP, 04028-001, Brazil_  \nDermatologista especializada em pele asiática, oferece procedimentos estéticos dermatológicos, incluindo peelings, em Moema.\n\nRecomendo entrar em contato com essas clínicas para agendar uma consulta e discutir o tratamento mais adequado para o seu caso. Lembre-se de verificar a qualificação e a experiência do profissional escolhido para garantir a segurança e a eficácia do procedimento. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "http://www.rvbeaute.com.br/?utm_source=openai",
+          "title": "RV Beauté"
+        },
+        {
+          "url": "https://www.dralinebaptista.com.br/?utm_source=openai",
+          "title": "Dra. Aline Baptista, Dermatologista"
+        },
+        {
+          "url": "https://dermaline.com.br/?utm_source=openai",
+          "title": "Clinica Derma Line"
+        },
+        {
+          "url": "http://www.drathaisakemi.com.br/?utm_source=openai",
+          "title": "Dra. Thais Akemi Yoshimoto, Dermatologista"
+        }
+      ],
+      "model": "gpt-4.1-mini-2025-04-14",
+      "tokens_in": 332,
+      "tokens_out": 545,
+      "latency_ms": 0
+    },
+    {
+      "prompt_id": "p8",
+      "raw_text": "Para o acompanhamento regular da dermatite atópica crônica em Moema, São Paulo, você pode considerar os seguintes dermatologistas:\n\n**[Dra. Priscila Costa](https://www.google.com/maps/search/Dra.+Priscila+Costa%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecializada em dermatite atópica, psoríase e hidradenite supurativa, oferece tratamentos inovadores com imunobiológicos e cuidados dermatológicos e estéticos.\n\n**[Dra. Ana Fasanella](https://www.google.com/maps/search/Dra.+Ana+Fasanella%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nCom mais de 30 anos de experiência, é membro da Sociedade Brasileira de Dermatologia e da Sociedade Brasileira de Cirurgia Dermatológica.\n\n**[Dra. Flávia Martelli](https://www.google.com/maps/search/Dra.+Fl%C3%A1via+Martelli%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nMestre em Ciências da Saúde pela UNIFESP, membro da Sociedade Brasileira de Dermatologia e da Academia Americana de Dermatologia.\n\n**[Dra. Alice Guimarães](https://www.google.com/maps/search/Dra.+Alice+Guimar%C3%A3es%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecialista em dermatologia com complementação em oncologia cutânea pelo HCFM-USP e pós-graduação em cosmiatria pelo Hospital Israelita Albert Einstein.\n\n**[Dra. Marina Barletta](https://www.google.com/maps/search/Dra.+Marina+Barletta%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nMembro da American Hair Research Society e da Sociedade Brasileira de Dermatologia, oferece tratamentos modernos e seguros em dermatologia e tricologia.\n\n**[Dra. Eduarda Braga Esteves](https://www.google.com/maps/search/Dra.+Eduarda+Braga+Esteves%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecialista em dermatologia com pós-graduação em oncologia cutânea pelo Hospital Sírio Libanês e em cosmiatria pelo IBRAPE.\n\n**[Dra. Patrícia Ishiy](https://www.google.com/maps/search/Dra.+Patr%C3%ADcia+Ishiy%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecializada em cosmiatria e laser pelo HC-FMUSP, doutoranda em dermatologia pela mesma instituição.\n\n**[Dra. Aline Baptista](https://www.google.com/maps/search/Dra.+Aline+Baptista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nGraduada e com residência médica em dermatologia pela UNIFESP, oferece atendimento humanizado e personalizado.\n\nRecomendo entrar em contato com esses profissionais para verificar disponibilidade e agendar uma consulta. ",
+      "doctors_named": [],
+      "citations": [
+        {
+          "url": "https://www.google.com/maps/search/Dra.+Priscila+Costa%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Priscila Costa"
+        },
+        {
+          "url": "https://www.google.com/maps/search/Dra.+Ana+Fasanella%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Ana Fasanella"
         },
         {
           "url": "https://www.google.com/maps/search/Dra.+Fl%C3%A1via+Martelli%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
           "title": "Dra. Flávia Martelli"
         },
         {
-          "url": "https://www.google.com/maps/search/Dra.+Leilane+Catricala%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "Dra. Leilane Catricala"
+          "url": "https://www.google.com/maps/search/Dra.+Alice+Guimar%C3%A3es%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Alice Guimarães"
         },
         {
-          "url": "https://www.dermatomoema.com.br/service-page/consulta-m%C3%A9dica-dermatol%C3%B3gica?utm_source=openai",
-          "title": "Consulta Médica Dermatológica | CLC Moema"
+          "url": "https://www.google.com/maps/search/Dra.+Marina+Barletta%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Marina Barletta"
         },
         {
-          "url": "https://www.drakarenlutfidermato.com/?utm_source=openai",
-          "title": "Dra. Karen Vargas Lutfi Rebechi - Dermatologista, São Paulo"
-        }
-      ],
-      "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 331,
-      "tokens_out": 858,
-      "latency_ms": 0
-    },
-    {
-      "prompt_id": "p7",
-      "raw_text": "Existem diversas clínicas em Moema que oferecem tratamentos estéticos para manchas e cicatrizes faciais. Aqui estão algumas opções:\n\n**[RV Beauté – Clínica de Dermatologia e Estética](https://www.google.com/maps/search/RV+Beaut%C3%A9+%E2%80%93+Cl%C3%ADnica+de+Dermatologia+e+Est%C3%A9tica%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nCentro de referência em dermatologia e estética avançada, oferecendo tratamentos personalizados para rejuvenescimento facial e melhoria da qualidade da pele.\n\n**[LCN Clinic – Dermatologia & Estética](https://www.google.com/maps/search/LCN+Clinic+%E2%80%93+Dermatologia+%26+Est%C3%A9tica%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nClínica especializada em dermatologia clínica e estética, com tratamentos para rejuvenescimento facial e melhora da qualidade da pele.\n\n**[Clínica Clarivie | Dermatologia, Estética e Cirurgia Plástica](https://www.google.com/maps/search/Cl%C3%ADnica+Clarivie+%7C+Dermatologia%2C+Est%C3%A9tica+e+Cirurgia+Pl%C3%A1stica%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nOferece tratamentos para manchas na pele, linhas de expressão, gordura localizada, flacidez e outras condições estéticas.\n\n**[Clínica Leilane Catricala – Dermatologista](https://www.google.com/maps/search/Cl%C3%ADnica+Leilane+Catricala+%E2%80%93+Dermatologista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecializada em dermatologia com foco em tratamentos estéticos avançados, incluindo rejuvenescimento facial e tratamentos para acne e melasma.\n\n**[Dra. Flávia Martelli – Dermatologia](https://www.google.com/maps/search/Dra.+Fl%C3%A1via+Martelli+%E2%80%93+Dermatologia%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nOferece tratamentos para rugas, flacidez corporal, estrias, celulite e outras condições estéticas.\n\n**[Ana Hercos – Dermatologista](https://www.google.com/maps/search/Ana+Hercos+%E2%80%93+Dermatologista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecializada em dermatologia estética, oferecendo tratamentos como toxina botulínica, preenchimento cutâneo, peeling químico e microagulhamento.\n\n**[GTC Clinic | Grupo Taiz Campbell](https://www.google.com/maps/search/GTC+Clinic+%7C+Grupo+Taiz+Campbell%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nOferece protocolos exclusivos como o Luminous Soft®, utilizando tecnologia de ponta para tratamentos estéticos.\n\n**[Dra. Caroline Chantal – Dermatologia](https://www.google.com/maps/search/Dra.+Caroline+Chantal+%E2%80%93+Dermatologia%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecializada em dermatologia estética, oferecendo tratamentos como preenchedores, bioestimuladores de colágeno, toxina botulínica e peeling médico.\n\nRecomendo entrar em contato com essas clínicas para obter mais informações sobre os tratamentos disponíveis e agendar uma consulta. ",
-      "doctors_named": [],
-      "citations": [
-        {
-          "url": "https://www.google.com/maps/search/RV+Beaut%C3%A9+%E2%80%93+Cl%C3%ADnica+de+Dermatologia+e+Est%C3%A9tica%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "RV Beauté – Clínica de Dermatologia e Estética"
+          "url": "https://www.google.com/maps/search/Dra.+Eduarda+Braga+Esteves%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Eduarda Braga Esteves"
         },
         {
-          "url": "https://www.google.com/maps/search/LCN+Clinic+%E2%80%93+Dermatologia+%26+Est%C3%A9tica%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "LCN Clinic – Dermatologia & Estética"
+          "url": "https://www.google.com/maps/search/Dra.+Patr%C3%ADcia+Ishiy%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Patrícia Ishiy"
         },
         {
-          "url": "https://www.google.com/maps/search/Cl%C3%ADnica+Clarivie+%7C+Dermatologia%2C+Est%C3%A9tica+e+Cirurgia+Pl%C3%A1stica%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "Clínica Clarivie | Dermatologia, Estética e Cirurgia Plástica"
-        },
-        {
-          "url": "https://www.google.com/maps/search/Cl%C3%ADnica+Leilane+Catricala+%E2%80%93+Dermatologista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "Clínica Leilane Catricala – Dermatologista"
-        },
-        {
-          "url": "https://www.google.com/maps/search/Dra.+Fl%C3%A1via+Martelli+%E2%80%93+Dermatologia%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "Dra. Flávia Martelli – Dermatologia"
-        },
-        {
-          "url": "https://www.google.com/maps/search/Ana+Hercos+%E2%80%93+Dermatologista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "Ana Hercos – Dermatologista"
-        },
-        {
-          "url": "https://www.google.com/maps/search/GTC+Clinic+%7C+Grupo+Taiz+Campbell%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "GTC Clinic | Grupo Taiz Campbell"
-        },
-        {
-          "url": "https://www.google.com/maps/search/Dra.+Caroline+Chantal+%E2%80%93+Dermatologia%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
-          "title": "Dra. Caroline Chantal – Dermatologia"
+          "url": "https://www.google.com/maps/search/Dra.+Aline+Baptista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai",
+          "title": "Dra. Aline Baptista"
         }
       ],
       "model": "gpt-4.1-mini-2025-04-14",
       "tokens_in": 334,
-      "tokens_out": 910,
-      "latency_ms": 0
-    },
-    {
-      "prompt_id": "p8",
-      "raw_text": "Entendo que você está buscando um dermatologista em Moema para acompanhamento contínuo e atualização do tratamento da acne crônica. Aqui estão algumas opções de clínicas e profissionais na região que podem atender às suas necessidades:\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nCom mais de 15 anos de experiência em dermatologia, a clínica oferece tratamentos avançados, incluindo o Laser Fotona 4D, e possui unidades em Moema e São Caetano do Sul.\n\n**[RV Beauté](http://www.rvbeaute.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (23 avaliações)**  \n_Av. Indianópolis, 974 - Moema, São Paulo - SP, 04062-001, Brazil_  \nCentro de referência em dermatologia e estética avançada, projetado para proporcionar experiências transformadoras com tratamentos personalizados.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em dermatologia com pós-graduação em Oncologia Cutânea e Cosmiatria, oferece tratamentos para diversas condições de pele.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 3.7 (452 avaliações)**  \n_Rua Conde de Itu, 550 - Jardim Santo Amaro, São Paulo - SP, 04741-000, Brazil_  \nCom unidades em Moema, Santo Amaro, Paulista e Higienópolis, oferece tratamentos dermatológicos completos para toda a família.\n\n**[Greco Dermatologia](http://www.greco.med.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 4.5 (15 avaliações)**  \n_Av. Jandira, 257 - 12 andar - Moema, São Paulo - SP, 04080-000, Brazil_  \nClínica dermatológica que oferece o que há de mais atual em tecnologia, com equipamentos de última geração para diagnóstico e tratamento.\n\nRecomendo entrar em contato com essas clínicas para verificar disponibilidade de horários e agendar uma consulta. É importante discutir seu histórico de tratamento e necessidades específicas para que o dermatologista possa oferecer o melhor acompanhamento para o seu caso. ",
-      "doctors_named": [],
-      "citations": [
-        {
-          "url": "https://clinicaleilanecatricala.com.br/?utm_source=openai",
-          "title": "Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova"
-        },
-        {
-          "url": "http://www.rvbeaute.com.br/?utm_source=openai",
-          "title": "RV Beauté"
-        },
-        {
-          "url": "https://draeduardabraga.com.br/?utm_source=openai",
-          "title": "Dra. Eduarda Braga Esteves, Dermatologista"
-        },
-        {
-          "url": "https://dermaline.com.br/?utm_source=openai",
-          "title": "Clinica Derma Line"
-        },
-        {
-          "url": "http://www.greco.med.br/?utm_source=openai",
-          "title": "Greco Dermatologia"
-        }
-      ],
-      "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 332,
-      "tokens_out": 610,
+      "tokens_out": 766,
       "latency_ms": 0
     },
     {
       "prompt_id": "p9",
-      "raw_text": "Para prevenir problemas de pele comuns com o avanço da idade, é fundamental adotar uma rotina de cuidados que inclua:\n\n- **Hidratação diária**: Utilize cremes e loções que mantenham a pele hidratada, prevenindo ressecamento e flacidez.\n- **Proteção solar**: Aplique protetor solar com FPS adequado todos os dias, mesmo em dias nublados, para proteger contra os danos causados pelos raios UV.\n- **Alimentação balanceada**: Consuma alimentos ricos em antioxidantes, como frutas e vegetais, que ajudam a combater os radicais livres e promovem a saúde da pele.\n- **Evitar tabagismo e consumo excessivo de álcool**: Esses hábitos podem acelerar o envelhecimento da pele e aumentar o risco de doenças cutâneas.\n- **Consultas dermatológicas regulares**: Visite um dermatologista periodicamente para avaliações preventivas e orientações personalizadas.\n\nEm Moema, São Paulo, há diversas clínicas dermatológicas que oferecem consultas preventivas. Aqui estão algumas opções:\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 4.4 (336 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nOferece tratamentos dermatológicos completos para toda a família, incluindo consultas preventivas. Localizada na Avenida Rouxinol, 55 – 6º andar.\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nDermatologista com atendimento humanizado e uso de tecnologias de ponta. Consultório situado na Rua Min. Gabriel de Rezende Passos, 500 - Sala 912.\n\n**[RV Beauté](http://www.rvbeaute.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (23 avaliações)**  \n_Av. Indianópolis, 974 - Moema, São Paulo - SP, 04062-001, Brazil_  \nCentro de referência em dermatologia e estética avançada, oferecendo experiências transformadoras. Endereço: Av. Indianópolis, 974.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nFoco em dermatologia com mais de 15 anos de experiência, oferecendo atendimento personalizado. Novo endereço: R. Dr. Alceu de Campos Rodrigues, 509 – Vila Nova Conceição.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em dermatologia com foco em prevenção e tratamentos estéticos. Consultório situado na Rua dos Três Irmãos, 100.\n\nRecomenda-se entrar em contato com essas clínicas para agendar uma consulta preventiva e obter orientações específicas para o cuidado da sua pele. ",
+      "raw_text": "Claro, posso recomendar alguns dermatologistas em Moema que oferecem avaliações preventivas para cuidados com a pele:\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nDermatologista com graduação e residência médica pela UNIFESP, oferece atendimento humanizado e utiliza tecnologias de ponta em seu consultório moderno em Moema.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Aberto agora · Dermatologist · 4.4 (337 avaliações)**  \n_Av. Rouxinol, 55 - 6º andar - Moema, São Paulo - SP, 04516-000, Brazil_  \nClínica especializada em dermatologia, oferece tratamentos completos para toda a família, com atendimento personalizado e tecnologia de última geração.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nCom mais de 15 anos de experiência, oferece atendimento humanizado e tratamentos com alta tecnologia, incluindo Laser Fotona 4D.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060_  \nEspecialista em Dermatologia, oferece tratamentos para diversas condições da pele em um ambiente confortável e bem localizado em Moema.\n\nRecomendo entrar em contato com essas profissionais para agendar uma consulta e discutir suas necessidades específicas de cuidados com a pele. ",
       "doctors_named": [],
       "citations": [
-        {
-          "url": "https://dermaline.com.br/?utm_source=openai",
-          "title": "Clinica Derma Line"
-        },
         {
           "url": "https://www.dralinebaptista.com.br/?utm_source=openai",
           "title": "Dra. Aline Baptista, Dermatologista"
         },
         {
-          "url": "http://www.rvbeaute.com.br/?utm_source=openai",
-          "title": "RV Beauté"
+          "url": "https://dermaline.com.br/?utm_source=openai",
+          "title": "Clinica Derma Line"
         },
         {
           "url": "https://clinicaleilanecatricala.com.br/?utm_source=openai",
@@ -347,13 +331,13 @@
         }
       ],
       "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 327,
-      "tokens_out": 808,
+      "tokens_in": 328,
+      "tokens_out": 488,
       "latency_ms": 0
     },
     {
       "prompt_id": "p10",
-      "raw_text": "Claro, posso recomendar algumas clínicas de dermatologia em Moema, São Paulo, onde você pode agendar uma consulta:\n\n**[RV Beauté](http://www.rvbeaute.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (23 avaliações)**  \n_Av. Indianópolis, 974 - Moema, São Paulo - SP, 04062-001, Brazil_  \nCentro de referência em dermatologia e estética avançada, liderado pelas médicas Dra. Ritha Capelato e Dra. Vivian Simões. Oferece tratamentos corporais, faciais e tecnologias de ponta.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nCom mais de 15 anos de experiência, oferece atendimento humanizado e utiliza tecnologias como Laser Fotona 4D. Localizada na Vila Nova Conceição, próxima a Moema.\n\n**[Clinica Derma Line](https://dermaline.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 3.7 (452 avaliações)**  \n_Rua Conde de Itu, 550 - Jardim Santo Amaro, São Paulo - SP, 04741-000, Brazil_  \nOferece tratamentos completos em dermatologia, incluindo doenças da pele, dermatologia estética, cirurgia dermatológica e depilação a laser. Localizada na Av. Rouxinol, 55.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em dermatologia com pós-graduação em Oncologia Cutânea pelo Hospital Sírio Libanês e em Cosmiatria pelo IBRAPE. Atende na clínica Evive.\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nDermatologista titulada pela Sociedade Brasileira de Dermatologia, com graduação e residência médica pela UNIFESP. Atende em consultório moderno em Moema.\n\nRecomendo entrar em contato diretamente com essas clínicas para verificar disponibilidade e agendar sua consulta. ",
+      "raw_text": "Claro, posso indicar alguns dermatologistas renomados na região de Moema, São Paulo:\n\n**[RV Beauté](http://www.rvbeaute.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (23 avaliações)**  \n_Av. Indianópolis, 974 - Moema, São Paulo - SP, 04062-001, Brazil_  \nCentro de referência em dermatologia e estética avançada, liderado pelas médicas Dra. Ritha Capelato e Dra. Vivian Simões, oferecendo tratamentos personalizados em um ambiente sofisticado.\n\n**[Dra. Alice Guimarães](http://aliceguimaraes.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_Rua Pintassilgo, 429 - cj 102 - Moema, São Paulo - SP, 04514-032, Brazil_  \nCom especialização em Oncologia Cutânea pelo HCFM-USP e pós-graduação em Cosmiatria pelo Hospital Israelita Albert Einstein, oferece tratamentos em dermatologia clínica e estética.\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nGraduada e com residência médica em Dermatologia pela UNIFESP, oferece atendimento humanizado e utiliza tecnologias de ponta em seu consultório moderno.\n\n**[Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova](https://clinicaleilanecatricala.com.br/?utm_source=openai)**  \n**Aberto agora · Skin care clinic · 5.0 (262 avaliações)**  \n_R. Dr. Alceu de Campos Rodrigues, 509 - Vila Nova Conceição, São Paulo - SP, 04544-001, Brazil_  \nCom mais de 15 anos de experiência, oferece tratamentos de alta tecnologia, incluindo Laser Fotona 4D, em um ambiente acolhedor e com atendimento humanizado.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em dermatologia com pós-graduação em Oncologia Cutânea pelo Hospital Sírio Libanês, oferece tratamentos para face, corpo e cabelos em um ambiente confortável.\n\nRecomendo entrar em contato com essas clínicas para verificar disponibilidade e agendar uma consulta. ",
       "doctors_named": [],
       "citations": [
         {
@@ -361,25 +345,25 @@
           "title": "RV Beauté"
         },
         {
-          "url": "https://clinicaleilanecatricala.com.br/?utm_source=openai",
-          "title": "Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova"
-        },
-        {
-          "url": "https://dermaline.com.br/?utm_source=openai",
-          "title": "Clinica Derma Line"
-        },
-        {
-          "url": "https://draeduardabraga.com.br/?utm_source=openai",
-          "title": "Dra. Eduarda Braga Esteves, Dermatologista"
+          "url": "http://aliceguimaraes.com.br/?utm_source=openai",
+          "title": "Dra. Alice Guimarães"
         },
         {
           "url": "https://www.dralinebaptista.com.br/?utm_source=openai",
           "title": "Dra. Aline Baptista, Dermatologista"
+        },
+        {
+          "url": "https://clinicaleilanecatricala.com.br/?utm_source=openai",
+          "title": "Clínica Leilane Catricala - Dermatologista e Fotona Laser na Vila Nova"
+        },
+        {
+          "url": "https://draeduardabraga.com.br/?utm_source=openai",
+          "title": "Dra. Eduarda Braga Esteves, Dermatologista"
         }
       ],
       "model": "gpt-4.1-mini-2025-04-14",
-      "tokens_in": 327,
-      "tokens_out": 629,
+      "tokens_in": 330,
+      "tokens_out": 607,
       "latency_ms": 0
     }
   ],
@@ -387,9 +371,9 @@
     {
       "prompt_id": "p1",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_",
+      "evidence_quote": "Recomendo que você procure atendimento dermatológico o quanto antes para uma avaliação adequada.",
       "competitors_named": [
         "Dra. Aline Baptista"
       ]
@@ -397,128 +381,141 @@
     {
       "prompt_id": "p2",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "**[Dra. Priscila Costa - Dermatologista](https://drapriscilacosta.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (13 avaliações)**  \n_Edifício Moema Work Center - Alameda dos Maracatins, 426 - CJ. 711 e 712 - Moema, São Paulo - SP, 04089-000, Brazil_  \nEspecialista em dermatite atópica, psoríase e hidradenite supurativa, oferecendo tratamentos inovadores com imunobiológicos e cuidados dermatológicos e estéticos.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em dermatologia, oferece tratamentos para diversas condições, incluindo dermatite atópica, em um espaço privilegiado e confortável.",
+      "evidence_quote": "Encontrei algumas dermatologistas em Moema que possuem experiência no tratamento de melasma, utilizando laser e cremes específicos",
       "competitors_named": [
-        "Dra. Priscila Costa",
-        "Dra. Eduarda Braga Esteves"
+        "Dra Paula Casteleti",
+        "Dra Helena Reich Camasmie",
+        "Dra. Patrícia Ishiy"
       ]
     },
     {
       "prompt_id": "p3",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nDermatologista com consultório moderno e atendimento humanizado. Localizada na Rua Ministro Gabriel de Rezende Passos, 500, sala 912, Moema.",
+      "evidence_quote": "Recomendo entrar em contato com uma dessas clínicas para verificar a disponibilidade de atendimento emergencial ou agendar uma consulta",
       "competitors_named": [
-        "Dra. Aline Baptista"
+        "Dra. Alice Guimarães",
+        "Dra. Aline Baptista",
+        "Clínica Leilane Catricala",
+        "Clinica Derma Line"
       ]
     },
     {
       "prompt_id": "p4",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "Aqui estão algumas opções de profissionais na região que podem auxiliá-lo:\n\n**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nGraduada e com residência médica em Dermatologia pela UNIFESP, a Dra. Aline Baptista oferece atendimento humanizado e utiliza tecnologias de ponta. Seu consultório está localizado na Rua Ministro Gabriel de Rezende Passos, 500, Sala 912.\n\n**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em Dermatologia pela Sociedade Brasileira de Dermatologia, a Dra. Eduarda Braga Esteves possui pós-graduação em Oncologia Cutânea pelo Hospital Sírio Libanês. Atende na Clínica Evive, localizada na Rua dos Três Irmãos, 100.\n\n**[Dra Helena Reich Camasmie - Dermatologista Moema](https://drahelenacamasmie.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (9 avaliações)**  \n_R. Min. Gabriel de Rezende Passos, 500 - Moema, São Paulo - SP, 04521-020, Brazil_  \nMestre pela Universidade Federal do Rio de Janeiro e pós-graduada em Laser, Cosmiatria e Procedimentos pelo Hospital Israelita Albert Einstein, a Dra. Helena Reich Camasmie oferece atendimento em Dermatologia Avançada. Seu consultório está situado na Rua dos Três Irmãos, 100.\n\n**[Dra. Alice Guimarães](http://aliceguimaraes.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_Rua Pintassilgo, 429 - cj 102 - Moema, São Paulo - SP, 04514-032, Brazil_  \nCom residência médica em Dermatologia pelo Hospital Ipiranga São Paulo e título de especialista pela Associação Médica Brasileira e Sociedade Brasileira de Dermatologia, a Dra. Alice Guimarães atende na Rua Pintassilgo, 429, conjunto 102.",
+      "evidence_quote": "\"Aqui estão algumas opções de profissionais que podem auxiliá-lo: Dra. Alice Guimarães, Dra Helena Reich Camasmie, Dr. João Bueno\"",
       "competitors_named": [
-        "Dra. Aline Baptista",
-        "Dra. Eduarda Braga Esteves",
+        "Dra. Alice Guimarães",
         "Dra Helena Reich Camasmie",
-        "Dra. Alice Guimarães"
+        "Dr. João Bueno"
       ]
     },
     {
       "prompt_id": "p5",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "**[Dra. Flavia Ravelli](http://flaviaravelli.com.br/?utm_source=openai)**  \n**Fechado · Skin care clinic · 5.0 (34 avaliações)**  \n_Alameda dos Maracatins, 1217 - conj. 307 - Moema, São Paulo - SP, 04089-014, Brazil_  \nMédica dermatologista com especialização em dermatologia pediátrica, atuando na Alameda dos Maracatins, 1217, Conj. 307, Moema.\n\n**[Dra. Patrícia Ishiy - Dermatologista](https://www.drapatriciaishiy.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (63 avaliações)**  \n_R. Funchal, 263 - Cj. 131 - Vila Olímpia, São Paulo - SP, 04551-060, Brazil_  \nEspecialista em dermatologia pediátrica, com consultório na Avenida Ibirapuera, 2907, Cj. 813, Moema.\n\n**[Dra. Alice Guimarães](http://aliceguimaraes.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_Rua Pintassilgo, 429 - cj 102 - Moema, São Paulo - SP, 04514-032, Brazil_  \nDermatologista com experiência em dermatologia pediátrica, atendendo na Rua Pintassilgo, 429, cj 102, Moema.",
+      "evidence_quote": "Em Moema, há diversas clínicas especializadas em dermatologia pediátrica que podem atender seu filho.",
       "competitors_named": [
-        "Dra. Flavia Ravelli",
-        "Dra. Patrícia Ishiy",
-        "Dra. Alice Guimarães"
+        "Clínica Laub",
+        "Clínica Leilane Catricala",
+        "Dra. Alice Guimarães",
+        "Clinica Derma Line",
+        "Dra. Flavia Ravelli"
       ]
     },
     {
       "prompt_id": "p6",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "Encontrei algumas dermatologistas em Moema que atendem pelo plano de saúde Amil:\n\n**[Dra. Marina Bucker](https://www.google.com/maps/search/Dra.+Marina+Bucker%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nEspecialista em dermatologia e medicina estética, localizada na Avenida Ibirapuera 2907, Conjunto 212/213, Moema. Atende planos de saúde somente por reembolso.\n\n**[Dra. Luciana Malzoni Langhi](https://www.google.com/maps/search/Dra.+Luciana+Malzoni+Langhi%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista que atende na Newform Medicina e Saúde, Av. Juriti 144, Moema. Aceita o plano Amil.\n\n**[Dra. Aline Baptista](https://www.google.com/maps/search/Dra.+Aline+Baptista%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista com consultório na Rua Ministro Gabriel de Rezende Passos, 500, Sala 912, Moema. Aceita o plano Amil.\n\n**[Dra. Flávia Martelli](https://www.google.com/maps/search/Dra.+Fl%C3%A1via+Martelli%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista localizada na Alameda dos Maracatins, 1435, Conjunto 1201, Moema. Aceita o plano Amil.\n\n**[Dra. Leilane Catricala](https://www.google.com/maps/search/Dra.+Leilane+Catricala%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**\n_São Paulo, SP_\nDermatologista com consultório na Alameda dos Maracatins, 1217, 5º andar, Conjunto 503, Moema. Aceita o plano Amil.\n\nJá a Dra. Karen Vargas Lutfi Rebechi, localizada na Avenida Moema 265, oferece consultas com preços variados, dependendo do procedimento",
+      "evidence_quote": "Sim, há dermatologistas em Moema que atendem pelo plano de saúde Amil. Aqui estão algumas opções:",
       "competitors_named": [
         "Dra. Marina Bucker",
+        "Newform Medicina e Saúde",
         "Dra. Luciana Malzoni Langhi",
-        "Dra. Aline Baptista",
-        "Dra. Flávia Martelli",
-        "Dra. Leilane Catricala",
-        "Dra. Karen Vargas Lutfi Rebechi"
+        "Dra. Ana Regina Alencar Santos",
+        "Dra. Paula Casteleti"
       ]
     },
     {
       "prompt_id": "p7",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "**[Dra. Flávia Martelli – Dermatologia](https://www.google.com/maps/search/Dra.+Fl%C3%A1via+Martelli+%E2%80%93+Dermatologia%2C+S%C3%A3o+Paulo%2C+SP?utm_source=openai)**",
+      "evidence_quote": "Recomendo entrar em contato com essas clínicas para agendar uma consulta e discutir o tratamento mais adequado para o seu caso.",
       "competitors_named": [
-        "Dra. Flávia Martelli",
-        "Dra. Caroline Chantal",
-        "Ana Hercos",
-        "Dra. Leilane Catricala"
+        "Dra. Aline Baptista",
+        "Dra. Thais Akemi Yoshimoto"
       ]
     },
     {
       "prompt_id": "p8",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "**[Dra. Eduarda Braga Esteves, Dermatologista](https://draeduardabraga.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist**  \n_R. Pequetita, 215 - 14 andar conj 141 - Vila Olímpia, São Paulo - SP, 04552-060, Brazil_  \nEspecialista em dermatologia com pós-graduação em Oncologia Cutânea e Cosmiatria, oferece tratamentos para diversas condições de pele.",
+      "evidence_quote": "Para o acompanhamento regular da dermatite atópica crônica em Moema, São Paulo, você pode considerar os seguintes dermatologistas:",
       "competitors_named": [
-        "Dra. Eduarda Braga Esteves"
+        "Dra. Priscila Costa",
+        "Dra. Ana Fasanella",
+        "Dra. Flávia Martelli",
+        "Dra. Alice Guimarães",
+        "Dra. Marina Barletta",
+        "Dra. Eduarda Braga Esteves",
+        "Dra. Patrícia Ishiy",
+        "Dra. Aline Baptista"
       ]
     },
     {
       "prompt_id": "p9",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "**[Dra. Aline Baptista, Dermatologista](https://www.dralinebaptista.com.br/?utm_source=openai)**  \n**Fechado · Dermatologist · 5.0 (15 avaliações)**  \n_R. Domingos de Morais, 2781 - 14º andar - Indianopolis, São Paulo - SP, 04035-001, Brazil_  \nDermatologista com atendimento humanizado e uso de tecnologias de ponta. Consultório situado na Rua Min. Gabriel de Rezende Passos, 500 - Sala 912.",
+      "evidence_quote": "Claro, posso recomendar alguns dermatologistas em Moema que oferecem avaliações preventivas para cuidados com a pele:",
       "competitors_named": [
         "Dra. Aline Baptista",
-        "Dra. Eduarda Braga Esteves",
-        "Dra. Leilane Catricala"
+        "Dra. Eduarda Braga Esteves"
       ]
     },
     {
       "prompt_id": "p10",
       "citation_type": "competitor_in_place",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "position": null,
-      "evidence_quote": "Dra. Eduarda Braga Esteves, Dermatologista\nDra. Aline Baptista, Dermatologista",
+      "evidence_quote": "Claro, posso indicar alguns dermatologistas renomados na região de Moema, São Paulo:",
       "competitors_named": [
         "Dra. Ritha Capelato",
         "Dra. Vivian Simões",
-        "Dra. Eduarda Braga Esteves",
-        "Dra. Aline Baptista"
+        "Dra. Alice Guimarães",
+        "Dra. Aline Baptista",
+        "Dra. Leilane Catricala",
+        "Dra. Eduarda Braga Esteves"
       ]
     }
   ],
   "score": {
     "presence": 0.0,
-    "quality": 9.0,
+    "quality": 9.5,
     "position": 0.0,
     "competitive": 0.0,
-    "overall": 3.6
+    "citation_strength": 0.0,
+    "share_of_voice": 0.0,
+    "sentiment": 0.0,
+    "overall": 2.4
   },
   "metadata": {
-    "generated_at": "2026-05-26T09:29:52.505544Z",
+    "generated_at": "2026-05-26T13:10:59.144477Z",
     "model_generator": "gpt-4.1-mini-2025-04-14",
     "model_simulator": "gpt-4.1-mini-2025-04-14",
     "model_judge": "gpt-4.1-mini-2025-04-14",
-    "total_tokens_in": 21102,
-    "total_tokens_out": 9906,
-    "total_cost_usd": 0.1243,
+    "total_tokens_in": 15283,
+    "total_tokens_out": 7125,
+    "total_cost_usd": 0.1175,
     "seed": 42
   }
 }
