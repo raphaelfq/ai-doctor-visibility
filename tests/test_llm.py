@@ -42,7 +42,8 @@ class TestGenerateStructuredTimeout:
     async def test_timeout_logs_trace_and_reraises(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             trace_path = Path(tmpdir) / "trace.jsonl"
-            client = LLMClient(trace_path=trace_path)
+            with patch("ai_visibility.llm.AsyncOpenAI"):
+                client = LLMClient(trace_path=trace_path)
 
             client._client.responses = AsyncMock()
             client._client.responses.parse = AsyncMock(
@@ -72,7 +73,8 @@ class TestGenerateStructuredGenericError:
     async def test_generic_error_logs_trace_and_reraises(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             trace_path = Path(tmpdir) / "trace.jsonl"
-            client = LLMClient(trace_path=trace_path)
+            with patch("ai_visibility.llm.AsyncOpenAI"):
+                client = LLMClient(trace_path=trace_path)
 
             client._client.responses = AsyncMock()
             client._client.responses.parse = AsyncMock(
@@ -101,7 +103,8 @@ class TestSearchTimeout:
     async def test_search_timeout_logs_trace_and_reraises(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             trace_path = Path(tmpdir) / "trace.jsonl"
-            client = LLMClient(trace_path=trace_path)
+            with patch("ai_visibility.llm.AsyncOpenAI"):
+                client = LLMClient(trace_path=trace_path)
 
             client._client.responses = AsyncMock()
             client._client.responses.create = AsyncMock(
