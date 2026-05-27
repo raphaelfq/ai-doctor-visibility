@@ -7,6 +7,7 @@ from pathlib import Path
 from markupsafe import Markup
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 
 from ai_visibility.config import settings
@@ -71,6 +72,15 @@ async def lifespan(app: FastAPI):
 def create_app() -> FastAPI:
     app = FastAPI(title="AI Visibility", lifespan=lifespan)
 
+    # CORS for Next.js frontend
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:3000", "http://frontend:3000"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
     templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
     templates.env.filters["score_color"] = _score_color
     templates.env.filters["score_label"] = _score_label
@@ -82,5 +92,9 @@ def create_app() -> FastAPI:
     from ai_visibility.web.routes import router
 
     app.include_router(router)
+
+    from ai_visibility.web.api_routes import api_router
+
+    app.include_router(api_router)
 
     return app

@@ -126,6 +126,34 @@ def delete_doctor(doctor_id: str) -> None:
         conn.execute("DELETE FROM doctors WHERE id = %s", (doctor_id,))
 
 
+def list_doctors_with_counts(limit: int = 100) -> list[dict[str, Any]]:
+    """List doctors with run_count and latest_score from their most recent completed run."""
+    with get_pool().connection() as conn:
+        rows = conn.execute(
+            """
+            SELECT d.*,
+                   COUNT(r.id) AS run_count,
+                   (SELECT r2.score FROM runs r2
+                    WHERE r2.doctor_id = d.id AND r2.status = 'completed'
+                    ORDER BY r2.created_at DESC LIMIT 1) AS latest_score
+            FROM doctors d
+            LEFT JOIN runs r ON r.doctor_id = d.id
+            GROUP BY d.id
+            ORDER BY d.created_at DESC
+            LIMIT %s
+            """,
+            (limit,),
+        ).fetchall()
+    result = []
+    for r in rows:
+        row_dict = dict(r)
+        row_dict["id"] = str(row_dict["id"])
+        if row_dict.get("created_at"):
+            row_dict["created_at"] = row_dict["created_at"].isoformat()
+        result.append(row_dict)
+    return result
+
+
 # ---------------------------------------------------------------------------
 # Runs CRUD
 # ---------------------------------------------------------------------------
