@@ -22,7 +22,7 @@ import {
 
 import { useDoctor, createRun, deleteDoctor } from "@/lib/api"
 import { formatDate, getScoreColor } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -98,9 +98,9 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
     return (
       <div className="py-12 text-center">
         <p className="text-muted-foreground">Medico nao encontrado.</p>
-        <Button variant="outline" className="mt-4" render={<Link href="/doctors" />}>
+        <Link href="/doctors" className={buttonVariants({ variant: "outline", className: "mt-4" })}>
           Voltar
-        </Button>
+        </Link>
       </div>
     )
   }
@@ -122,9 +122,9 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" render={<Link href="/doctors" />} aria-label="Voltar">
+          <Link href="/doctors" className={buttonVariants({ variant: "ghost", size: "icon" })} aria-label="Voltar">
             <ArrowLeft className="size-4" />
-          </Button>
+          </Link>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">{doctor.name}</h1>
             <p className="text-sm text-muted-foreground">
@@ -302,13 +302,12 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
                       <ScoreBadge score={run.score} />
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        render={<Link href={`/analysis/${run.id}`} />}
+                      <Link
+                        href={`/analysis/${run.id}`}
+                        className={buttonVariants({ variant: "ghost", size: "sm" })}
                       >
                         Ver detalhes
-                      </Button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}

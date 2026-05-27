@@ -7,7 +7,7 @@ import { Plus, Search } from "lucide-react"
 import { useDoctors } from "@/lib/api"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ScoreBadge } from "@/components/score-badge"
 
@@ -28,10 +28,10 @@ export default function DoctorsPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-bold tracking-tight">Medicos</h1>
-        <Button render={<Link href="/doctors/new" />}>
+        <Link href="/doctors/new" className={buttonVariants()}>
           <Plus className="size-4" />
           Novo Medico
-        </Button>
+        </Link>
       </div>
 
       <div className="relative max-w-sm">

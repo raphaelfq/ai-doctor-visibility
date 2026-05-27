@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ArrowLeft, Loader2 } from "lucide-react"
 
 import { useRunStatus } from "@/lib/api"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress, ProgressLabel, ProgressValue } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -55,9 +55,9 @@ export function AnalysisClient({ runId }: AnalysisClientProps) {
         <p className="text-muted-foreground">
           {error ? "Erro ao carregar analise." : "Analise nao encontrada."}
         </p>
-        <Button variant="outline" className="mt-4" render={<Link href="/" />}>
+        <Link href="/" className={buttonVariants({ variant: "outline", className: "mt-4" })}>
           Voltar ao Dashboard
-        </Button>
+        </Link>
       </div>
     )
   }
@@ -68,14 +68,13 @@ export function AnalysisClient({ runId }: AnalysisClientProps) {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <Button
-          variant="ghost"
-          size="icon"
-          render={<Link href={`/doctors/${run.doctor_id}`} />}
+        <Link
+          href={`/doctors/${run.doctor_id}`}
+          className={buttonVariants({ variant: "ghost", size: "icon" })}
           aria-label="Voltar"
         >
           <ArrowLeft className="size-4" />
-        </Button>
+        </Link>
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
             Analise — {run.doctor_name}

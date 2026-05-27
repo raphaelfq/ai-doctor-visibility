@@ -53,8 +53,8 @@ export function OverviewTab({ report, benchmark }: OverviewTabProps) {
           <CardTitle>Dimensoes de Visibilidade</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="mx-auto h-72 max-w-md">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="mx-auto max-w-md" style={{ height: 288 }}>
+            <ResponsiveContainer width="100%" height="100%" minHeight={200}>
               <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="75%">
                 <PolarGrid stroke="var(--border)" />
                 <PolarAngleAxis

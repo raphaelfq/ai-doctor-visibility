@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 import { createDoctor } from "@/lib/api"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -56,9 +56,9 @@ export default function NewDoctorPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" render={<Link href="/doctors" />} aria-label="Voltar">
+        <Link href="/doctors" className={buttonVariants({ variant: "ghost", size: "icon" })} aria-label="Voltar">
           <ArrowLeft className="size-4" />
-        </Button>
+        </Link>
         <h1 className="text-2xl font-bold tracking-tight">Novo Medico</h1>
       </div>
 
@@ -112,9 +112,9 @@ export default function NewDoctorPage() {
             )}
 
             <div className="flex justify-end gap-3 pt-2">
-              <Button variant="outline" type="button" render={<Link href="/doctors" />}>
+              <Link href="/doctors" className={buttonVariants({ variant: "outline" })}>
                 Cancelar
-              </Button>
+              </Link>
               <Button type="submit" disabled={loading}>
                 {loading ? "Salvando..." : "Cadastrar"}
               </Button>
