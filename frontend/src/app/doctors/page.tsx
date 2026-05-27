@@ -28,7 +28,10 @@ export default function DoctorsPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-bold tracking-tight">Medicos</h1>
-        <Link href="/doctors/new" className={buttonVariants()}>
+        <Link
+          href="/doctors/new"
+          className={buttonVariants({ size: "lg" }) + " gap-2 bg-emerald-600 text-white hover:bg-emerald-700"}
+        >
           <Plus className="size-4" />
           Novo Medico
         </Link>

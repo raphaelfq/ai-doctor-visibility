@@ -31,7 +31,7 @@ function NavContent() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-1 px-2" aria-label="Menu principal">
+      <nav className="space-y-1 px-2" aria-label="Menu principal">
         {navItems.map((item) => {
           const isActive =
             item.href === "/"
@@ -57,19 +57,22 @@ function NavContent() {
         })}
       </nav>
 
-      {/* Bottom action */}
-      <div className="border-t border-slate-800 p-3">
+      {/* Action button — right below nav */}
+      <div className="px-3 pt-4">
         <Link
           href="/doctors/new"
           className={cn(
-            buttonVariants({ variant: "default", size: "default" }),
-            "w-full justify-start gap-2 bg-blue-600 text-white hover:bg-blue-700",
+            buttonVariants({ variant: "default", size: "lg" }),
+            "w-full gap-2 bg-blue-600 text-white hover:bg-blue-700",
           )}
         >
           <Plus className="size-4" />
           Novo Medico
         </Link>
       </div>
+
+      {/* Spacer */}
+      <div className="flex-1" />
     </div>
   )
 }
