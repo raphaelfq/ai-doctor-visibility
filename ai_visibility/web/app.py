@@ -18,6 +18,25 @@ from ai_visibility.web.db import close_pool, init_pool
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 
 
+def _highlight(html: str, name: str, css_class: str) -> Markup:
+    """Replace name occurrences in already-rendered HTML with <mark> tags.
+
+    Only replaces text that is NOT already inside an HTML tag attribute
+    or tag body (i.e. skips content within < ... >).
+    """
+    import html as html_mod
+
+    plain = str(html)
+    escaped_name = html_mod.escape(name)
+    mark_tag = f'<mark class="{css_class}">{escaped_name}</mark>'
+
+    # Split on HTML tags, only replace in text segments (even indices)
+    parts = re.split(r'(<[^>]+>)', plain)
+    for i in range(0, len(parts), 2):  # text nodes only
+        parts[i] = parts[i].replace(escaped_name, mark_tag)
+    return Markup(''.join(parts))
+
+
 def _render_md(text: str) -> Markup:
     """Convert basic markdown (bold, links) to HTML. Returns safe markup."""
     import html as html_mod
@@ -57,6 +76,7 @@ def create_app() -> FastAPI:
     templates.env.filters["score_label"] = _score_label
     templates.env.filters["get_benchmark"] = get_benchmark
     templates.env.filters["render_md"] = _render_md
+    templates.env.filters["highlight"] = _highlight
     app.state.templates = templates
 
     from ai_visibility.web.routes import router

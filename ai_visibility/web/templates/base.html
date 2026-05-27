@@ -1,42 +1,83 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="corporate">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}AI Visibility{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.22/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { daisyui: { themes: ["corporate", "business"] } }
+    </script>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        (function() {
+            var t = localStorage.getItem('theme') || 'corporate';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
         .htmx-indicator { display: none; }
         .htmx-request .htmx-indicator { display: inline-block; }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <nav class="bg-white border-b shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="/" class="text-lg font-bold text-gray-900 flex items-center gap-2">
-                <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+<body class="bg-base-200 min-h-screen flex flex-col">
+    <div class="navbar bg-base-100 shadow-sm border-b border-base-200">
+        <div class="navbar-start">
+            <a href="/" class="btn btn-ghost text-xl gap-2">
+                <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                 </svg>
                 AI Visibility
             </a>
-            <div class="flex items-center gap-3">
-                <a href="/doctors" class="text-sm text-gray-600 hover:text-gray-900">Médicos</a>
-                <a href="/doctors/new" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
-                    + Novo Médico
-                </a>
-            </div>
         </div>
-    </nav>
-    <main class="max-w-6xl mx-auto px-4 py-8">
+        <div class="navbar-center hidden md:flex">
+            <a href="/" class="btn btn-ghost btn-sm">Dashboard</a>
+            <a href="/doctors" class="btn btn-ghost btn-sm">Medicos</a>
+        </div>
+        <div class="navbar-end gap-2">
+            <a href="/doctors/new" class="btn btn-primary btn-sm gap-1">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+                Novo Medico
+            </a>
+            <label class="swap swap-rotate btn btn-ghost btn-circle btn-sm">
+                <input type="checkbox" id="theme-toggle" />
+                <!-- sun icon -->
+                <svg class="swap-off w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm0 15a5 5 0 100-10 5 5 0 000 10zm9-4h-1a1 1 0 110-2h1a1 1 0 110 2zM4 13H3a1 1 0 110-2h1a1 1 0 110 2zm15.07-7.07l-.7.7a1 1 0 11-1.42-1.41l.71-.71a1 1 0 111.41 1.42zM7.05 18.36l-.7.71a1 1 0 11-1.42-1.41l.71-.71a1 1 0 111.41 1.41zM20.49 18.36a1 1 0 01-1.41 0l-.71-.71a1 1 0 111.41-1.41l.71.7a1 1 0 010 1.42zM7.05 5.64a1 1 0 01-1.41 0l-.71-.71a1 1 0 011.41-1.41l.71.7a1 1 0 010 1.42z"/>
+                </svg>
+                <!-- moon icon -->
+                <svg class="swap-on w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21.64 13a1 1 0 00-1.05-.14 8.05 8.05 0 01-3.37.73 8.15 8.15 0 01-8.14-8.1 8.6 8.6 0 01.25-2A1 1 0 008 2.36a10.14 10.14 0 1014 11 1 1 0 00-.36-.39z"/>
+                </svg>
+            </label>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 w-full flex-1">
         {% block content %}{% endblock %}
     </main>
-    <footer class="text-center text-xs text-gray-400 py-6 border-t mt-12">
-        POC &mdash; iMedicina AI Visibility
+
+    <footer class="footer footer-center bg-base-200 text-base-content/50 p-4 border-t border-base-300">
+        <p class="text-xs">POC &mdash; iMedicina AI Visibility</p>
     </footer>
+
+    <script>
+        (function() {
+            var toggle = document.getElementById('theme-toggle');
+            toggle.checked = localStorage.getItem('theme') === 'business';
+            toggle.addEventListener('change', function() {
+                var theme = toggle.checked ? 'business' : 'corporate';
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            });
+        })();
+    </script>
 </body>
 </html>
