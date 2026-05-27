@@ -75,7 +75,11 @@ def create_app() -> FastAPI:
     # CORS for Next.js frontend
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:3000", "http://frontend:3000"],
+        allow_origins=[
+            "http://localhost:3000",
+            "http://frontend:3000",
+            "https://app.visibilitydemo.quintanilha.site",
+        ],
         allow_credentials=True,
         allow_methods=["GET", "POST", "DELETE"],
         allow_headers=["Content-Type"],
