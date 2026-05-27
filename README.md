@@ -68,6 +68,11 @@ make test      # pytest -v
 
 ## Arquitetura — 4 estagios
 
+![Pipeline Architecture](docs/diagrams/pipeline-architecture.png)
+
+<details>
+<summary>Versao texto</summary>
+
 ```
 Input (nome, especialidade, cidade)
          |
@@ -100,6 +105,14 @@ Input (nome, especialidade, cidade)
          v
   Outputs: report.html, report.md, report.json, trace.jsonl
 ```
+
+</details>
+
+---
+
+## Arquitetura do sistema
+
+![System Architecture](docs/diagrams/system-architecture.png)
 
 ---
 
