@@ -33,6 +33,9 @@ dev = [
 [project.scripts]
 ai-visibility = "ai_visibility.cli:app"
 
+[tool.setuptools.packages.find]
+include = ["ai_visibility*"]
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]

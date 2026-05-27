@@ -11,20 +11,31 @@ env:
   ECR_REPOSITORY: ai-visibility
   ECS_CLUSTER: ai-visibility
   ECS_SERVICE: ai-visibility
+  ECS_TASK_FAMILY: ai-visibility
 
 jobs:
   test:
     name: Tests
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: pip
 
-      - name: Install dependencies
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('pyproject.toml') }}
+          restore-keys: pip-
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libpq-dev
+
+      - name: Install Python dependencies
         run: pip install -e ".[dev]"
 
       - name: Run tests
@@ -63,12 +74,27 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
+      - name: Update ECS task definition with new image
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Get current task definition and update the image
+          TASK_DEF=$(aws ecs describe-task-definition --task-definition $ECS_TASK_FAMILY --query taskDefinition)
+          NEW_TASK_DEF=$(echo "$TASK_DEF" | \
+            jq --arg IMG "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
+            '.containerDefinitions[0].image = $IMG | del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)')
+          aws ecs register-task-definition --cli-input-json "$NEW_TASK_DEF" --query "taskDefinition.revision" --output text
+
       - name: Deploy to ECS
         run: |
+          LATEST_REVISION=$(aws ecs describe-task-definition --task-definition $ECS_TASK_FAMILY --query "taskDefinition.revision" --output text)
           aws ecs update-service \
             --cluster $ECS_CLUSTER \
             --service $ECS_SERVICE \
-            --force-new-deployment
-          aws ecs wait services-stable \
-            --cluster $ECS_CLUSTER \
-            --services $ECS_SERVICE
+            --task-definition $ECS_TASK_FAMILY:$LATEST_REVISION \
+            --force-new-deployment \
+            --query "service.deployments[0].taskDefinition" --output text
+
+      - name: Wait for deployment
+        run: aws ecs wait services-stable --cluster $ECS_CLUSTER --services $ECS_SERVICE
