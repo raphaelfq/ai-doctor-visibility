@@ -1,13 +1,5 @@
 "use client"
 
-import {
-  PolarAngleAxis,
-  PolarGrid,
-  Radar,
-  RadarChart,
-  ResponsiveContainer,
-} from "recharts"
-
 import type { Report } from "@/lib/types"
 import { getCitationStyle } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -18,13 +10,26 @@ interface OverviewTabProps {
   benchmark?: number | null
 }
 
+function DimensionBar({ label, value, weight, color }: { label: string; value: number; weight: string; color: string }) {
+  return (
+    <div>
+      <div className="flex items-baseline justify-between mb-1">
+        <span className="text-sm font-medium">{label}</span>
+        <span className="text-xs text-muted-foreground">{weight}</span>
+      </div>
+      <div className="h-3 w-full rounded-full bg-muted overflow-hidden">
+        <div
+          className={`h-full rounded-full ${color}`}
+          style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
+        />
+      </div>
+      <p className="text-right text-sm font-bold mt-0.5">{Math.round(value)}</p>
+    </div>
+  )
+}
+
 export function OverviewTab({ report, benchmark }: OverviewTabProps) {
   const { score, verdicts } = report
-
-  const radarData = [
-    { dimension: "Visibilidade", value: score.visibility, fullMark: 100 },
-    { dimension: "Dominância", value: score.dominance, fullMark: 100 },
-  ]
 
   return (
     <div className="mt-4 space-y-6">
@@ -45,47 +50,27 @@ export function OverviewTab({ report, benchmark }: OverviewTabProps) {
         )}
       </div>
 
-      {/* Radar chart */}
+      {/* Dimensions */}
       <Card>
         <CardHeader>
           <CardTitle>Dimensões de Visibilidade</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="mx-auto max-w-md" style={{ height: 288 }}>
-            <ResponsiveContainer width="100%" height="100%" minHeight={200}>
-              <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="75%">
-                <PolarGrid stroke="var(--border)" />
-                <PolarAngleAxis
-                  dataKey="dimension"
-                  tick={{ fontSize: 13, fill: "var(--foreground)" }}
-                />
-                <Radar
-                  name="Score"
-                  dataKey="value"
-                  stroke="#3b82f6"
-                  fill="#3b82f6"
-                  fillOpacity={0.2}
-                  strokeWidth={2}
-                />
-              </RadarChart>
-            </ResponsiveContainer>
-          </div>
-          {/* Dimension breakdown */}
-          <div className="mt-4 grid grid-cols-2 gap-3">
-            {radarData.map((d) => (
-              <div key={d.dimension} className="text-center">
-                <p className="text-2xl font-bold">{Math.round(d.value)}</p>
-                <p className="text-xs text-muted-foreground">{d.dimension}</p>
-              </div>
-            ))}
-          </div>
-          {/* Indirect presence — informational metric */}
-          <div className="mt-3 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-dashed px-3 py-1 text-sm text-muted-foreground">
-              <span>Presença Indireta</span>
-              <span className="font-semibold">{Math.round(score.indirect_presence)}</span>
-              <span className="text-xs">(informativo)</span>
+        <CardContent className="space-y-5">
+          <DimensionBar label="Visibilidade" value={score.visibility} weight="65%" color="bg-blue-500" />
+          <DimensionBar label="Dominância Competitiva" value={score.dominance} weight="35%" color="bg-emerald-500" />
+          {/* Indirect presence — informational */}
+          <div className="border-t pt-4">
+            <div className="flex items-baseline justify-between mb-1">
+              <span className="text-sm font-medium text-muted-foreground">Presença Indireta</span>
+              <span className="text-xs text-muted-foreground">informativo</span>
             </div>
+            <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+              <div
+                className="h-full rounded-full bg-amber-400"
+                style={{ width: `${Math.min(100, Math.max(0, score.indirect_presence))}%` }}
+              />
+            </div>
+            <p className="text-right text-sm font-medium text-muted-foreground mt-0.5">{Math.round(score.indirect_presence)}</p>
           </div>
         </CardContent>
       </Card>
