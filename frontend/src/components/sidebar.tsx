@@ -7,7 +7,6 @@ import { useState } from "react"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
@@ -91,10 +90,13 @@ export function MobileHeader() {
   return (
     <header className="flex h-14 items-center gap-3 border-b bg-white px-4 lg:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger>
-          <Button variant="ghost" size="icon" aria-label="Abrir menu">
-            <Menu className="size-5" />
-          </Button>
+        <SheetTrigger
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "icon" }),
+          )}
+          aria-label="Abrir menu"
+        >
+          <Menu className="size-5" />
         </SheetTrigger>
         <SheetContent side="left" className="w-64 bg-slate-900 p-0">
           <SheetTitle className="sr-only">Menu de navegacao</SheetTitle>
