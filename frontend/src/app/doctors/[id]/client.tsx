@@ -97,7 +97,7 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
   if (!doctor) {
     return (
       <div className="py-12 text-center">
-        <p className="text-muted-foreground">Medico nao encontrado.</p>
+        <p className="text-muted-foreground">Médico não encontrado.</p>
         <Link href="/doctors" className={buttonVariants({ variant: "outline", className: "mt-4" })}>
           Voltar
         </Link>
@@ -136,12 +136,12 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
         <div className="flex gap-2">
           <Button onClick={handleNewRun} disabled={runLoading}>
             <Play className="size-4" />
-            {runLoading ? "Iniciando..." : "Nova Analise"}
+            {runLoading ? "Iniciando..." : "Nova Análise"}
           </Button>
           <Dialog>
             <DialogTrigger
               render={
-                <Button variant="destructive" aria-label="Remover medico" />
+                <Button variant="destructive" aria-label="Remover médico" />
               }
             >
               <Trash2 className="size-4" />
@@ -149,10 +149,10 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Remover medico</DialogTitle>
+                <DialogTitle>Remover médico</DialogTitle>
                 <DialogDescription>
-                  Tem certeza que deseja remover {doctor.name}? Todas as analises
-                  serao perdidas. Esta acao nao pode ser desfeita.
+                  Tem certeza que deseja remover {doctor.name}? Todas as análises
+                  serão perdidas. Esta ação não pode ser desfeita.
                 </DialogDescription>
               </DialogHeader>
               <DialogFooter>
@@ -207,11 +207,11 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
               </div>
             )}
             <div>
-              <p className="text-xs text-muted-foreground">Analises</p>
+              <p className="text-xs text-muted-foreground">Análises</p>
               <p className="font-medium">{doctor.runs?.length ?? 0}</p>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">Ultimo score</p>
+              <p className="text-xs text-muted-foreground">Último score</p>
               <ScoreBadge score={doctor.runs?.find((r) => r.status === "completed")?.score} showLabel />
             </div>
           </div>
@@ -222,9 +222,9 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
       {chartData.length >= 2 && (
         <Card>
           <CardHeader>
-            <CardTitle>Evolucao do Score</CardTitle>
+            <CardTitle>Evolução do Score</CardTitle>
             <CardDescription>
-              Historico de scores nas ultimas analises
+              Histórico de scores nas últimas análises
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -278,7 +278,7 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
       {/* Run history */}
       <Card>
         <CardHeader>
-          <CardTitle>Historico de Analises</CardTitle>
+          <CardTitle>Histórico de Análises</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           {doctor.runs.length > 0 ? (
@@ -289,7 +289,7 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
                   <TableHead>Data</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Score</TableHead>
-                  <TableHead className="text-right">Acao</TableHead>
+                  <TableHead className="text-right">Ação</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -324,7 +324,7 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
             </Table>
           ) : (
             <p className="p-6 text-center text-muted-foreground">
-              Nenhuma analise realizada para este medico.
+              Nenhuma análise realizada para este médico.
             </p>
           )}
         </CardContent>

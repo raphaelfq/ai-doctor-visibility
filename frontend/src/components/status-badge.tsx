@@ -4,7 +4,7 @@ import type { RunStatus } from "@/lib/types"
 const statusConfig: Record<RunStatus, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
   pending: { label: "Pendente", variant: "secondary" },
   running: { label: "Executando", variant: "outline" },
-  completed: { label: "Concluido", variant: "default" },
+  completed: { label: "Concluído", variant: "default" },
   failed: { label: "Falhou", variant: "destructive" },
 }
 

@@ -31,7 +31,7 @@ export default function NewDoctorPage() {
     const crmState = formData.get("crm_state") as string
 
     if (!name || !specialty || !city) {
-      setError("Nome, especialidade e cidade sao obrigatorios.")
+      setError("Nome, especialidade e cidade são obrigatórios.")
       setLoading(false)
       return
     }
@@ -59,19 +59,19 @@ export default function NewDoctorPage() {
         <Link href="/doctors" className={buttonVariants({ variant: "ghost", size: "icon" })} aria-label="Voltar">
           <ArrowLeft className="size-4" />
         </Link>
-        <h1 className="text-2xl font-bold tracking-tight">Novo Medico</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Novo Médico</h1>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Informacoes do medico</CardTitle>
+          <CardTitle>Informações do médico</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome *</Label>
-                <Input id="name" name="name" placeholder="Dr. Joao Silva" required />
+                <Input id="name" name="name" placeholder="Dr. João Silva" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="specialty">Especialidade *</Label>
@@ -82,7 +82,7 @@ export default function NewDoctorPage() {
             <div className="grid gap-4 sm:grid-cols-3">
               <div className="space-y-2">
                 <Label htmlFor="city">Cidade *</Label>
-                <Input id="city" name="city" placeholder="Sao Paulo" required />
+                <Input id="city" name="city" placeholder="São Paulo" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="state">Estado</Label>

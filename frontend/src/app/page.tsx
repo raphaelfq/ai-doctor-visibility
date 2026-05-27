@@ -39,7 +39,7 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Medicos cadastrados
+              Médicos cadastrados
             </CardTitle>
             <Stethoscope className="size-4 text-muted-foreground" />
           </CardHeader>
@@ -55,7 +55,7 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Analises realizadas
+              Análises realizadas
             </CardTitle>
             <Activity className="size-4 text-muted-foreground" />
           </CardHeader>
@@ -71,7 +71,7 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Score medio
+              Score médio
             </CardTitle>
             <TrendingUp className="size-4 text-muted-foreground" />
           </CardHeader>
@@ -92,7 +92,7 @@ export default function DashboardPage() {
       {/* Doctor grid */}
       <section>
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Medicos</h2>
+          <h2 className="text-lg font-semibold">Médicos</h2>
           <Link
             href="/doctors"
             className="text-sm text-blue-600 hover:underline"
@@ -130,7 +130,7 @@ export default function DashboardPage() {
 
       {/* Recent runs */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold">Analises recentes</h2>
+        <h2 className="mb-3 text-lg font-semibold">Análises recentes</h2>
 
         <Card>
           <CardContent className="p-0">
@@ -144,7 +144,7 @@ export default function DashboardPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Medico</TableHead>
+                    <TableHead>Médico</TableHead>
                     <TableHead>Especialidade</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Score</TableHead>
@@ -180,7 +180,7 @@ export default function DashboardPage() {
               </Table>
             ) : (
               <p className="p-6 text-center text-muted-foreground">
-                Nenhuma analise realizada ainda.
+                Nenhuma análise realizada ainda.
               </p>
             )}
           </CardContent>

@@ -20,7 +20,7 @@ export function getScoreColor(score: number | null | undefined): string {
 export function getScoreLabel(score: number | null | undefined): string {
   if (score == null) return "Sem dados"
   if (score <= 30) return "Baixo"
-  if (score <= 60) return "Medio"
+  if (score <= 60) return "Médio"
   return "Alto"
 }
 
@@ -56,7 +56,7 @@ export function getCitationStyle(type: CitationType) {
       bg: "bg-gray-50",
       border: "border-gray-200",
       text: "text-gray-500",
-      label: "Nao mencionado",
+      label: "Não mencionado",
     },
   }
   return styles[type]

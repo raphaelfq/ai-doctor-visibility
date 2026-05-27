@@ -53,7 +53,7 @@ export function AnalysisClient({ runId }: AnalysisClientProps) {
     return (
       <div className="py-12 text-center">
         <p className="text-muted-foreground">
-          {error ? "Erro ao carregar analise." : "Analise nao encontrada."}
+          {error ? "Erro ao carregar análise." : "Análise não encontrada."}
         </p>
         <Link href="/" className={buttonVariants({ variant: "outline", className: "mt-4" })}>
           Voltar ao Dashboard
@@ -77,7 +77,7 @@ export function AnalysisClient({ runId }: AnalysisClientProps) {
         </Link>
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
-            Analise — {run.doctor_name}
+            Análise — {run.doctor_name}
           </h1>
           <p className="text-sm text-muted-foreground">
             {run.specialty} &middot; {run.city}
@@ -96,7 +96,7 @@ export function AnalysisClient({ runId }: AnalysisClientProps) {
             <div className="mx-auto max-w-md space-y-8 text-center">
               <Loader2 className="mx-auto size-12 animate-spin text-blue-500" />
               <div>
-                <h2 className="text-lg font-semibold">Analise em andamento</h2>
+                <h2 className="text-lg font-semibold">Análise em andamento</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {run.progress || "Iniciando pipeline..."}
                 </p>
@@ -157,7 +157,7 @@ export function AnalysisClient({ runId }: AnalysisClientProps) {
         <Card>
           <CardContent className="py-12 text-center">
             <p className="text-lg font-semibold text-destructive">
-              Analise falhou
+              Análise falhou
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
               {run.error || "Um erro inesperado ocorreu."}
@@ -170,10 +170,10 @@ export function AnalysisClient({ runId }: AnalysisClientProps) {
       {run.status === "completed" && run.report && (
         <Tabs defaultValue="overview">
           <TabsList>
-            <TabsTrigger value="overview">Visao Geral</TabsTrigger>
-            <TabsTrigger value="simulations">Simulacoes</TabsTrigger>
+            <TabsTrigger value="overview">Visão Geral</TabsTrigger>
+            <TabsTrigger value="simulations">Simulações</TabsTrigger>
             <TabsTrigger value="competitors">Concorrentes</TabsTrigger>
-            <TabsTrigger value="action-plan">Plano de Acao</TabsTrigger>
+            <TabsTrigger value="action-plan">Plano de Ação</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview">

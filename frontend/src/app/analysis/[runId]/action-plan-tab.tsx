@@ -11,7 +11,7 @@ export function ActionPlanTab({ recommendations }: ActionPlanTabProps) {
   if (!recommendations || recommendations.length === 0) {
     return (
       <div className="mt-4 py-12 text-center text-muted-foreground">
-        Nenhuma recomendacao disponivel para esta analise.
+        Nenhuma recomendação disponível para esta análise.
       </div>
     )
   }
@@ -19,13 +19,13 @@ export function ActionPlanTab({ recommendations }: ActionPlanTabProps) {
   return (
     <div className="mt-4 space-y-4">
       <h2 className="text-lg font-semibold">
-        Recomendacoes ({recommendations.length})
+        Recomendações ({recommendations.length})
       </h2>
 
       {recommendations.map((rec, i) => (
         <Alert key={i}>
           <Lightbulb className="size-4" />
-          <AlertTitle>Recomendacao {i + 1}</AlertTitle>
+          <AlertTitle>Recomendação {i + 1}</AlertTitle>
           <AlertDescription>{rec}</AlertDescription>
         </Alert>
       ))}

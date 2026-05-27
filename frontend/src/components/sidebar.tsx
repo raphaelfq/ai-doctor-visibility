@@ -16,7 +16,7 @@ import {
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/doctors", label: "Medicos", icon: Users },
+  { href: "/doctors", label: "Médicos", icon: Users },
 ]
 
 function NavContent() {
@@ -67,7 +67,7 @@ function NavContent() {
           )}
         >
           <Plus className="size-4" />
-          Novo Medico
+          Novo Médico
         </Link>
       </div>
 
@@ -102,7 +102,7 @@ export function MobileHeader() {
           <Menu className="size-5" />
         </SheetTrigger>
         <SheetContent side="left" className="w-64 bg-slate-900 p-0">
-          <SheetTitle className="sr-only">Menu de navegacao</SheetTitle>
+          <SheetTitle className="sr-only">Menu de navegação</SheetTitle>
           <NavContent />
         </SheetContent>
       </Sheet>

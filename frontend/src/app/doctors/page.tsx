@@ -27,13 +27,13 @@ export default function DoctorsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold tracking-tight">Medicos</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Médicos</h1>
         <Link
           href="/doctors/new"
           className={buttonVariants({ size: "lg" }) + " gap-2 bg-emerald-600 text-white hover:bg-emerald-700"}
         >
           <Plus className="size-4" />
-          Novo Medico
+          Novo Médico
         </Link>
       </div>
 
@@ -44,7 +44,7 @@ export default function DoctorsPage() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="pl-9"
-          aria-label="Buscar medicos"
+          aria-label="Buscar médicos"
         />
       </div>
 
@@ -76,7 +76,7 @@ export default function DoctorsPage() {
                     <div className="text-right">
                       <ScoreBadge score={doc.latest_score} />
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {doc.run_count} {doc.run_count === 1 ? "analise" : "analises"}
+                        {doc.run_count} {doc.run_count === 1 ? "análise" : "análises"}
                       </p>
                     </div>
                   </div>
@@ -88,8 +88,8 @@ export default function DoctorsPage() {
       ) : (
         <p className="py-12 text-center text-muted-foreground">
           {search
-            ? "Nenhum medico encontrado para esta busca."
-            : "Nenhum medico cadastrado ainda."}
+            ? "Nenhum médico encontrado para esta busca."
+            : "Nenhum médico cadastrado ainda."}
         </p>
       )}
     </div>

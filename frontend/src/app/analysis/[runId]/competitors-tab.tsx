@@ -62,7 +62,7 @@ export function CompetitorsTab({ report }: CompetitorsTabProps) {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Concorrentes unicos
+              Concorrentes únicos
             </CardTitle>
             <Users className="size-4 text-muted-foreground" />
           </CardHeader>
@@ -124,7 +124,7 @@ export function CompetitorsTab({ report }: CompetitorsTabProps) {
                       border: "1px solid var(--border)",
                       fontSize: "14px",
                     }}
-                    formatter={(value) => [`${value}/${totalPrompts}`, "Aparicoes"]}
+                    formatter={(value) => [`${value}/${totalPrompts}`, "Aparições"]}
                   />
                   <Bar
                     dataKey="count"
@@ -150,8 +150,8 @@ export function CompetitorsTab({ report }: CompetitorsTabProps) {
               <TableHeader>
                 <TableRow>
                   <TableHead>Nome</TableHead>
-                  <TableHead>Aparicoes</TableHead>
-                  <TableHead className="text-right">Acao</TableHead>
+                  <TableHead>Aparições</TableHead>
+                  <TableHead className="text-right">Ação</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -176,7 +176,7 @@ export function CompetitorsTab({ report }: CompetitorsTabProps) {
 
       {competitors.length === 0 && (
         <p className="py-12 text-center text-muted-foreground">
-          Nenhum concorrente identificado nesta analise.
+          Nenhum concorrente identificado nesta análise.
         </p>
       )}
     </div>

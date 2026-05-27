@@ -189,11 +189,11 @@ function SimulationCard({
             {style.label}
           </span>
           <Badge variant="secondary" className="text-[10px]">
-            Confianca: {Math.round(verdict.confidence * 100)}%
+            Confiança: {Math.round(verdict.confidence * 100)}%
           </Badge>
           {verdict.position != null && (
             <Badge variant="outline" className="text-[10px]">
-              Posicao #{verdict.position}
+              Posição #{verdict.position}
             </Badge>
           )}
           {competitors.length > 0 && (

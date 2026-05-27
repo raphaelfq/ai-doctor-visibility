@@ -22,9 +22,9 @@ export function OverviewTab({ report, benchmark }: OverviewTabProps) {
   const { score, verdicts } = report
 
   const radarData = [
-    { dimension: "Presenca", value: score.presence, fullMark: 100 },
+    { dimension: "Presença", value: score.presence, fullMark: 100 },
     { dimension: "Qualidade", value: score.quality, fullMark: 100 },
-    { dimension: "Posicao", value: score.position, fullMark: 100 },
+    { dimension: "Posição", value: score.position, fullMark: 100 },
     { dimension: "Competitivo", value: score.competitive, fullMark: 100 },
   ]
 
@@ -39,9 +39,9 @@ export function OverviewTab({ report, benchmark }: OverviewTabProps) {
             <span className="font-semibold">{Math.round(benchmark)}</span>
             {" — "}
             {score.overall >= benchmark ? (
-              <span className="text-green-600">acima da media</span>
+              <span className="text-green-600">acima da média</span>
             ) : (
-              <span className="text-amber-600">abaixo da media</span>
+              <span className="text-amber-600">abaixo da média</span>
             )}
           </p>
         )}
@@ -50,7 +50,7 @@ export function OverviewTab({ report, benchmark }: OverviewTabProps) {
       {/* Radar chart */}
       <Card>
         <CardHeader>
-          <CardTitle>Dimensoes de Visibilidade</CardTitle>
+          <CardTitle>Dimensões de Visibilidade</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mx-auto max-w-md" style={{ height: 288 }}>

@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AI Visibility — Dashboard",
-  description: "Analise de visibilidade medica em IAs generativas",
+  description: "Análise de visibilidade médica em IAs generativas",
 }
 
 export default function RootLayout({
