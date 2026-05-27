@@ -20,8 +20,9 @@ _TIMEOUT = 10.0
 
 async def validate_crm(crm: str, crm_state: str) -> CFMValidation:
     """Validate a CRM number against the CFM public directory."""
-    # Basic format validation
-    if not crm.strip().isdigit():
+    # Normalize CRM: remove dots, hyphens, spaces (e.g. "169.135" → "169135")
+    crm = re.sub(r"[\s.\-/]", "", crm.strip())
+    if not crm.isdigit():
         return CFMValidation(
             valid=False,
             error=f"CRM deve conter apenas dígitos, recebido: '{crm}'",

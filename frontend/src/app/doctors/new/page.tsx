@@ -97,7 +97,7 @@ export default function NewDoctorPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="crm">CRM</Label>
-                <Input id="crm" name="crm" placeholder="123456" />
+                <Input id="crm" name="crm" placeholder="123.456 ou 123456" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="crm_state">Estado do CRM</Label>
