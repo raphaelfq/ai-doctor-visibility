@@ -107,17 +107,6 @@ def render_html(report: Report, output_dir: Path) -> Path:
     for i, rec in enumerate(recommendations, 1):
         rec_items += f'<li class="py-2">{_e(rec)}</li>'
 
-    # CFM badge
-    cfm_badge = ""
-    if report.cfm_validation:
-        cfm = report.cfm_validation
-        if cfm.valid is True:
-            cfm_badge = f'<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ CRM Verificado</span>'
-        elif cfm.valid is False:
-            cfm_badge = f'<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">✗ CRM Inválido</span>'
-        else:
-            cfm_badge = f'<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">⚠ Verificação Pendente</span>'
-
     # SVG gauge offset: circumference = 2 * π * 45 ≈ 283
     offset = 283 * (1 - s.overall / 100)
 
@@ -142,7 +131,6 @@ def render_html(report: Report, output_dir: Path) -> Path:
                     <h1 class="text-2xl font-bold text-gray-900">{_e(doc.name)}</h1>
                     <p class="text-gray-600 mt-1">{_e(doc.specialty)} — {location}</p>
                     {f'<p class="text-gray-500 text-sm mt-1">CRM: {_e(doc.crm)}/{_e(doc.crm_state)}</p>' if doc.crm else ''}
-                    <div class="mt-2">{cfm_badge}</div>
                 </div>
                 <div class="text-right text-sm text-gray-400">
                     {report.metadata.generated_at.strftime('%d/%m/%Y %H:%M')}
@@ -171,22 +159,18 @@ def render_html(report: Report, output_dir: Path) -> Path:
             </p>
 
             <!-- Dimension bars -->
-            <div class="grid grid-cols-2 gap-4 mt-6 max-w-lg mx-auto text-left">
+            <div class="grid grid-cols-3 gap-4 mt-6 max-w-2xl mx-auto text-left">
                 <div>
-                    <div class="flex justify-between text-sm text-gray-600"><span>Qualidade (40%)</span><span>{s.quality:.0f}</span></div>
-                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.quality}%"></div></div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Visibilidade (65%)</span><span>{s.visibility:.0f}</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.visibility}%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm text-gray-600"><span>Presença (30%)</span><span>{s.presence:.0f}</span></div>
-                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.presence}%"></div></div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Dominância (35%)</span><span>{s.dominance:.0f}</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.dominance}%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm text-gray-600"><span>Posição (20%)</span><span>{s.position:.0f}</span></div>
-                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.position}%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-600"><span>Competitivo (10%)</span><span>{s.competitive:.0f}</span></div>
-                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-500 rounded-full h-2" style="width: {s.competitive}%"></div></div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Presença Indireta <span class="text-gray-400 text-xs">(informativo)</span></span><span>{s.indirect_presence:.0f}</span></div>
+                    <div class="bg-gray-200 rounded-full h-2 mt-1"><div class="bg-blue-300 rounded-full h-2" style="width: {s.indirect_presence}%; border: 1px dashed #93c5fd;"></div></div>
                 </div>
             </div>
         </div>

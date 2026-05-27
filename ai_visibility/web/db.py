@@ -159,6 +159,16 @@ def list_doctors_with_counts(limit: int = 100) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 
+def has_active_run(doctor_id: str) -> bool:
+    """Check if a doctor has any pending or running runs."""
+    with get_pool().connection() as conn:
+        row = conn.execute(
+            "SELECT 1 FROM runs WHERE doctor_id = %s AND status IN ('pending', 'running') LIMIT 1",
+            (doctor_id,),
+        ).fetchone()
+    return row is not None
+
+
 def create_run(*, doctor_id: str) -> str:
     """Insert a pending run and return its UUID string."""
     run_id = str(uuid.uuid4())

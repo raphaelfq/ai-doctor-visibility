@@ -29,6 +29,8 @@ class Settings(BaseSettings):
     cache_dir: str = "./.cache"
     cache_ttl_seconds: int = 86400  # 24h
 
+    admin_api_key: str = ""  # ADMIN_API_KEY env var; empty = auth disabled (dev)
+
     database_url: str = "postgresql://app:dev@localhost:5432/ai_visibility"
 
 

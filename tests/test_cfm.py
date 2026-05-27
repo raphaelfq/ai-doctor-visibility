@@ -3,7 +3,7 @@
 import pytest
 
 from ai_visibility.cfm import _parse_cfm_response, validate_crm
-from ai_visibility.models import CFMValidation
+from ai_visibility.cfm import CFMValidation
 
 
 class TestCRMFormatValidation:

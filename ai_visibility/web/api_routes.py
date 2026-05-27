@@ -6,7 +6,8 @@ import logging
 from datetime import datetime
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+from fastapi.security import APIKeyHeader
 from pydantic import BaseModel
 
 from ai_visibility.models import DoctorInput, Report
@@ -17,6 +18,7 @@ from ai_visibility.web.db import (
     delete_doctor,
     get_doctor,
     get_run,
+    has_active_run,
     list_doctors_with_counts,
     list_recent_runs,
     list_runs_for_doctor,
@@ -25,6 +27,18 @@ from ai_visibility.web.db import (
 logger = logging.getLogger(__name__)
 
 api_router = APIRouter(prefix="/api", tags=["api"])
+
+_api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+
+
+def require_api_key(api_key: str | None = Depends(_api_key_header)):
+    """Validate API key for mutating endpoints. Auth disabled when admin_api_key is empty."""
+    from ai_visibility.config import settings
+
+    if not settings.admin_api_key:
+        return  # Auth disabled (dev mode)
+    if api_key != settings.admin_api_key:
+        raise HTTPException(status_code=401, detail="Invalid or missing API key")
 
 
 # ---------- Response models ----------
@@ -143,7 +157,7 @@ def api_get_doctor(doctor_id: UUID):
     )
 
 
-@api_router.post("/doctors", status_code=201, response_model=DoctorSummary)
+@api_router.post("/doctors", status_code=201, response_model=DoctorSummary, dependencies=[Depends(require_api_key)])
 def api_create_doctor(body: DoctorCreate):
     """Create a new doctor."""
     doctor_id = create_doctor(
@@ -169,7 +183,7 @@ def api_create_doctor(body: DoctorCreate):
     )
 
 
-@api_router.delete("/doctors/{doctor_id}", status_code=204)
+@api_router.delete("/doctors/{doctor_id}", status_code=204, dependencies=[Depends(require_api_key)])
 def api_delete_doctor(doctor_id: UUID):
     """Delete a doctor and all their runs (CASCADE)."""
     doctor = get_doctor(str(doctor_id))
@@ -243,7 +257,7 @@ def api_get_run(run_id: UUID):
     return detail
 
 
-@api_router.post("/runs", status_code=201, response_model=RunCreateResponse)
+@api_router.post("/runs", status_code=201, response_model=RunCreateResponse, dependencies=[Depends(require_api_key)])
 def api_create_run(body: RunCreate):
     """Create a run and start the background pipeline."""
     from ai_visibility.web.db import create_run
@@ -251,6 +265,9 @@ def api_create_run(body: RunCreate):
     doctor_row = get_doctor(body.doctor_id)
     if not doctor_row:
         raise HTTPException(status_code=404, detail="Doctor not found")
+
+    if has_active_run(body.doctor_id):
+        raise HTTPException(status_code=409, detail="Doctor already has a pending or running analysis")
 
     run_id = create_run(doctor_id=body.doctor_id)
 

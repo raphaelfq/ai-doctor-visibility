@@ -5,8 +5,10 @@ from __future__ import annotations
 import json
 import uuid
 
-from fastapi import APIRouter, Form, Request
+from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+
+from ai_visibility.web.api_routes import require_api_key
 
 from ai_visibility.models import DoctorInput, Report
 from ai_visibility.web.background import start_pipeline_run
@@ -17,6 +19,7 @@ from ai_visibility.web.db import (
     get_doctor,
     get_pool,
     get_run,
+    has_active_run,
     list_doctors,
     list_recent_runs,
     list_runs_for_doctor,
@@ -118,6 +121,9 @@ def run_create(
     if not doctor_row:
         return HTMLResponse("Medico nao encontrado", status_code=404)
 
+    if has_active_run(doctor_id):
+        return HTMLResponse("Este medico ja possui uma analise em andamento", status_code=409)
+
     run_id = create_run(doctor_id=doctor_id)
 
     doctor_input = DoctorInput(
@@ -173,13 +179,19 @@ def run_status_partial(request: Request, run_id: str):
 # ---------------------------------------------------------------------------
 
 
-@router.post("/api/seed")
+@router.post("/api/seed", dependencies=[Depends(require_api_key)])
 async def seed_data(request: Request):
     """Import a report JSON payload as a completed run. Used to seed prod with examples."""
     body = await request.json()
     report_data = body.get("report")
     if not report_data:
         return JSONResponse({"error": "missing report"}, status_code=400)
+
+    # Validate the report payload matches our model
+    try:
+        report = Report.model_validate(report_data)
+    except Exception as e:
+        return JSONResponse({"error": f"Invalid report: {e}"}, status_code=422)
 
     d = report_data["doctor"]
     name = d["name"]

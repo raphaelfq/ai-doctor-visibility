@@ -10,7 +10,6 @@ from unittest.mock import AsyncMock, patch
 import pytest
 
 from ai_visibility.models import (
-    CFMValidation,
     DoctorInput,
     GeneratedPrompt,
     GeneratedPrompts,
@@ -211,14 +210,6 @@ async def test_full_pipeline_end_to_end(tmp_path):
         crm_state="SP",
     )
 
-    canned_cfm = CFMValidation(
-        valid=True,
-        registered_name="Dr. Teste da Silva",
-        status="Ativo",
-        specialties=["Dermatologia"],
-        rqe_numbers=["12345"],
-    )
-
     with (
         patch("ai_visibility.llm.AsyncOpenAI"),
         patch(
@@ -231,11 +222,6 @@ async def test_full_pipeline_end_to_end(tmp_path):
             new_callable=AsyncMock,
             side_effect=_search_side_effect,
         ),
-        patch(
-            "ai_visibility.pipeline.validate_crm",
-            new_callable=AsyncMock,
-            return_value=canned_cfm,
-        ),
         patch("ai_visibility.llm.LLMClient._log_trace"),
     ):
         report = await run_pipeline(doctor, output_dir=tmp_path)
@@ -247,11 +233,7 @@ async def test_full_pipeline_end_to_end(tmp_path):
     assert report.doctor.specialty == "Dermatologia"
     assert report.doctor.city == "Campinas"
 
-    # 2. CFM validation passed through
-    assert report.cfm_validation is not None
-    assert report.cfm_validation.valid is True
-
-    # 3. Stage 1: 10 prompts generated
+    # 2. Stage 1: 10 prompts generated
     assert len(report.prompts) == 10
     prompt_ids = {p.id for p in report.prompts}
     assert prompt_ids == {f"p{i}" for i in range(1, 11)}
@@ -287,18 +269,14 @@ async def test_full_pipeline_end_to_end(tmp_path):
 
     # 6. Stage 4: Score dimensions all between 0-100
     s = report.score
-    for dim_name in ("presence", "quality", "position", "competitive", "overall"):
+    for dim_name in ("visibility", "dominance", "indirect_presence", "overall"):
         dim_value = getattr(s, dim_name)
         assert 0 <= dim_value <= 100, f"{dim_name}={dim_value} out of [0,100]"
 
-    # Sanity check: with 3/10 mentioned_by_name + 2/10 specialty, presence > 0
-    assert s.presence > 0
-    # With 3 mentioned_by_name, quality should be meaningful
-    assert s.quality > 0
-    # Position should be non-zero since we have name mentions with positions
-    assert s.position > 0
-    # Competitive < 100 because we have 3 competitor_in_place verdicts
-    assert s.competitive < 100
+    # Sanity check: with 3/10 mentioned_by_name, visibility > 0
+    assert s.visibility > 0
+    # Dominance < 100 because we have 3 competitor_in_place verdicts
+    assert s.dominance < 100
     # Overall should be a weighted combination, non-trivial
     assert s.overall > 0
 

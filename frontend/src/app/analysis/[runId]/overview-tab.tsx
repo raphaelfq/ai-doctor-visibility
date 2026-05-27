@@ -22,10 +22,8 @@ export function OverviewTab({ report, benchmark }: OverviewTabProps) {
   const { score, verdicts } = report
 
   const radarData = [
-    { dimension: "Presença", value: score.presence, fullMark: 100 },
-    { dimension: "Qualidade", value: score.quality, fullMark: 100 },
-    { dimension: "Posição", value: score.position, fullMark: 100 },
-    { dimension: "Competitivo", value: score.competitive, fullMark: 100 },
+    { dimension: "Visibilidade", value: score.visibility, fullMark: 100 },
+    { dimension: "Dominância", value: score.dominance, fullMark: 100 },
   ]
 
   return (
@@ -73,13 +71,21 @@ export function OverviewTab({ report, benchmark }: OverviewTabProps) {
             </ResponsiveContainer>
           </div>
           {/* Dimension breakdown */}
-          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mt-4 grid grid-cols-2 gap-3">
             {radarData.map((d) => (
               <div key={d.dimension} className="text-center">
                 <p className="text-2xl font-bold">{Math.round(d.value)}</p>
                 <p className="text-xs text-muted-foreground">{d.dimension}</p>
               </div>
             ))}
+          </div>
+          {/* Indirect presence — informational metric */}
+          <div className="mt-3 flex justify-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-dashed px-3 py-1 text-sm text-muted-foreground">
+              <span>Presença Indireta</span>
+              <span className="font-semibold">{Math.round(score.indirect_presence)}</span>
+              <span className="text-xs">(informativo)</span>
+            </div>
           </div>
         </CardContent>
       </Card>

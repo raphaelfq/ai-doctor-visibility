@@ -58,7 +58,7 @@ def _make_report() -> Report:
             ),
         ],
         score=ScoreBreakdown(
-            presence=0.0, quality=9.0, position=0.0, competitive=0.0, overall=3.6,
+            visibility=0.0, dominance=0.0, indirect_presence=0.0, overall=0.0,
         ),
         metadata=ReportMetadata(
             generated_at=datetime(2026, 5, 26, 12, 0, tzinfo=timezone.utc),
@@ -81,7 +81,7 @@ class TestJSONDump:
             assert path.exists()
             data = json.loads(path.read_text())
             assert data["doctor"]["name"] == "Dr. Teste"
-            assert data["score"]["overall"] == 3.6
+            assert data["score"]["overall"] == 0.0
 
     def test_roundtrip(self):
         """JSON dump can be parsed back into a Report."""

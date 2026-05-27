@@ -19,6 +19,12 @@ from ai_visibility.web.db import close_pool, init_pool
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 
 
+_ALLOWED_CSS_CLASSES = frozenset({
+    "bg-success/30 px-0.5 rounded font-semibold",
+    "bg-error/20 px-0.5 rounded",
+})
+
+
 def _highlight(html: str, name: str, css_class: str) -> Markup:
     """Replace name occurrences in already-rendered HTML with <mark> tags.
 
@@ -27,6 +33,8 @@ def _highlight(html: str, name: str, css_class: str) -> Markup:
     """
     import html as html_mod
 
+    if css_class not in _ALLOWED_CSS_CLASSES:
+        css_class = "bg-success/30 px-0.5 rounded font-semibold"
     plain = str(html)
     escaped_name = html_mod.escape(name)
     mark_tag = f'<mark class="{css_class}">{escaped_name}</mark>'
@@ -82,7 +90,7 @@ def create_app() -> FastAPI:
         ],
         allow_credentials=True,
         allow_methods=["GET", "POST", "DELETE"],
-        allow_headers=["Content-Type"],
+        allow_headers=["Content-Type", "X-API-Key"],
     )
 
     templates = Jinja2Templates(directory=str(TEMPLATES_DIR))

@@ -1,10 +1,14 @@
-"""Tests for LLM client utilities — cost estimation and tracing (no API calls)."""
+"""Tests for LLM client utilities — cost estimation, tracing, and error paths."""
 
+import asyncio
 import json
 import tempfile
 from pathlib import Path
+from unittest.mock import AsyncMock, patch
 
-from ai_visibility.llm import _estimate_cost, WEB_SEARCH_COST_PER_CALL
+import pytest
+
+from ai_visibility.llm import LLMClient, _estimate_cost, WEB_SEARCH_COST_PER_CALL
 
 
 class TestCostEstimation:
@@ -31,6 +35,92 @@ class TestCostEstimation:
 
     def test_web_search_cost_constant(self):
         assert WEB_SEARCH_COST_PER_CALL == 0.01
+
+
+class TestGenerateStructuredTimeout:
+    @pytest.mark.asyncio
+    async def test_timeout_logs_trace_and_reraises(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            trace_path = Path(tmpdir) / "trace.jsonl"
+            client = LLMClient(trace_path=trace_path)
+
+            client._client.responses = AsyncMock()
+            client._client.responses.parse = AsyncMock(
+                side_effect=asyncio.TimeoutError()
+            )
+
+            with pytest.raises(asyncio.TimeoutError):
+                await client.generate_structured(
+                    model="gpt-4.1-mini",
+                    input=[{"role": "user", "content": "test"}],
+                    text_format=type("Dummy", (), {}),
+                    temperature=0,
+                    stage="test",
+                    prompt_id="p1",
+                )
+
+            lines = trace_path.read_text().splitlines()
+            assert len(lines) == 1
+            entry = json.loads(lines[0])
+            assert entry["status"] == "timeout"
+            assert entry["stage"] == "test"
+            assert "timed out" in entry["error"]
+
+
+class TestGenerateStructuredGenericError:
+    @pytest.mark.asyncio
+    async def test_generic_error_logs_trace_and_reraises(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            trace_path = Path(tmpdir) / "trace.jsonl"
+            client = LLMClient(trace_path=trace_path)
+
+            client._client.responses = AsyncMock()
+            client._client.responses.parse = AsyncMock(
+                side_effect=RuntimeError("API connection failed")
+            )
+
+            with pytest.raises(RuntimeError, match="API connection failed"):
+                await client.generate_structured(
+                    model="gpt-4.1-mini",
+                    input=[{"role": "user", "content": "test"}],
+                    text_format=type("Dummy", (), {}),
+                    temperature=0,
+                    stage="test",
+                    prompt_id="p2",
+                )
+
+            lines = trace_path.read_text().splitlines()
+            assert len(lines) == 1
+            entry = json.loads(lines[0])
+            assert entry["status"] == "error"
+            assert "API connection failed" in entry["error"]
+
+
+class TestSearchTimeout:
+    @pytest.mark.asyncio
+    async def test_search_timeout_logs_trace_and_reraises(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            trace_path = Path(tmpdir) / "trace.jsonl"
+            client = LLMClient(trace_path=trace_path)
+
+            client._client.responses = AsyncMock()
+            client._client.responses.create = AsyncMock(
+                side_effect=asyncio.TimeoutError()
+            )
+
+            with pytest.raises(asyncio.TimeoutError):
+                await client.search(
+                    model="gpt-4.1-mini",
+                    input="test query",
+                    stage="simulator",
+                    prompt_id="p3",
+                )
+
+            lines = trace_path.read_text().splitlines()
+            assert len(lines) == 1
+            entry = json.loads(lines[0])
+            assert entry["status"] == "timeout"
+            assert entry["stage"] == "simulator"
 
 
 class TestFullDiagnosisCostEstimate:

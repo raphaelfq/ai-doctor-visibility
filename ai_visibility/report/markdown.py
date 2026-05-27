@@ -27,31 +27,15 @@ def render_markdown(report: Report, output_dir: Path) -> Path:
         f"**Gerado em:** {report.metadata.generated_at.strftime('%Y-%m-%d %H:%M')}\n"
     )
 
-    # CFM validation
-    if report.cfm_validation:
-        cfm = report.cfm_validation
-        if cfm.valid is True:
-            lines.append(f"✅ **CRM verificado** — {cfm.registered_name or 'Nome registrado'}")
-            if cfm.status:
-                lines.append(f"   Situação: {cfm.status}")
-            if cfm.specialties:
-                lines.append(f"   Especialidades: {', '.join(cfm.specialties)}")
-        elif cfm.valid is False:
-            lines.append(f"❌ **CRM inválido** — {cfm.error}")
-        else:
-            lines.append(f"⚠️ **Verificação CFM pendente** — {cfm.error}")
-        lines.append("")
-
     # Score
     lines.append(f"## Score Geral: {s.overall:.0f} / 100\n")
     lines.append(f"Média da especialidade ({doc.specialty}): {benchmark:.0f}/100\n")
 
     lines.append("| Dimensão | Score | Peso | O que mede |")
     lines.append("|----------|-------|------|------------|")
-    lines.append(f"| Qualidade | {s.quality:.1f} | 40% | Tipo de menção ponderado pela confiança |")
-    lines.append(f"| Presença | {s.presence:.1f} | 30% | Em quantos prompts o médico apareceu |")
-    lines.append(f"| Posição | {s.position:.1f} | 20% | Posição média quando citado por nome |")
-    lines.append(f"| Competitivo | {s.competitive:.1f} | 10% | Inverso de deslocamento por concorrente |")
+    lines.append(f"| Visibilidade | {s.visibility:.1f} | 65% | Quão bem a IA conhece e cita o médico por nome |")
+    lines.append(f"| Dominância | {s.dominance:.1f} | 35% | Participação de mercado frente aos concorrentes |")
+    lines.append(f"| Presença Indireta | {s.indirect_presence:.1f} | — | % de prompts onde a IA recomendou a especialidade sem citar o médico (informativo) |")
     lines.append("")
 
     # One-line diagnosis

@@ -84,10 +84,9 @@ def run(
     table.add_column("Score", justify="right")
     table.add_column("Peso", justify="right")
 
-    table.add_row("Qualidade", f"{report.score.quality:.1f}", "40%")
-    table.add_row("Presença", f"{report.score.presence:.1f}", "30%")
-    table.add_row("Posição", f"{report.score.position:.1f}", "20%")
-    table.add_row("Competitivo", f"{report.score.competitive:.1f}", "10%")
+    table.add_row("Visibilidade", f"{report.score.visibility:.1f}", "65%")
+    table.add_row("Dominância", f"{report.score.dominance:.1f}", "35%")
+    table.add_row("Presença Indireta", f"{report.score.indirect_presence:.1f}", "—")
     table.add_row("", "", "")
     table.add_row("[bold]Overall[/bold]", f"[bold]{report.score.overall:.1f}[/bold]", "100%")
     console.print(table)

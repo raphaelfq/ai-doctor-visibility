@@ -11,8 +11,16 @@ import re
 
 import httpx
 from bs4 import BeautifulSoup
+from pydantic import BaseModel
 
-from ai_visibility.models import CFMValidation
+
+class CFMValidation(BaseModel):
+    valid: bool | None = None
+    registered_name: str | None = None
+    status: str | None = None
+    specialties: list[str] = []
+    rqe_numbers: list[str] = []
+    error: str | None = None
 
 _CFM_URL = "https://portal.cfm.org.br/busca-medicos/"
 _TIMEOUT = 10.0
@@ -95,7 +103,7 @@ def _parse_cfm_response(html: str) -> CFMValidation:
     specialties = [s.strip() for s in specialty_matches if s.strip()]
 
     return CFMValidation(
-        valid=status is None or status == "Ativo",
+        valid=True if status == "Ativo" else (None if status is None else False),
         registered_name=registered_name,
         status=status,
         specialties=specialties,

@@ -25,18 +25,6 @@ class DoctorInput(BaseModel):
     crm_state: str | None = None
 
 
-# ---------- CFM Validation ----------
-
-
-class CFMValidation(BaseModel):
-    valid: bool | None = None
-    registered_name: str | None = None
-    status: str | None = None
-    specialties: list[str] = []
-    rqe_numbers: list[str] = []
-    error: str | None = None
-
-
 # ---------- Stage 1 — Prompt Generator ----------
 
 
@@ -116,10 +104,9 @@ class Verdict(BaseModel):
 
 
 class ScoreBreakdown(BaseModel):
-    presence: float = Field(ge=0, le=100)
-    quality: float = Field(ge=0, le=100)
-    position: float = Field(ge=0, le=100)
-    competitive: float = Field(ge=0, le=100)
+    visibility: float = Field(ge=0, le=100)
+    dominance: float = Field(ge=0, le=100)
+    indirect_presence: float = Field(ge=0, le=100)
     overall: float = Field(ge=0, le=100)
 
 
@@ -139,7 +126,6 @@ class ReportMetadata(BaseModel):
 
 class Report(BaseModel):
     doctor: DoctorInput
-    cfm_validation: CFMValidation | None = None
     prompts: list[GeneratedPrompt]
     responses: list[SimulatedResponse]
     verdicts: list[Verdict]
@@ -159,5 +145,5 @@ class TraceEntry(BaseModel):
     tokens_out: int
     latency_ms: int
     cost_usd: float
-    status: Literal["success", "error"]
+    status: Literal["success", "error", "timeout", "parse_error"]
     error: str | None = None

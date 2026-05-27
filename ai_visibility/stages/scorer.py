@@ -3,93 +3,98 @@
 Pure Python, deterministic score calculation. No LLM calls.
 Same input → same output (±0 points).
 
-4 dimensions measuring AI Citation visibility (1 of 6 PRD dimensions):
-- quality:  weighted average by citation type × confidence (40%)
-- presence: % of prompts where doctor appeared (30%)
-- position: rank when mentioned by name (20%)
-- competitive: inverse of competitor displacement rate (10%)
+2 independent dimensions measuring AI Citation visibility:
+- visibility (65%): per-prompt score averaged — how well AI knows the doctor
+- dominance (35%): market share — doctor's named mentions vs competitors
 """
 
 from collections import Counter
 
 from ai_visibility.models import ScoreBreakdown, Verdict
 
-QUALITY_VALUE: dict[str, int] = {
-    "mentioned_by_name": 100,
-    "mentioned_as_specialty": 30,
-    "competitor_in_place": 10,
-    "not_mentioned": 0,
-}
-
 SPECIALTY_BENCHMARKS: dict[str, float] = {
-    "Dermatologia": 35.0,
-    "Cardiologia": 28.0,
-    "Ortopedia": 31.0,
-    "Ginecologia": 38.0,
-    "Psiquiatria": 25.0,
-    "Endocrinologia": 22.0,
-    "Cirurgia Plástica": 40.0,
-    "Obstetrícia": 33.0,
-    "Neurologia": 27.0,
-    "Oftalmologia": 30.0,
-    "Urologia": 29.0,
-    "Pediatria": 35.0,
-    "Otorrinolaringologia": 24.0,
-    "Gastroenterologia": 26.0,
-    "Pneumologia": 23.0,
+    "Dermatologia": 25.0,
+    "Cardiologia": 18.0,
+    "Ortopedia": 20.0,
+    "Ginecologia": 26.0,
+    "Psiquiatria": 15.0,
+    "Endocrinologia": 12.0,
+    "Cirurgia Plástica": 28.0,
+    "Obstetrícia": 22.0,
+    "Neurologia": 17.0,
+    "Oftalmologia": 20.0,
+    "Urologia": 19.0,
+    "Pediatria": 23.0,
+    "Otorrinolaringologia": 14.0,
+    "Gastroenterologia": 16.0,
+    "Pneumologia": 13.0,
 }
 
-DEFAULT_BENCHMARK = 30.0
+DEFAULT_BENCHMARK = 18.0
+
+
+def _prompt_score(v: Verdict) -> float:
+    """Score a single verdict on a 0–100 scale.
+
+    - mentioned_by_name: 100 (pos 1) down to 10 (pos 10+), based on rank
+    - mentioned_as_specialty: 15 (AI knows the specialty, not the doctor)
+    - competitor_in_place / not_mentioned: 0
+    """
+    if v.citation_type == "mentioned_by_name":
+        pos = v.position if v.position is not None else 5
+        return max(10.0, (11 - pos) * 10.0)
+    if v.citation_type == "mentioned_as_specialty":
+        return 15.0
+    return 0.0
 
 
 def score(verdicts: list[Verdict]) -> ScoreBreakdown:
-    """Calculate the AI Visibility Score from a list of verdicts."""
+    """Calculate the AI Visibility Score from a list of verdicts.
+
+    Dimensions:
+    - visibility (65%): Average prompt score across all prompts. Measures
+      how often and how prominently the AI names the doctor.
+      Perfect = 10/10 named at position 1 → 100.
+
+    - dominance (35%): Among prompts where ANY doctor was named
+      (mentioned_by_name + competitor_in_place), what fraction named the
+      target doctor? Measures competitive market share.
+      0 if nobody was ever named (empty space, not a win).
+
+    Overall = 0.65 × visibility + 0.35 × dominance → range [0, 100].
+    """
     n = len(verdicts)
     if n == 0:
         return ScoreBreakdown(
-            presence=0.0, quality=0.0, position=0.0, competitive=0.0, overall=0.0
+            visibility=0.0, dominance=0.0, indirect_presence=0.0, overall=0.0,
         )
 
-    # Presence (30%): % of prompts where doctor appeared
-    mentioned = [
-        v for v in verdicts
-        if v.citation_type in ("mentioned_by_name", "mentioned_as_specialty")
-    ]
-    presence = 100.0 * len(mentioned) / n
+    # --- Visibility (65%) ---
+    visibility = sum(_prompt_score(v) for v in verdicts) / n
 
-    # Quality (40%): weighted average of citation quality × confidence
-    quality = (
-        sum(QUALITY_VALUE[v.citation_type] * v.confidence for v in verdicts) / n
+    # --- Dominance (35%) ---
+    by_name_count = sum(
+        1 for v in verdicts if v.citation_type == "mentioned_by_name"
     )
-
-    # Position (20%): higher rank = higher score (when mentioned by name)
-    by_name = [
-        v for v in verdicts
-        if v.citation_type == "mentioned_by_name" and v.position is not None
-    ]
-    if by_name:
-        position = (
-            sum(max(0, (11 - v.position) * 10) for v in by_name) / len(by_name)
-        )
-    else:
-        position = 0.0
-
-    # Competitive (10%): inverse of competitor displacement rate
     competitor_count = sum(
         1 for v in verdicts if v.citation_type == "competitor_in_place"
     )
-    competitive = 100.0 - (100.0 * competitor_count / n)
+    active = by_name_count + competitor_count
+    dominance = (by_name_count / active * 100.0) if active > 0 else 0.0
 
-    # Overall: weighted combination
-    overall = (
-        0.40 * quality + 0.30 * presence + 0.20 * position + 0.10 * competitive
+    # --- Indirect Presence (informational, not in overall) ---
+    specialty_count = sum(
+        1 for v in verdicts if v.citation_type == "mentioned_as_specialty"
     )
+    indirect_presence = (specialty_count / n) * 100.0
+
+    # --- Overall (only visibility + dominance) ---
+    overall = 0.65 * visibility + 0.35 * dominance
 
     return ScoreBreakdown(
-        presence=round(presence, 1),
-        quality=round(quality, 1),
-        position=round(position, 1),
-        competitive=round(competitive, 1),
+        visibility=round(visibility, 1),
+        dominance=round(dominance, 1),
+        indirect_presence=round(indirect_presence, 1),
         overall=round(overall, 1),
     )
 
@@ -108,14 +113,18 @@ def generate_recommendations(
     recs: list[str] = []
     benchmark = get_benchmark(specialty)
 
-    if score_result.presence < 20:
+    by_name_count = sum(
+        1 for v in verdicts if v.citation_type == "mentioned_by_name"
+    )
+
+    # Invisible — never named
+    if by_name_count == 0:
         recs.append(
-            f"Você é praticamente invisível para IAs de busca. "
-            f"Em {int(10 - score_result.presence / 10)} de 10 prompts simulados, "
-            f"seu nome não apareceu."
+            "Nenhuma IA citou seu nome nos 10 prompts simulados. "
+            "Você é invisível para pacientes que buscam via ChatGPT, Gemini ou Copilot."
         )
 
-    # Competitor dominance
+    # Competitors dominating
     all_competitors: list[str] = []
     for v in verdicts:
         all_competitors.extend(v.competitors_named)
@@ -128,23 +137,29 @@ def generate_recommendations(
                 f"Esse profissional está capturando pacientes que poderiam ser seus."
             )
 
-    if score_result.position < 50 and score_result.presence > 0:
+    # Low dominance despite being named sometimes
+    if by_name_count > 0 and score_result.dominance < 40:
         recs.append(
-            "Quando citado, você aparece em posições baixas. "
-            "IAs tendem a priorizar médicos com perfil online completo e conteúdo educativo."
+            "Quando a IA cita nomes, concorrentes aparecem mais que você. "
+            "Fortaleça sua presença digital com conteúdo educativo e perfil completo."
         )
 
+    # Only generic mentions
+    specialty_count = sum(
+        1 for v in verdicts if v.citation_type == "mentioned_as_specialty"
+    )
+    if by_name_count == 0 and specialty_count > 0:
+        recs.append(
+            "A IA recomenda sua especialidade na sua cidade, mas não sabe seu nome. "
+            "Crie conteúdo online vinculado ao seu nome + especialidade + cidade."
+        )
+
+    # Below benchmark
     if score_result.overall < benchmark:
         recs.append(
             f"Seu score ({score_result.overall:.0f}) está abaixo da média da "
             f"especialidade {specialty} ({benchmark:.0f}). "
             f"Construir uma presença digital estruturada pode mudar isso."
-        )
-
-    if score_result.quality < 30:
-        recs.append(
-            "Construa uma entidade verificada (CRM/RQE) com schema correto — "
-            "você praticamente não existe na camada de IA."
         )
 
     if not recs:

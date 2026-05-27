@@ -8,11 +8,9 @@ from collections.abc import Callable
 from datetime import datetime, timezone
 from pathlib import Path
 
-from ai_visibility.cfm import validate_crm
 from ai_visibility.config import settings
 from ai_visibility.llm import LLMClient
 from ai_visibility.models import (
-    CFMValidation,
     DoctorInput,
     GeneratedPrompt,
     Report,
@@ -21,7 +19,7 @@ from ai_visibility.models import (
 )
 from ai_visibility.stages.judge import judge_all
 from ai_visibility.stages.prompts import generate_prompts
-from ai_visibility.stages.scorer import generate_recommendations, score
+from ai_visibility.stages.scorer import score
 from ai_visibility.stages.simulator import simulate_searches
 
 logger = logging.getLogger(__name__)
@@ -47,17 +45,10 @@ async def run_pipeline(
         if on_progress:
             on_progress(msg)
 
-    # --- CFM Validation + Stage 1 (parallel) ---
-    _progress("Validando CRM no CFM + gerando prompts de paciente...")
+    # --- Stage 1: Prompt Generator ---
+    _progress("Gerando prompts de paciente...")
 
-    cfm_task = (
-        validate_crm(doctor.crm, doctor.crm_state)
-        if doctor.crm and doctor.crm_state
-        else _noop_cfm()
-    )
-    prompts_task = generate_prompts(doctor, client)
-
-    cfm_result, raw_prompts = await asyncio.gather(cfm_task, prompts_task)
+    raw_prompts = await generate_prompts(doctor, client)
 
     # Handle cached prompts (returned as list[dict] from cache)
     prompts: list[GeneratedPrompt] = []
@@ -88,9 +79,6 @@ async def run_pipeline(
     # --- Stage 4: Scorer ---
     _progress("Calculando AI Visibility Score...")
     score_result = score(verdicts)
-    recommendations = generate_recommendations(
-        verdicts, score_result, doctor.name, doctor.specialty
-    )
 
     elapsed_ms = int((time.monotonic() - start_time) * 1000)
 
@@ -119,7 +107,6 @@ async def run_pipeline(
 
     report = Report(
         doctor=doctor,
-        cfm_validation=cfm_result if not isinstance(cfm_result, type(None)) else None,
         prompts=prompts,
         responses=responses,
         verdicts=verdicts,
@@ -147,7 +134,3 @@ async def run_pipeline(
     )
 
     return report
-
-
-async def _noop_cfm() -> CFMValidation | None:
-    return None

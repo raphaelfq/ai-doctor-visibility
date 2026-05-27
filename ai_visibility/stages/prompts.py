@@ -10,10 +10,14 @@ Design (SPEC §7.1, PRACTICES §4):
 - Cache by (specialty, city, neighborhood)
 """
 
+import logging
+
 from ai_visibility import cache as cache_mod
 from ai_visibility.config import settings
 from ai_visibility.llm import LLMClient
 from ai_visibility.models import DoctorInput, GeneratedPrompts
+
+logger = logging.getLogger(__name__)
 
 GENERATOR_SYSTEM_PROMPT = """\
 Você é um gerador de prompts de pacientes brasileiros realistas.
@@ -74,19 +78,22 @@ async def generate_prompts(
         "Gere 10 prompts diversos seguindo as regras."
     )
 
-    response = await client.generate_structured(
-        model=settings.model_generator,
-        input=[
-            {"role": "system", "content": GENERATOR_SYSTEM_PROMPT},
-            {"role": "user", "content": user_msg},
-        ],
-        text_format=GeneratedPrompts,
-        temperature=settings.temperature_generator,
-        stage="generator",
-    )
-
-    result = response.output_parsed
-    prompts = result.prompts if result else []
+    try:
+        response = await client.generate_structured(
+            model=settings.model_generator,
+            input=[
+                {"role": "system", "content": GENERATOR_SYSTEM_PROMPT},
+                {"role": "user", "content": user_msg},
+            ],
+            text_format=GeneratedPrompts,
+            temperature=settings.temperature_generator,
+            stage="generator",
+        )
+        result = response.output_parsed
+        prompts = result.prompts if result else []
+    except Exception as e:
+        logger.error("Prompt generation failed for %s/%s: %s", doctor.specialty, doctor.city, e)
+        raise
 
     # Cache for reuse across doctors of the same specialty × city
     if prompts:

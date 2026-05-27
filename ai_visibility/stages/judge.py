@@ -248,10 +248,12 @@ async def judge_all(
     response_map = {r.prompt_id: r for r in responses}
 
     tasks = []
+    filtered_prompts = []
     for prompt in prompts:
         resp = response_map.get(prompt.id)
         if resp is None:
             continue
+        filtered_prompts.append(prompt)
         tasks.append(judge.evaluate(doctor, prompt, resp))
 
     results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -259,10 +261,10 @@ async def judge_all(
     verdicts: list[Verdict] = []
     for i, result in enumerate(results):
         if isinstance(result, Exception):
-            logger.warning("Judge evaluation failed for prompt %s: %s", prompts[i].id, result)
+            logger.warning("Judge evaluation failed for prompt %s: %s", filtered_prompts[i].id, result)
             verdicts.append(
                 Verdict(
-                    prompt_id=prompts[i].id,
+                    prompt_id=filtered_prompts[i].id,
                     citation_type="not_mentioned",
                     confidence=0.0,
                     evidence_quote=f"[ERRO: {type(result).__name__}: {result}]",

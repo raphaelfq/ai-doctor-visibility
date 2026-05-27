@@ -1,7 +1,7 @@
 """Tests for the scorer — deterministic, no LLM calls.
 
 Every expected value is hand-calculated.
-4 dimensions: quality (40%), presence (30%), position (20%), competitive (10%).
+2 dimensions: visibility (65%), dominance (35%).
 """
 
 import pytest
@@ -17,11 +17,10 @@ class TestPerfectScore:
             for i in range(1, 11)
         ]
         result = score(verdicts)
-        assert result.presence == 100.0
-        assert result.quality == 100.0
-        assert result.position == 100.0
-        assert result.competitive == 100.0
-        assert result.overall == 100.0
+        assert result.visibility == 100.0
+        assert result.dominance == 100.0
+        assert result.indirect_presence == 0.0
+        assert result.overall == 100.0  # 0.65*100 + 0.35*100
 
 
 class TestZeroScore:
@@ -30,13 +29,12 @@ class TestZeroScore:
             make_verdict(f"p{i}", "not_mentioned") for i in range(1, 11)
         ]
         result = score(verdicts)
-        assert result.presence == 0.0
-        assert result.quality == 0.0
-        assert result.position == 0.0
-        # competitive: no competitors = 100
-        assert result.competitive == 100.0
-        # overall: 0.40*0 + 0.30*0 + 0.20*0 + 0.10*100 = 10
-        assert result.overall == 10.0
+        assert result.visibility == 0.0
+        # dominance: no active prompts = 0
+        assert result.dominance == 0.0
+        assert result.indirect_presence == 0.0
+        # overall: 0.65*0 + 0.35*0 = 0
+        assert result.overall == 0.0
 
 
 class TestAllCompetitors:
@@ -46,13 +44,11 @@ class TestAllCompetitors:
             for i in range(1, 11)
         ]
         result = score(verdicts)
-        assert result.presence == 0.0
-        # quality: 10 * 1.0 / 10 = 10
-        assert result.quality == 10.0
-        assert result.position == 0.0
-        assert result.competitive == 0.0
-        # overall: 0.40*10 + 0.30*0 + 0.20*0 + 0.10*0 = 4
-        assert result.overall == 4.0
+        assert result.visibility == 0.0
+        assert result.dominance == 0.0
+        assert result.indirect_presence == 0.0
+        # overall: 0.65*0 + 0.35*0 = 0
+        assert result.overall == 0.0
 
 
 class TestMixedResults:
@@ -71,12 +67,14 @@ class TestMixedResults:
         ]
         result = score(verdicts)
 
-        assert result.presence == 50.0
-        assert result.quality == pytest.approx(31.6, abs=0.1)
-        assert result.position == 90.0
-        assert result.competitive == 100.0
-        # 0.40*31.65 + 0.30*50 + 0.20*90 + 0.10*100 = 55.66 → 55.7
-        assert result.overall == pytest.approx(55.7, abs=0.1)
+        # visibility: (100+90+80+15+15+0+0+0+0+0)/10 = 30.0
+        assert result.visibility == 30.0
+        # dominance: 3 by_name / (3 by_name + 0 competitor) = 100.0
+        assert result.dominance == 100.0
+        # indirect_presence: 2 mentioned_as_specialty / 10 = 20.0
+        assert result.indirect_presence == 20.0
+        # overall: 0.65*30 + 0.35*100 = 19.5 + 35 = 54.5
+        assert result.overall == 54.5
 
 
 class TestReproducibility:
@@ -95,4 +93,5 @@ class TestEmptyInput:
     def test_returns_zeros(self):
         result = score([])
         assert result.overall == 0.0
-        assert result.presence == 0.0
+        assert result.visibility == 0.0
+        assert result.indirect_presence == 0.0

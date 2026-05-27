@@ -3,8 +3,8 @@
 import pytest
 from pydantic import ValidationError
 
+from ai_visibility.cfm import CFMValidation
 from ai_visibility.models import (
-    CFMValidation,
     Citation,
     DoctorInput,
     GeneratedPrompt,
@@ -83,26 +83,25 @@ class TestVerdict:
 class TestScoreBreakdown:
     def test_valid_scores(self):
         s = ScoreBreakdown(
-            presence=50.0, quality=30.0, position=0.0, competitive=80.0, overall=42.0,
+            visibility=50.0, dominance=80.0, indirect_presence=10.0, overall=42.0,
         )
         assert s.overall == 42.0
+        assert s.indirect_presence == 10.0
 
     def test_score_bounds(self):
         with pytest.raises(ValidationError):
             ScoreBreakdown(
-                presence=101.0,  # > 100
-                quality=0.0,
-                position=0.0,
-                competitive=0.0,
+                visibility=101.0,  # > 100
+                dominance=0.0,
+                indirect_presence=0.0,
                 overall=0.0,
             )
 
         with pytest.raises(ValidationError):
             ScoreBreakdown(
-                presence=-1.0,  # < 0
-                quality=0.0,
-                position=0.0,
-                competitive=0.0,
+                visibility=-1.0,  # < 0
+                dominance=0.0,
+                indirect_presence=0.0,
                 overall=0.0,
             )
 

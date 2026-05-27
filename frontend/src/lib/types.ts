@@ -60,7 +60,6 @@ export interface RunDetail extends RunSummary {
 
 export interface Report {
   doctor: ReportDoctor
-  cfm_validation?: CFMValidation | null
   prompts: GeneratedPrompt[]
   responses: SimulatedResponse[]
   verdicts: Verdict[]
@@ -78,32 +77,27 @@ export interface ReportDoctor {
   crm_state?: string | null
 }
 
-export interface CFMValidation {
-  status: string
-  name_found?: string | null
-  specialty_found?: string | null
-  situation?: string | null
-}
-
 export interface GeneratedPrompt {
   id: string
   text: string
-  intent: string
   persona: string
-  locale: string
+  intent_summary: string
 }
 
 export interface SimulatedResponse {
   prompt_id: string
   raw_text: string
-  model: string
+  doctors_named: string[]
   citations: Citation[]
+  model: string
+  tokens_in: number
+  tokens_out: number
+  latency_ms: number
 }
 
 export interface Citation {
   title: string
   url: string
-  snippet?: string | null
 }
 
 export type CitationType =
@@ -122,18 +116,21 @@ export interface Verdict {
 }
 
 export interface ScoreBreakdown {
-  presence: number
-  quality: number
-  position: number
-  competitive: number
+  visibility: number
+  dominance: number
+  indirect_presence: number
   overall: number
 }
 
 export interface ReportMetadata {
-  model: string
-  scored_at: string
-  version: string
-  duration_seconds?: number | null
+  generated_at: string
+  model_generator: string
+  model_simulator: string
+  model_judge: string
+  total_tokens_in: number
+  total_tokens_out: number
+  total_cost_usd: number
+  seed: number
 }
 
 // ---------------------------------------------------------------------------

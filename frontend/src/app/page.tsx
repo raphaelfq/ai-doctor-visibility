@@ -24,10 +24,11 @@ export default function DashboardPage() {
 
   const totalDoctors = doctors?.length ?? 0
   const totalRuns = runs?.length ?? 0
+  const scoredDoctors = doctors?.filter((d) => d.latest_score != null) ?? []
   const avgScore =
-    doctors && doctors.length > 0
-      ? doctors.reduce((sum, d) => sum + (d.latest_score ?? 0), 0) /
-        doctors.filter((d) => d.latest_score != null).length
+    scoredDoctors.length > 0
+      ? scoredDoctors.reduce((sum, d) => sum + (d.latest_score ?? 0), 0) /
+        scoredDoctors.length
       : null
 
   return (

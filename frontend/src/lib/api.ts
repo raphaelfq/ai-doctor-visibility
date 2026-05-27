@@ -13,6 +13,13 @@ import type {
 // ---------------------------------------------------------------------------
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY ?? ""
+
+function authHeaders(): Record<string, string> {
+  const headers: Record<string, string> = { "Content-Type": "application/json" }
+  if (API_KEY) headers["X-API-Key"] = API_KEY
+  return headers
+}
 
 async function fetcher<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`)
@@ -75,7 +82,7 @@ export function useRunStatus(id: string | undefined) {
 export async function createDoctor(payload: CreateDoctorPayload): Promise<Doctor> {
   const res = await fetch(`${API_BASE}/api/doctors`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: authHeaders(),
     body: JSON.stringify(payload),
   })
   if (!res.ok) {
@@ -86,8 +93,11 @@ export async function createDoctor(payload: CreateDoctorPayload): Promise<Doctor
 }
 
 export async function deleteDoctor(id: string): Promise<void> {
+  const headers: Record<string, string> = {}
+  if (API_KEY) headers["X-API-Key"] = API_KEY
   const res = await fetch(`${API_BASE}/api/doctors/${id}`, {
     method: "DELETE",
+    headers,
   })
   if (!res.ok) {
     const body = await res.text().catch(() => "")
@@ -98,7 +108,7 @@ export async function deleteDoctor(id: string): Promise<void> {
 export async function createRun(doctorId: string): Promise<CreateRunResponse> {
   const res = await fetch(`${API_BASE}/api/runs`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: authHeaders(),
     body: JSON.stringify({ doctor_id: doctorId }),
   })
   if (!res.ok) {
