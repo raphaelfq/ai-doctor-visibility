@@ -37,7 +37,7 @@ def _render(request: Request, name: str, context: dict | None = None):
 
 
 @router.get("/", response_class=HTMLResponse)
-async def dashboard(request: Request):
+def dashboard(request: Request):
     doctors = list_doctors()
     runs = list_recent_runs()
     return _render(request, "dashboard.html", {"doctors": doctors, "runs": runs})
@@ -49,18 +49,18 @@ async def dashboard(request: Request):
 
 
 @router.get("/doctors", response_class=HTMLResponse)
-async def doctors_list(request: Request):
+def doctors_list(request: Request):
     doctors = list_doctors()
     return _render(request, "doctors/list.html", {"doctors": doctors})
 
 
 @router.get("/doctors/new", response_class=HTMLResponse)
-async def doctor_new_form(request: Request):
+def doctor_new_form(request: Request):
     return _render(request, "doctors/new.html")
 
 
 @router.post("/doctors")
-async def doctor_create(
+def doctor_create(
     request: Request,
     name: str = Form(...),
     specialty: str = Form(...),
@@ -83,7 +83,7 @@ async def doctor_create(
 
 
 @router.get("/doctors/{doctor_id}", response_class=HTMLResponse)
-async def doctor_detail(request: Request, doctor_id: str):
+def doctor_detail(request: Request, doctor_id: str):
     doctor = get_doctor(doctor_id)
     if not doctor:
         return HTMLResponse("Medico nao encontrado", status_code=404)
@@ -92,7 +92,7 @@ async def doctor_detail(request: Request, doctor_id: str):
 
 
 @router.post("/doctors/{doctor_id}/delete")
-async def doctor_delete(doctor_id: str):
+def doctor_delete(doctor_id: str):
     delete_doctor(doctor_id)
     return RedirectResponse(url="/doctors", status_code=303)
 
@@ -103,14 +103,14 @@ async def doctor_delete(doctor_id: str):
 
 
 @router.get("/runs/new", response_class=HTMLResponse)
-async def run_new_form(request: Request, doctor_id: str | None = None):
+def run_new_form(request: Request, doctor_id: str | None = None):
     doctor = get_doctor(doctor_id) if doctor_id else None
     doctors = list_doctors() if not doctor else []
     return _render(request, "runs/new.html", {"doctor": doctor, "doctors": doctors})
 
 
 @router.post("/runs")
-async def run_create(
+def run_create(
     request: Request,
     doctor_id: str = Form(...),
 ):
@@ -135,7 +135,7 @@ async def run_create(
 
 
 @router.get("/runs/{run_id}", response_class=HTMLResponse)
-async def run_detail(request: Request, run_id: str):
+def run_detail(request: Request, run_id: str):
     run = get_run(run_id)
     if not run:
         return HTMLResponse("Analise nao encontrada", status_code=404)
@@ -152,7 +152,7 @@ async def run_detail(request: Request, run_id: str):
 
 
 @router.get("/runs/{run_id}/status", response_class=HTMLResponse)
-async def run_status_partial(request: Request, run_id: str):
+def run_status_partial(request: Request, run_id: str):
     run = get_run(run_id)
     if not run:
         return HTMLResponse("Analise nao encontrada", status_code=404)

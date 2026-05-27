@@ -117,13 +117,13 @@ class LLMClient:
         stage: str,
         prompt_id: str | None = None,
     ):
-        """Call Responses API with web_search_preview tool (no structured output)."""
+        """Call Responses API with web_search tool (no structured output)."""
         async with self._semaphore:
             start = time.monotonic()
             try:
                 response = await self._client.responses.create(
                     model=model,
-                    tools=[{"type": "web_search_preview"}],
+                    tools=[{"type": "web_search"}],
                     input=input,
                 )
                 latency_ms = int((time.monotonic() - start) * 1000)

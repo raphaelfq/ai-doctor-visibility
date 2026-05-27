@@ -1,7 +1,10 @@
 """Pipeline orchestrator — runs CFM validation + 4 stages + reporters."""
 
 import asyncio
+import json
+import logging
 import time
+from collections.abc import Callable
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -21,11 +24,13 @@ from ai_visibility.stages.prompts import generate_prompts
 from ai_visibility.stages.scorer import generate_recommendations, score
 from ai_visibility.stages.simulator import simulate_searches
 
+logger = logging.getLogger(__name__)
+
 
 async def run_pipeline(
     doctor: DoctorInput,
     output_dir: Path,
-    on_progress: object = None,
+    on_progress: Callable[[str], None] | None = None,
 ) -> Report:
     """Execute the full diagnostic pipeline and return a Report."""
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -65,7 +70,7 @@ async def run_pipeline(
     _progress(f"✓ {len(prompts)} prompts gerados")
 
     # --- Stage 2: Search Simulator ---
-    _progress("Simulando buscas com web_search_preview...")
+    _progress("Simulando buscas com web_search...")
     responses = await simulate_searches(prompts, client)
     _progress(f"✓ {len(responses)} buscas concluídas")
 
@@ -88,8 +93,6 @@ async def run_pipeline(
     total_tokens_out = 0
     total_cost = 0.0
     if trace_path.exists():
-        import json
-
         for line in trace_path.read_text().splitlines():
             if line.strip():
                 entry = json.loads(line)
@@ -129,8 +132,13 @@ async def run_pipeline(
 
         langfuse = get_client()
         langfuse.flush()
-    except Exception:
+    except (ImportError, RuntimeError):
         pass  # Langfuse is optional — don't break pipeline if not configured
+
+    logger.info(
+        "Pipeline completed for %s: score=%.1f, cost=$%.4f, elapsed=%.1fs",
+        doctor.name, score_result.overall, total_cost, elapsed_ms / 1000,
+    )
 
     return report
 

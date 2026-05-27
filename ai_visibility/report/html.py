@@ -1,10 +1,15 @@
 """HTML reporter — generates a static report.html with Tailwind CSS and SVG gauge."""
 
+import html as html_mod
 from collections import Counter
 from pathlib import Path
 
 from ai_visibility.models import Report
 from ai_visibility.stages.scorer import generate_recommendations, get_benchmark
+
+
+def _e(text: object) -> str:
+    return html_mod.escape(str(text))
 
 
 def _score_color(score: float) -> str:
@@ -34,11 +39,11 @@ def render_html(report: Report, output_dir: Path) -> Path:
     color = _score_color(s.overall)
     label = _score_label(s.overall)
 
-    location = doc.city
+    location = _e(doc.city)
     if doc.neighborhood:
-        location = f"{doc.city} ({doc.neighborhood})"
+        location = f"{_e(doc.city)} ({_e(doc.neighborhood)})"
     if doc.state:
-        location += f" - {doc.state}"
+        location += f" - {_e(doc.state)}"
 
     # Build verdict rows
     verdict_rows = ""
@@ -61,15 +66,15 @@ def render_html(report: Report, output_dir: Path) -> Path:
             "not_mentioned": "⬜",
         }.get(v.citation_type, "?")
 
-        competitors_str = ", ".join(v.competitors_named) if v.competitors_named else "—"
+        competitors_str = ", ".join(_e(c) for c in v.competitors_named) if v.competitors_named else "—"
         pos_str = f"#{v.position}" if v.position else "—"
 
         verdict_rows += f"""
         <tr class="{bg}">
-            <td class="px-4 py-3 text-sm font-medium">{v.prompt_id}</td>
-            <td class="px-4 py-3 text-sm max-w-md">{prompt.text[:120]}{'...' if len(prompt.text) > 120 else ''}</td>
+            <td class="px-4 py-3 text-sm font-medium">{_e(v.prompt_id)}</td>
+            <td class="px-4 py-3 text-sm max-w-md">{_e(prompt.text[:120])}{'...' if len(prompt.text) > 120 else ''}</td>
             <td class="px-4 py-3 text-sm text-center">{icon}</td>
-            <td class="px-4 py-3 text-sm">{v.citation_type.replace('_', ' ')}</td>
+            <td class="px-4 py-3 text-sm">{_e(v.citation_type.replace('_', ' '))}</td>
             <td class="px-4 py-3 text-sm text-center">{v.confidence:.0%}</td>
             <td class="px-4 py-3 text-sm text-center">{pos_str}</td>
             <td class="px-4 py-3 text-sm">{competitors_str}</td>
@@ -87,7 +92,7 @@ def render_html(report: Report, output_dir: Path) -> Path:
         pct = 100 * count / total
         competitor_cards += f"""
         <div class="bg-white rounded-xl shadow-sm border p-4">
-            <div class="font-semibold text-gray-900">{comp_name}</div>
+            <div class="font-semibold text-gray-900">{_e(comp_name)}</div>
             <div class="text-sm text-gray-500 mt-1">Aparece em {count}/{total} prompts</div>
             <div class="mt-2 bg-gray-200 rounded-full h-2">
                 <div class="bg-blue-600 rounded-full h-2" style="width: {pct}%"></div>
@@ -100,7 +105,7 @@ def render_html(report: Report, output_dir: Path) -> Path:
     )
     rec_items = ""
     for i, rec in enumerate(recommendations, 1):
-        rec_items += f'<li class="py-2">{rec}</li>'
+        rec_items += f'<li class="py-2">{_e(rec)}</li>'
 
     # CFM badge
     cfm_badge = ""
@@ -121,7 +126,7 @@ def render_html(report: Report, output_dir: Path) -> Path:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Visibility Report — {doc.name}</title>
+    <title>AI Visibility Report — {_e(doc.name)}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -134,9 +139,9 @@ def render_html(report: Report, output_dir: Path) -> Path:
         <div class="bg-white rounded-2xl shadow-sm border p-8 mb-6">
             <div class="flex items-start justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-900">{doc.name}</h1>
-                    <p class="text-gray-600 mt-1">{doc.specialty} — {location}</p>
-                    {f'<p class="text-gray-500 text-sm mt-1">CRM: {doc.crm}/{doc.crm_state}</p>' if doc.crm else ''}
+                    <h1 class="text-2xl font-bold text-gray-900">{_e(doc.name)}</h1>
+                    <p class="text-gray-600 mt-1">{_e(doc.specialty)} — {location}</p>
+                    {f'<p class="text-gray-500 text-sm mt-1">CRM: {_e(doc.crm)}/{_e(doc.crm_state)}</p>' if doc.crm else ''}
                     <div class="mt-2">{cfm_badge}</div>
                 </div>
                 <div class="text-right text-sm text-gray-400">
@@ -162,7 +167,7 @@ def render_html(report: Report, output_dir: Path) -> Path:
                 </svg>
             </div>
             <p class="text-sm text-gray-500 mt-2">
-                Média da especialidade ({doc.specialty}): <strong>{benchmark:.0f}/100</strong>
+                Média da especialidade ({_e(doc.specialty)}): <strong>{benchmark:.0f}/100</strong>
             </p>
 
             <!-- Dimension bars -->

@@ -8,6 +8,7 @@ class Settings(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         extra="ignore",  # Langfuse env vars are read by its own SDK
+        protected_namespaces=(),
     )
 
     openai_api_key: str = ""  # Required for API calls; empty OK for tests/offline

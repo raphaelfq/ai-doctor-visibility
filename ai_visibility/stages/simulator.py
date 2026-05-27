@@ -1,21 +1,24 @@
 """Stage 2 — Search Simulator.
 
-Runs each patient prompt against the OpenAI API with web_search_preview,
+Runs each patient prompt against the OpenAI API with web_search,
 returning real search results with cited sources.
 
 Design:
-- Uses client.responses.create with web_search_preview tool
-- Does NOT use structured output (incompatible with web_search_preview)
+- Uses client.responses.create with web_search tool
+- Does NOT use structured output (incompatible with web_search)
 - Extracts citations from response annotations
 - Parallel execution via asyncio.gather
 """
 
 import asyncio
+import logging
 import time
 
 from ai_visibility.config import settings
 from ai_visibility.llm import LLMClient
 from ai_visibility.models import Citation, GeneratedPrompt, SimulatedResponse
+
+logger = logging.getLogger(__name__)
 
 
 async def _simulate_one(
@@ -72,6 +75,7 @@ async def simulate_searches(
     responses: list[SimulatedResponse] = []
     for i, result in enumerate(results):
         if isinstance(result, Exception):
+            logger.warning("Search simulation failed for prompt %s: %s", prompts[i].id, result)
             # Create a failed response entry
             responses.append(
                 SimulatedResponse(

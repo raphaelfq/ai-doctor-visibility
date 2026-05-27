@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 import asyncio
+import logging
+import shutil
 import tempfile
 import threading
-import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
 from ai_visibility.models import DoctorInput
 from ai_visibility.web.db import update_run_status
+
+logger = logging.getLogger(__name__)
 
 
 def start_pipeline_run(run_id: str, doctor: DoctorInput) -> None:
@@ -26,6 +29,7 @@ def start_pipeline_run(run_id: str, doctor: DoctorInput) -> None:
 
 def _run_in_thread(run_id: str, doctor: DoctorInput) -> None:
     """Thread target: runs the async pipeline in its own event loop."""
+    logger.info("Starting pipeline run %s for %s", run_id, doctor.name)
     update_run_status(run_id, status="running")
 
     try:
@@ -48,14 +52,9 @@ def _run_in_thread(run_id: str, doctor: DoctorInput) -> None:
             completed_at=datetime.now(timezone.utc).isoformat(),
         )
 
-        # Auto-register top competitor as a doctor
-        try:
-            from ai_visibility.web.competitor import register_top_competitor
-
-            register_top_competitor(report)
-        except Exception:
-            pass  # Best-effort — don't fail the run for competitor registration
+        shutil.rmtree(output_dir, ignore_errors=True)
     except Exception as e:
+        logger.exception("Pipeline failed for run %s", run_id)
         update_run_status(
             run_id,
             status="failed",

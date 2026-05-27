@@ -10,6 +10,8 @@ Same input → same output (±0 points).
 - competitive: inverse of competitor displacement rate (10%)
 """
 
+from collections import Counter
+
 from ai_visibility.models import ScoreBreakdown, Verdict
 
 QUALITY_VALUE: dict[str, int] = {
@@ -118,8 +120,6 @@ def generate_recommendations(
     for v in verdicts:
         all_competitors.extend(v.competitors_named)
     if all_competitors:
-        from collections import Counter
-
         top = Counter(all_competitors).most_common(3)
         if top:
             top_name, top_count = top[0]

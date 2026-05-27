@@ -18,6 +18,7 @@ References:
 """
 
 import asyncio
+import logging
 from abc import ABC, abstractmethod
 
 from pydantic import BaseModel, Field
@@ -30,6 +31,8 @@ from ai_visibility.models import (
     SimulatedResponse,
     Verdict,
 )
+
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # Decomposed evaluation model — 3 binary questions with chain-of-thought
@@ -235,6 +238,7 @@ async def judge_all(
     verdicts: list[Verdict] = []
     for i, result in enumerate(results):
         if isinstance(result, Exception):
+            logger.warning("Judge evaluation failed for prompt %s: %s", prompts[i].id, result)
             verdicts.append(
                 Verdict(
                     prompt_id=prompts[i].id,
