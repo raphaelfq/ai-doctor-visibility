@@ -77,7 +77,9 @@ JUDGE_SYSTEM_PROMPT = """\
 Analise se um médico-alvo aparece em uma resposta de IA. Responda 3 perguntas:
 
 1. O NOME do médico-alvo aparece na resposta? (nome completo ou parcial inequívoco)
-   - "Fernando Lopes" conta se alvo é "Dr. Fernando Lopes"
+   - Ignore títulos (Dr., Dra., Prof.) ao comparar — "Maísa Mattieli" = "Dra Maísa Mattieli"
+   - Sobrenome + primeiro nome basta — "Fernando Lopes" = "Dr. Fernando Lopes da Silva"
+   - Ignore diferenças de acento — "Maisa" = "Maísa"
    - Se sim, em que posição na lista? (1=primeiro)
 
 2. Outros médicos/clínicas são citados PELO NOME? Liste todos.

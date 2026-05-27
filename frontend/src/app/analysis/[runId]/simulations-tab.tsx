@@ -87,8 +87,13 @@ function SimulationCard({
     const parts: React.ReactNode[] = []
     let remaining = text
 
-    const doctorFirst = doctorName.split(" ")[0]
-    const allNames = [doctorFirst, ...competitors]
+    const nameParts = doctorName.split(" ").filter(
+      (p) => !/^(dr\.?|dra\.?|prof\.?)$/i.test(p),
+    )
+    const doctorMatchName = nameParts.length >= 2
+      ? `${nameParts[0]} ${nameParts[nameParts.length - 1]}`
+      : nameParts[0] ?? doctorName
+    const allNames = [doctorMatchName, ...competitors]
     const regex = new RegExp(
       `(${allNames.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
       "gi",
@@ -97,7 +102,7 @@ function SimulationCard({
 
     segments.forEach((seg, i) => {
       if (!seg) return
-      const isDoctor = seg.toLowerCase() === doctorFirst.toLowerCase()
+      const isDoctor = seg.toLowerCase() === doctorMatchName.toLowerCase()
       const isCompetitor = competitors.some(
         (c) => c.toLowerCase() === seg.toLowerCase(),
       )
