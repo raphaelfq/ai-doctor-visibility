@@ -285,6 +285,7 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="w-12 text-center">#</TableHead>
                   <TableHead>Data</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Score</TableHead>
@@ -292,8 +293,15 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {doctor.runs.map((run) => (
-                  <TableRow key={run.id}>
+                {doctor.runs.map((run, idx) => (
+                  <TableRow
+                    key={run.id}
+                    className="cursor-pointer hover:bg-muted/50"
+                    onClick={() => router.push(`/analysis/${run.id}`)}
+                  >
+                    <TableCell className="text-center text-muted-foreground">
+                      {doctor.runs.length - idx}
+                    </TableCell>
                     <TableCell>{formatDate(run.created_at)}</TableCell>
                     <TableCell>
                       <StatusBadge status={run.status} />
@@ -305,6 +313,7 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
                       <Link
                         href={`/analysis/${run.id}`}
                         className={buttonVariants({ variant: "ghost", size: "sm" })}
+                        onClick={(e) => e.stopPropagation()}
                       >
                         Ver detalhes
                       </Link>
