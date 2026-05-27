@@ -257,9 +257,6 @@ def api_get_run(run_id: UUID):
             new_score = calc_score(parsed_verdicts)
             report_data["score"] = new_score.model_dump()
 
-        # Remove cfm_validation if present (old reports)
-        report_data.pop("cfm_validation", None)
-
         report = Report.model_validate(report_data)
 
         detail.report = report.model_dump(mode="json")

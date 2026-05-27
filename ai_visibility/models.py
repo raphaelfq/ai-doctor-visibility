@@ -25,6 +25,18 @@ class DoctorInput(BaseModel):
     crm_state: str | None = None
 
 
+# ---------- CFM Validation ----------
+
+
+class CFMValidation(BaseModel):
+    valid: bool | None = None
+    registered_name: str | None = None
+    status: str | None = None
+    specialties: list[str] = []
+    rqe_numbers: list[str] = []
+    error: str | None = None
+
+
 # ---------- Stage 1 — Prompt Generator ----------
 
 
@@ -126,6 +138,7 @@ class ReportMetadata(BaseModel):
 
 class Report(BaseModel):
     doctor: DoctorInput
+    cfm_validation: CFMValidation | None = None
     prompts: list[GeneratedPrompt]
     responses: list[SimulatedResponse]
     verdicts: list[Verdict]

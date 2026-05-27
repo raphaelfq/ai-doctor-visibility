@@ -8,9 +8,11 @@ from collections.abc import Callable
 from datetime import datetime, timezone
 from pathlib import Path
 
+from ai_visibility.cfm import validate_crm
 from ai_visibility.config import settings
 from ai_visibility.llm import LLMClient
 from ai_visibility.models import (
+    CFMValidation,
     DoctorInput,
     GeneratedPrompt,
     Report,
@@ -45,10 +47,17 @@ async def run_pipeline(
         if on_progress:
             on_progress(msg)
 
-    # --- Stage 1: Prompt Generator ---
-    _progress("Gerando prompts de paciente...")
+    # --- CFM Validation + Stage 1 (parallel) ---
+    _progress("Validando CRM no CFM + gerando prompts de paciente...")
 
-    raw_prompts = await generate_prompts(doctor, client)
+    cfm_task = (
+        validate_crm(doctor.crm, doctor.crm_state)
+        if doctor.crm and doctor.crm_state
+        else _noop_cfm()
+    )
+    prompts_task = generate_prompts(doctor, client)
+
+    cfm_result, raw_prompts = await asyncio.gather(cfm_task, prompts_task)
 
     # Handle cached prompts (returned as list[dict] from cache)
     prompts: list[GeneratedPrompt] = []
@@ -107,6 +116,7 @@ async def run_pipeline(
 
     report = Report(
         doctor=doctor,
+        cfm_validation=cfm_result if cfm_result is not None else None,
         prompts=prompts,
         responses=responses,
         verdicts=verdicts,
@@ -134,3 +144,7 @@ async def run_pipeline(
     )
 
     return report
+
+
+async def _noop_cfm() -> CFMValidation | None:
+    return None

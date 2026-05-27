@@ -58,8 +58,18 @@ export interface RunDetail extends RunSummary {
 // Report sub-types
 // ---------------------------------------------------------------------------
 
+export interface CFMValidation {
+  valid: boolean | null
+  registered_name?: string | null
+  status?: string | null
+  specialties: string[]
+  rqe_numbers: string[]
+  error?: string | null
+}
+
 export interface Report {
   doctor: ReportDoctor
+  cfm_validation?: CFMValidation | null
   prompts: GeneratedPrompt[]
   responses: SimulatedResponse[]
   verdicts: Verdict[]

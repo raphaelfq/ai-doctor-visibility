@@ -48,6 +48,21 @@ export function OverviewTab({ report, benchmark }: OverviewTabProps) {
             )}
           </p>
         )}
+        {/* CFM validation badge */}
+        {report.cfm_validation && (
+          <div className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${
+            report.cfm_validation.valid === true
+              ? "border-green-300 bg-green-50 text-green-700"
+              : report.cfm_validation.valid === false
+              ? "border-red-300 bg-red-50 text-red-700"
+              : "border-amber-300 bg-amber-50 text-amber-700"
+          }`}>
+            <span>{report.cfm_validation.valid === true ? "CRM Ativo" : report.cfm_validation.valid === false ? "CRM Inválido" : "CRM Não verificado"}</span>
+            {report.cfm_validation.registered_name && (
+              <span className="text-xs opacity-70">({report.cfm_validation.registered_name})</span>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Dimensions */}

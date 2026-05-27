@@ -38,7 +38,6 @@ def _parse_report(report_data: dict | str) -> Report:
     if "visibility" not in score_data and "quality" in score_data:
         parsed_verdicts = [Verdict(**v) for v in report_data.get("verdicts", [])]
         report_data["score"] = calc_score(parsed_verdicts).model_dump()
-    report_data.pop("cfm_validation", None)
     return Report.model_validate(report_data)
 
 
