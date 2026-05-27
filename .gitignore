@@ -9,3 +9,4 @@ build/
 .venv/
 iMedicina_*.md
 docs/TIMELINE.md
+output_new/
