@@ -8,3 +8,4 @@ build/
 *.pyc
 .venv/
 iMedicina_*.md
+docs/TIMELINE.md
