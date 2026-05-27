@@ -29,6 +29,9 @@ urgência, segunda_opinião, pediátrico, convênio_vs_particular, estético_ele
 crônico_acompanhamento, preventivo, pediu_indicação
 - Use todas as 10 personas, uma por prompt
 - Prompts em português brasileiro coloquial e natural
+- OBRIGATÓRIO: todo prompt DEVE mencionar a cidade ou bairro do paciente de forma natural \
+(ex: "em Moema", "aqui em Campinas", "na região de Vila Mariana"). \
+Sem localização, a busca não retorna resultados locais e o teste perde valor.
 - NÃO mencione o nome de nenhum médico específico — o paciente está procurando, não conhece ninguém
 - Varie: tom (formal/informal), comprimento (curto/longo), nível de detalhe clínico
 - IDs devem ser "p1" até "p10"

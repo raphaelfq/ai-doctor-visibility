@@ -24,6 +24,7 @@ logger = logging.getLogger(__name__)
 async def _simulate_one(
     prompt: GeneratedPrompt,
     client: LLMClient,
+    user_location: dict | None = None,
 ) -> SimulatedResponse:
     """Run a single prompt through the search simulator."""
     response = await client.search(
@@ -31,6 +32,7 @@ async def _simulate_one(
         input=prompt.text,
         stage="simulator",
         prompt_id=prompt.id,
+        user_location=user_location,
     )
 
     # Extract text from response
@@ -67,9 +69,10 @@ async def _simulate_one(
 async def simulate_searches(
     prompts: list[GeneratedPrompt],
     client: LLMClient,
+    user_location: dict | None = None,
 ) -> list[SimulatedResponse]:
     """Run all prompts through the search simulator in parallel."""
-    tasks = [_simulate_one(prompt, client) for prompt in prompts]
+    tasks = [_simulate_one(prompt, client, user_location) for prompt in prompts]
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
     responses: list[SimulatedResponse] = []

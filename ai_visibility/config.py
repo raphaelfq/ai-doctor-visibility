@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     seed: int = 42
     semaphore_limit: int = 5
     max_retries: int = 5
+    llm_timeout_seconds: int = 60
 
     cache_dir: str = "./.cache"
     cache_ttl_seconds: int = 86400  # 24h

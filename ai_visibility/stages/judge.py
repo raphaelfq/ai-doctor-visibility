@@ -164,6 +164,9 @@ class BaseJudge(ABC):
     ) -> Verdict: ...
 
 
+_JUDGE_MAX_RETRIES = 2
+
+
 class OpenAIJudge(BaseJudge):
     """Judge V3: decomposed binary questions with chain-of-thought."""
 
@@ -193,28 +196,44 @@ Cidade: {doctor.city}
 
 Analise a resposta e responda as 3 perguntas com raciocínio."""
 
-        api_response = await self._client.generate_structured(
-            model=settings.model_judge,
-            input=[
-                {"role": "system", "content": JUDGE_SYSTEM_PROMPT},
-                {"role": "user", "content": user_msg},
-            ],
-            text_format=DecomposedEvaluation,
-            temperature=settings.temperature_judge,
-            stage="judge",
+        last_error: Exception | None = None
+        for attempt in range(_JUDGE_MAX_RETRIES + 1):
+            try:
+                api_response = await self._client.generate_structured(
+                    model=settings.model_judge,
+                    input=[
+                        {"role": "system", "content": JUDGE_SYSTEM_PROMPT},
+                        {"role": "user", "content": user_msg},
+                    ],
+                    text_format=DecomposedEvaluation,
+                    temperature=settings.temperature_judge,
+                    stage="judge",
+                    prompt_id=prompt.id,
+                )
+
+                eval_result = api_response.output_parsed
+                if eval_result is None:
+                    raise ValueError("output_parsed is None (truncated JSON)")
+
+                return _derive_verdict(eval_result, prompt.id)
+            except Exception as e:
+                last_error = e
+                if attempt < _JUDGE_MAX_RETRIES:
+                    wait = 2 ** attempt
+                    logger.warning(
+                        "Judge retry %d/%d for prompt %s (%s), waiting %ds",
+                        attempt + 1, _JUDGE_MAX_RETRIES, prompt.id, e, wait,
+                    )
+                    await asyncio.sleep(wait)
+
+        logger.error("Judge failed after %d retries for prompt %s: %s",
+                      _JUDGE_MAX_RETRIES + 1, prompt.id, last_error)
+        return Verdict(
             prompt_id=prompt.id,
+            citation_type="not_mentioned",
+            confidence=0.0,
+            evidence_quote=f"[ERRO: {type(last_error).__name__}: {last_error}]",
         )
-
-        eval_result = api_response.output_parsed
-        if eval_result is None:
-            return Verdict(
-                prompt_id=prompt.id,
-                citation_type="not_mentioned",
-                confidence=0.0,
-                evidence_quote="[ERRO: falha no parsing structured output]",
-            )
-
-        return _derive_verdict(eval_result, prompt.id)
 
 
 async def judge_all(

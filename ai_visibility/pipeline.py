@@ -71,7 +71,13 @@ async def run_pipeline(
 
     # --- Stage 2: Search Simulator ---
     _progress("Simulando buscas com web_search...")
-    responses = await simulate_searches(prompts, client)
+    user_location = {
+        "type": "approximate",
+        "city": doctor.city,
+        "region": doctor.state or "",
+        "country": "BR",
+    }
+    responses = await simulate_searches(prompts, client, user_location)
     _progress(f"✓ {len(responses)} buscas concluídas")
 
     # --- Stage 3: Judge ---
