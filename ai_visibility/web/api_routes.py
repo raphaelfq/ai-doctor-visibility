@@ -10,7 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel
 
-from ai_visibility.models import DoctorInput, Report
+from ai_visibility.models import DoctorInput, Report, Verdict
 from ai_visibility.stages.scorer import generate_recommendations, get_benchmark
 from ai_visibility.web.background import start_pipeline_run
 from ai_visibility.web.db import (
@@ -244,9 +244,23 @@ def api_get_run(run_id: UUID):
     if run["status"] == "completed" and run.get("report_json"):
         report_data = run["report_json"]
         if isinstance(report_data, str):
-            report = Report.model_validate_json(report_data)
-        else:
-            report = Report.model_validate(report_data)
+            import json as _json
+            report_data = _json.loads(report_data)
+
+        # Migrate old score format (presence/quality/position/competitive)
+        # to new format (visibility/dominance/indirect_presence)
+        score_data = report_data.get("score", {})
+        if "visibility" not in score_data and "quality" in score_data:
+            from ai_visibility.stages.scorer import score as calc_score
+            verdicts_raw = report_data.get("verdicts", [])
+            parsed_verdicts = [Verdict(**v) for v in verdicts_raw]
+            new_score = calc_score(parsed_verdicts)
+            report_data["score"] = new_score.model_dump()
+
+        # Remove cfm_validation if present (old reports)
+        report_data.pop("cfm_validation", None)
+
+        report = Report.model_validate(report_data)
 
         detail.report = report.model_dump(mode="json")
         detail.recommendations = generate_recommendations(

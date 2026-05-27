@@ -10,7 +10,8 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 
 from ai_visibility.web.api_routes import require_api_key
 
-from ai_visibility.models import DoctorInput, Report
+from ai_visibility.models import DoctorInput, Report, Verdict
+from ai_visibility.stages.scorer import score as calc_score
 from ai_visibility.web.background import start_pipeline_run
 from ai_visibility.web.db import (
     create_doctor,
@@ -27,6 +28,18 @@ from ai_visibility.web.db import (
 )
 
 router = APIRouter()
+
+
+def _parse_report(report_data: dict | str) -> Report:
+    """Parse report_json, migrating old score format if needed."""
+    if isinstance(report_data, str):
+        report_data = json.loads(report_data)
+    score_data = report_data.get("score", {})
+    if "visibility" not in score_data and "quality" in score_data:
+        parsed_verdicts = [Verdict(**v) for v in report_data.get("verdicts", [])]
+        report_data["score"] = calc_score(parsed_verdicts).model_dump()
+    report_data.pop("cfm_validation", None)
+    return Report.model_validate(report_data)
 
 
 def _render(request: Request, name: str, context: dict | None = None):
@@ -148,11 +161,7 @@ def run_detail(request: Request, run_id: str):
 
     report = None
     if run["status"] == "completed" and run.get("report_json"):
-        report_data = run["report_json"]
-        if isinstance(report_data, str):
-            report = Report.model_validate_json(report_data)
-        else:
-            report = Report.model_validate(report_data)
+        report = _parse_report(run["report_json"])
 
     return _render(request, "runs/detail.html", {"run": run, "report": report})
 
@@ -165,11 +174,7 @@ def run_status_partial(request: Request, run_id: str):
 
     report = None
     if run["status"] == "completed" and run.get("report_json"):
-        report_data = run["report_json"]
-        if isinstance(report_data, str):
-            report = Report.model_validate_json(report_data)
-        else:
-            report = Report.model_validate(report_data)
+        report = _parse_report(run["report_json"])
 
     return _render(request, "_partials/run_status.html", {"run": run, "report": report})
 
@@ -189,7 +194,7 @@ async def seed_data(request: Request):
 
     # Validate the report payload matches our model
     try:
-        report = Report.model_validate(report_data)
+        report = _parse_report(report_data)
     except Exception as e:
         return JSONResponse({"error": f"Invalid report: {e}"}, status_code=422)
 
