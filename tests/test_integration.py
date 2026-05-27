@@ -220,6 +220,7 @@ async def test_full_pipeline_end_to_end(tmp_path):
     )
 
     with (
+        patch("ai_visibility.llm.AsyncOpenAI"),
         patch(
             "ai_visibility.llm.LLMClient.generate_structured",
             new_callable=AsyncMock,
