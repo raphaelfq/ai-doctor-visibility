@@ -6,6 +6,7 @@ import { Eye, LayoutDashboard, Menu, Users, Plus } from "lucide-react"
 import { useState } from "react"
 
 import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -58,14 +59,17 @@ function NavContent() {
       </nav>
 
       {/* Bottom action */}
-      <div className="p-3">
-        <Button
-          className="w-full justify-start gap-2 bg-blue-600 text-white hover:bg-blue-700"
-          render={<Link href="/doctors/new" />}
+      <div className="border-t border-slate-800 p-3">
+        <Link
+          href="/doctors/new"
+          className={cn(
+            buttonVariants({ variant: "default", size: "default" }),
+            "w-full justify-start gap-2 bg-blue-600 text-white hover:bg-blue-700",
+          )}
         >
           <Plus className="size-4" />
           Novo Medico
-        </Button>
+        </Link>
       </div>
     </div>
   )
@@ -74,7 +78,9 @@ function NavContent() {
 export function Sidebar() {
   return (
     <aside className="hidden w-64 shrink-0 bg-slate-900 lg:block" aria-label="Barra lateral">
-      <NavContent />
+      <div className="sticky top-0 h-screen">
+        <NavContent />
+      </div>
     </aside>
   )
 }
@@ -85,12 +91,10 @@ export function MobileHeader() {
   return (
     <header className="flex h-14 items-center gap-3 border-b bg-white px-4 lg:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger
-          render={
-            <Button variant="ghost" size="icon" aria-label="Abrir menu" />
-          }
-        >
-          <Menu className="size-5" />
+        <SheetTrigger>
+          <Button variant="ghost" size="icon" aria-label="Abrir menu">
+            <Menu className="size-5" />
+          </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-64 bg-slate-900 p-0">
           <SheetTitle className="sr-only">Menu de navegacao</SheetTitle>
