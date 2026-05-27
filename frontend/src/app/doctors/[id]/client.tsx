@@ -208,11 +208,11 @@ export function DoctorDetailClient({ id }: DoctorDetailClientProps) {
             )}
             <div>
               <p className="text-xs text-muted-foreground">Analises</p>
-              <p className="font-medium">{doctor.run_count}</p>
+              <p className="font-medium">{doctor.runs?.length ?? 0}</p>
             </div>
             <div>
               <p className="text-xs text-muted-foreground">Ultimo score</p>
-              <ScoreBadge score={doctor.latest_score} showLabel />
+              <ScoreBadge score={doctor.runs?.find((r) => r.status === "completed")?.score} showLabel />
             </div>
           </div>
         </CardContent>

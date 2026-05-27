@@ -69,6 +69,13 @@ export function getCitationStyle(type: CitationType) {
 export function formatDate(iso: string | null | undefined): string {
   if (!iso) return "—"
   const d = new Date(iso)
-  const pad = (n: number) => String(n).padStart(2, "0")
-  return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`
+  // Force São Paulo timezone (UTC-3) since ECS runs in us-east-1
+  return d.toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  })
 }
